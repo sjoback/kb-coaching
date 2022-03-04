@@ -14,3 +14,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+main {
+  padding: 1.5rem;
+  margin-top: 59px;
+}
