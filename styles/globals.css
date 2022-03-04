@@ -19,3 +19,15 @@ main {
   padding: 1.5rem;
   margin-top: 59px;
 }
+
+button {
+  cursor: pointer;
+}
+
+/* Move this to separate file? */
+input,
+textarea {
+  padding: 10px 20px;
+  outline: none;
+  resize: vertical;
+}

@@ -1,5 +1,16 @@
+import EditActions from "components/EditActions";
+import GoBackButton from "components/GoBackButton";
+import styles from "./Drills.module.scss";
+
 function DrillPage({ drill }) {
-  return <h1>{drill.name}</h1>;
+  return (
+    <div className={styles.wrapper}>
+      <h1>{drill.name}</h1>
+      <GoBackButton />
+
+      <EditActions />
+    </div>
+  );
 }
 
 export default DrillPage;

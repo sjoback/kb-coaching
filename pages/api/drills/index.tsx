@@ -1,5 +1,6 @@
 import data from "data/drills.json";
 import { v4 as uuidv4 } from "uuid";
+const fs = require("fs");
 
 export default function handler(req, res) {
   if (req.method === "GET") {
@@ -16,10 +17,12 @@ export default function handler(req, res) {
       name: drillName,
       comment: drillComment,
     };
-    console.log(newDrill);
-
-    // data.push(newDrill);
+    data.push(newDrill);
+    saveData();
     res.status(201).json(newDrill);
-    console.log(data);
+  }
+
+  function saveData() {
+    fs.writeFileSync("data/drills.json", JSON.stringify(data, null, 4));
   }
 }
