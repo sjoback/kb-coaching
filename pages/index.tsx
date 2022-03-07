@@ -1,14 +1,12 @@
-import LinkButton from "components/LinkButton";
-import styles from "./Home.module.scss";
+import QuickActions from "components/QuickActions";
+import RecentWorkouts from "components/RecentWorkouts";
+
 function HomePage() {
   return (
     <div>
-      <h1>App content</h1>
-      <ul className={styles.mainList}>
-        <li>
-          <LinkButton icon={"faCoffe"} link={"/drills"} text={"Drills"} />
-        </li>
-      </ul>
+      <QuickActions />
+
+      <RecentWorkouts />
     </div>
   );
 }
