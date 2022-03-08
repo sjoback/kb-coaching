@@ -1,12 +1,10 @@
 [
-  {
-    "id": "1",
-    "added": "2022-03-04",
-    "edited": "",
-    "name": "Slip n' Rip",
-    "comment": "This is the drill comment",
-    "drills": [],
-    "warmup": [],
-    "mitts": []
-  }
+    {
+        "id": "f111d29c-6924-4c3c-a472-40f90fe0da37",
+        "added": 1646753831629,
+        "name": "dd",
+        "comment": "dd",
+        "warmup": [],
+        "drills": []
+    }
 ]

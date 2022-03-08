@@ -2,18 +2,22 @@
     {
         "id": "1",
         "added": "2022-03-04",
-        "name": "Dutch reload",
-        "comment": "This is the drill comment"
+        "edited": "",
+        "name": "Slip n' Rip",
+        "comment": "This is the drill comment",
+        "drills": [],
+        "warmup": [],
+        "mitts": []
     },
     {
-        "id": "2",
-        "added": "2022-03-04",
-        "name": "Dutch slip n' rip",
-        "comment": "This is the drill comment"
+        "id": "bdea58e3-5531-4011-ab26-c308343508d2",
+        "added": 1646750966245,
+        "name": "",
+        "comment": ""
     },
     {
-        "id": "7bbb7a95-a6f9-4a85-8650-ebcb21be2e43",
-        "added": 1646404096272,
+        "id": "73ff0f36-63f7-4c3e-bd4f-c985992392af",
+        "added": 1646751020550,
         "name": "asd",
         "comment": "asd"
     }

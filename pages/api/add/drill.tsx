@@ -9,17 +9,17 @@ export default function handler(req, res) {
 
     if (req.method === "POST") {
         const id = uuidv4();
-        const drillName = req.body.name;
-        const drillComment = req.body.comment;
-        const newDrill = {
+        const name = req.body.name;
+        const comment = req.body.comment;
+        const newItem = {
             id: id,
             added: Date.now(),
-            name: drillName,
-            comment: drillComment,
+            name: name,
+            comment: comment,
         };
-        data.push(newDrill);
+        data.push(newItem);
         saveData();
-        res.status(201).json(newDrill);
+        res.status(201).json(newItem);
     }
 
     function saveData() {
