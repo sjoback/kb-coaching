@@ -1,24 +1,28 @@
 import GoBackButton from "components/GoBackButton";
+import styles from "./Workouts.module.scss";
 import { useState } from "react";
-import styles from "./Add.module.scss";
+import ModalAdd from "components/ModalAdd";
 
-function AddPage({ drills }) {
+function AddWorkout() {
     const [name, setName] = useState(String);
     const [comment, setComment] = useState(String);
 
-    const submitDrill = async () => {
-        const response = await fetch(`/api/add/workout`, {
+    const saveWorkout = async () => {
+        const response = await fetch("/api/workouts", {
             method: "POST",
             body: JSON.stringify({
                 name: name,
                 comment: comment,
+                drills: [],
+                warmup: [],
+                mitts: [],
             }),
             headers: {
                 "Content-Type": "application/json",
             },
         });
 
-        const data = await response.json();
+        // const data = await response.json();
     };
 
     return (
@@ -26,11 +30,12 @@ function AddPage({ drills }) {
             <GoBackButton />
 
             <form className={styles.form}>
-                <h1>add new workout</h1>
+                <h1>new workout</h1>
 
                 <div className={styles.formContainer}>
                     <label htmlFor="name">Name</label>
                     <input
+                        placeholder="E.g: Dutch slip 'n rip"
                         name="name"
                         type="text"
                         value={name}
@@ -42,49 +47,22 @@ function AddPage({ drills }) {
                     <label htmlFor="comment">Comment</label>
                     <textarea
                         name="comment"
+                        placeholder="E.g: This is a good  for etc etc.."
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                     />
                 </div>
 
                 <div className={styles.formContainer}>
-                    <label htmlFor="comment">Drills</label>
-                    <select onChange={(e) => setComment(e.target.value)}>
-                        {drills.map((drill) => drill.name)}
-                    </select>
+                    {/* <ModalAdd data={drills} add={handleAddDrill} /> */}
                 </div>
 
                 <div>
-                    <button onClick={submitDrill}> Add drill</button>
+                    <button onClick={saveWorkout}>Save workout</button>
                 </div>
             </form>
         </div>
     );
 }
 
-export async function getStaticProps() {
-    const response = await fetch(`http://localhost:3000/api/drills`);
-    const drills = await response.json();
-
-    return {
-        props: { type: drills },
-    };
-}
-
-export default AddPage;
-
-// export async function getStaticPaths() {
-//     const response = await fetch("http://localhost:3000/api/add");
-//     const addPaths = await response.json();
-
-//     return {
-//         paths: addPaths.map((path) => {
-//             return {
-//                 params: {
-//                     type: path.type,
-//                 },
-//             };
-//         }),
-//         fallback: false,
-//     };
-// }
+export default AddWorkout;

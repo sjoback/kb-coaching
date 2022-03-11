@@ -1,24 +1,30 @@
 [
     {
-        "id": "1",
-        "added": "2022-03-04",
-        "edited": "",
-        "name": "Slip n' Rip",
-        "comment": "This is the drill comment",
-        "drills": [],
-        "warmup": [],
-        "mitts": []
+        "id": "b6ebab5f-a5bc-42e4-b9b5-0fc19cb4e0be",
+        "added": 1646836031746,
+        "updated": "",
+        "name": "new dasd",
+        "comment": "asdad"
     },
     {
-        "id": "bdea58e3-5531-4011-ab26-c308343508d2",
-        "added": 1646750966245,
-        "name": "",
+        "id": "5307db74-0295-42a2-b8ce-03da4cdeeebe",
+        "added": 1646985862848,
+        "updated": "",
+        "name": "1",
         "comment": ""
     },
     {
-        "id": "73ff0f36-63f7-4c3e-bd4f-c985992392af",
-        "added": 1646751020550,
-        "name": "asd",
-        "comment": "asd"
+        "id": "b358031b-87fb-432e-92e4-b9c805b920be",
+        "added": 1646985867408,
+        "updated": "",
+        "name": "2",
+        "comment": ""
+    },
+    {
+        "id": "f0404b39-7ef0-44f9-af94-49bf9aff7dca",
+        "added": 1646985869178,
+        "updated": "",
+        "name": "3",
+        "comment": ""
     }
 ]

@@ -1,3 +1,4 @@
+import LinkButton from "components/LinkButton";
 import workouts from "data/workouts.json";
 
 function RecentWorkouts() {
@@ -7,7 +8,12 @@ function RecentWorkouts() {
 
             <ul>
                 {workouts?.map((item) => (
-                    <div>{item.name}</div>
+                    <li key={item.id}>
+                        <LinkButton
+                            link={`/workouts/${item.id}`}
+                            text={item.name}
+                        />
+                    </li>
                 ))}
             </ul>
         </div>

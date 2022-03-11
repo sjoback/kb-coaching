@@ -5,9 +5,9 @@
         padding: 2rem;
         border: 1px solid #e6e6e6;
         border-radius: 10px;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         width: 600px;
         max-width: 100%;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         gap: 30px;
         display: grid;
         grid-template-columns: 1fr;
@@ -20,17 +20,14 @@
             gap: 10px;
             display: grid;
             grid-template-columns: 1fr;
-
-            input,
-            textarea {
-                box-shadow: inset rgba(100, 100, 111, 0.1) 0px 7px 15px 0px;
-                background-color: #f2f2f2;
-                border: 1px solid #e6e6e6;
-                border-radius: 5px;
-                padding: 15px;
-                outline: none;
-                resize: vertical;
-            }
         }
     }
+}
+
+.container {
+    position: relative;
+}
+
+.modal {
+    position: absolute;
 }

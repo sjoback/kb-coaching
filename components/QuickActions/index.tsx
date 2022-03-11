@@ -9,22 +9,22 @@ function QuickActions() {
             <ul className={styles.mainList}>
                 <li>
                     <LinkButton
-                        icon={"faCoffe"}
-                        link={"/add/workout"}
+                        // icon={"faCoffe"}
+                        link={"/workouts/add"}
                         text={"Add Workout"}
                     />
                 </li>
                 <li>
                     <LinkButton
-                        icon={"faCoffe"}
-                        link={"/add/drill"}
+                        // icon={"faCoffe"}
+                        link={"/drills/add"}
                         text={"Add Drill"}
                     />
                 </li>
                 <li>
                     <LinkButton
-                        icon={"faCoffe"}
-                        link={"/add/warmup"}
+                        // icon={"faCoffe"}
+                        link={"/warmups/add/"}
                         text={"Add Warmup"}
                     />
                 </li>
