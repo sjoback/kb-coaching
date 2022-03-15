@@ -4,27 +4,25 @@ import styles from "./QuickActions.module.scss";
 function QuickActions() {
     return (
         <div className={styles.wrapper}>
-            <h1>Quick actions</h1>
-
             <ul className={styles.mainList}>
                 <li>
                     <LinkButton
                         // icon={"faCoffe"}
-                        link={"/workouts/add"}
+                        link={"/workouts/new"}
                         text={"Add Workout"}
                     />
                 </li>
                 <li>
                     <LinkButton
                         // icon={"faCoffe"}
-                        link={"/drills/add"}
+                        link={"/drills/new"}
                         text={"Add Drill"}
                     />
                 </li>
                 <li>
                     <LinkButton
                         // icon={"faCoffe"}
-                        link={"/warmups/add/"}
+                        link={"/warmups/new"}
                         text={"Add Warmup"}
                     />
                 </li>

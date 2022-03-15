@@ -21,7 +21,7 @@ function WorkoutsPage({ data }) {
                 <div>No workouts added</div>
             )}
 
-            <LinkButton link={"/workouts/add"} text={"Add new workout"} />
+            <LinkButton link={"/workouts/new"} text={"Add new workout"} />
         </div>
     );
 }
@@ -29,8 +29,10 @@ function WorkoutsPage({ data }) {
 export default WorkoutsPage;
 
 export async function getStaticProps() {
-    const response = await fetch("http://localhost:3000/api/workouts");
+    const response = await fetch(`${process.env.API_URL}/workouts`);
+
     const data = await response.json();
+    console.log(data);
 
     return {
         props: { data },

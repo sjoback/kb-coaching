@@ -22,7 +22,8 @@ function AddWorkout() {
             },
         });
 
-        // const data = await response.json();
+        const data = await response.json();
+        console.log(data);
     };
 
     return (
@@ -47,7 +48,7 @@ function AddWorkout() {
                     <label htmlFor="comment">Comment</label>
                     <textarea
                         name="comment"
-                        placeholder="E.g: This is a good  for etc etc.."
+                        placeholder="E.g: This is a good for etc etc.."
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                     />
