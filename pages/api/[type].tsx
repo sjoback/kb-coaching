@@ -1,14 +1,18 @@
-import data from "data/data.json";
 import workouts from "data/workouts.json";
+import drills from "data/drills.json";
 
 import { v4 as uuidv4 } from "uuid";
 const fs = require("fs");
 
 export default function handler(req, res) {
    const { type } = req.query;
+   const concatData = {
+      workouts: [...workouts],
+      drills: [...drills],
+   };
    switch (req.method) {
       case "GET":
-         res.status(200).json(data[type]);
+         res.status(200).json(concatData[type]);
          break;
 
       case "POST":
@@ -19,9 +23,10 @@ export default function handler(req, res) {
             updated: new Date().toISOString(),
             ...req.body,
          };
-         // data[type].push(newItem);
-         workouts.push(newItem);
-         saveData(workouts);
+
+         const data = concatData[type];
+         data.push(newItem);
+         saveData(data);
          res.status(201).json(req.body);
          break;
    }

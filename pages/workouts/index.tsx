@@ -2,39 +2,41 @@ import LinkButton from "components/LinkButton";
 import Link from "next/link";
 
 function WorkoutsPage({ data }) {
-    return (
-        <div>
-            <h1>Workouts</h1>
-            {data ? (
-                <ul>
-                    {data.map((workout) => {
-                        return (
-                            <li key={workout.id}>
-                                <Link href={`/workouts/${workout.id}`}>
-                                    {workout.name}
-                                </Link>
-                            </li>
-                        );
-                    })}
-                </ul>
-            ) : (
-                <div>No workouts added</div>
-            )}
+   console.log(data);
 
-            <LinkButton link={"/workouts/new"} text={"Add new workout"} />
-        </div>
-    );
+   return (
+      <div>
+         <h1>Workouts</h1>
+         {data ? (
+            <ul>
+               {data.map((workout) => {
+                  return (
+                     <li key={workout.id}>
+                        <Link href={`/workouts/${workout.id}`}>
+                           {workout.name}
+                        </Link>
+                     </li>
+                  );
+               })}
+            </ul>
+         ) : (
+            <div>No workouts added</div>
+         )}
+
+         <LinkButton link={"/workouts/new"} text={"Add new workout"} />
+      </div>
+   );
 }
 
 export default WorkoutsPage;
 
 export async function getStaticProps() {
-    const response = await fetch(`${process.env.API_URL}/workouts`);
+   const response = await fetch(`${process.env.API_URL}/workouts`);
 
-    const data = await response.json();
-    console.log(data);
+   const data = await response.json();
+   console.log(data);
 
-    return {
-        props: { data },
-    };
+   return {
+      props: { data },
+   };
 }
