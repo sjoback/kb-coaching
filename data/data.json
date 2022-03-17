@@ -1,6 +1,27 @@
 {
     "drills": [],
-    "workouts": [],
+    "workouts": [
+        {
+            "id": "b3028b38-4577-46af-822a-b7998b309e96",
+            "added": "2022-03-17T15:18:49.994Z",
+            "updated": "2022-03-17T15:18:49.994Z",
+            "name": "1",
+            "comment": "1",
+            "drills": [],
+            "warmup": [],
+            "mitts": []
+        },
+        {
+            "id": "0bbbef07-be87-4c1f-addf-2d2c7b7dd360",
+            "added": "2022-03-17T15:19:24.060Z",
+            "updated": "2022-03-17T15:19:24.060Z",
+            "name": "czxczxc",
+            "comment": "zxczc",
+            "drills": [],
+            "warmup": [],
+            "mitts": []
+        }
+    ],
     "warmups": [],
     "mitts": []
 }

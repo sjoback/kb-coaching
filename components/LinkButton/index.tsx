@@ -4,14 +4,16 @@ import { faCoffee, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function LinkButton({ link, text, icon }) {
-    return (
-        <Link href={link}>
+   return (
+      <div className={styles.wrapper}>
+         <Link href={link}>
             <a className={styles.main}>
-                {/* <FontAwesomeIcon icon={icon} /> */}
-                {text}
+               {/* <FontAwesomeIcon icon={icon} /> */}
+               {text}
             </a>
-        </Link>
-    );
+         </Link>
+      </div>
+   );
 }
 
 export default LinkButton;

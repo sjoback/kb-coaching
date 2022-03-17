@@ -1,23 +1,20 @@
 import LinkButton from "components/LinkButton";
-import workouts from "data/workouts.json";
+import data from "data/data.json";
 
 function RecentWorkouts() {
-    return (
-        <div>
-            <h1>Recent Workouts</h1>
+   return (
+      <div>
+         <h1>Recent Workouts</h1>
 
-            <ul>
-                {workouts?.map((item) => (
-                    <li key={item.id}>
-                        <LinkButton
-                            link={`/workouts/${item.id}`}
-                            text={item.name}
-                        />
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+         <ul>
+            {data.workouts?.map((item) => (
+               <li key={item.id}>
+                  <LinkButton link={`/workouts/${item.id}`} text={item.name} />
+               </li>
+            ))}
+         </ul>
+      </div>
+   );
 }
 
 export default RecentWorkouts;
