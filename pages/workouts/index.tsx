@@ -2,8 +2,6 @@ import LinkButton from "components/LinkButton";
 import Link from "next/link";
 
 function WorkoutsPage({ data }) {
-   console.log(data);
-
    return (
       <div>
          <h1>Workouts</h1>

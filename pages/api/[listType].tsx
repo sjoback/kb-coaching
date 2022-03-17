@@ -5,14 +5,14 @@ import { v4 as uuidv4 } from "uuid";
 const fs = require("fs");
 
 export default function handler(req, res) {
-   const { type } = req.query;
+   const { listType } = req.query;
    const concatData = {
       workouts: [...workouts],
       drills: [...drills],
    };
    switch (req.method) {
       case "GET":
-         res.status(200).json(concatData[type]);
+         res.status(200).json(concatData[listType]);
          break;
 
       case "POST":
@@ -24,7 +24,7 @@ export default function handler(req, res) {
             ...req.body,
          };
 
-         const data = concatData[type];
+         const data = concatData[listType];
          data.push(newItem);
          saveData(data);
          res.status(201).json(req.body);
@@ -32,6 +32,9 @@ export default function handler(req, res) {
    }
 
    function saveData(newData) {
-      fs.writeFileSync(`data/${type}.json`, JSON.stringify(newData, null, 4));
+      fs.writeFileSync(
+         `data/${listType}.json`,
+         JSON.stringify(newData, null, 4)
+      );
    }
 }

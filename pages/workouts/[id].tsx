@@ -41,12 +41,12 @@ function WorkoutPage({ drills, workout }) {
    };
 
    const deleteWorkout = async () => {
-      const response = await fetch(`/api/workouts/${workout.id}`, {
+      const response = await fetch(`/api/edit/workouts/${workout.id}`, {
          method: "DELETE",
          headers: { "Content-Type": "application/json" },
       });
 
-      Router.push("/");
+      // Router.push("/");
    };
 
    return (
@@ -84,9 +84,9 @@ export default WorkoutPage;
 
 export async function getStaticProps({ params }) {
    const response = await fetch(
-      `http://localhost:3000/api/workouts/${params.id}`
+      `${process.env.API_URL}/edit/workouts/${params.id}`
    );
-   const drillsResponse = await fetch(`http://localhost:3000/api/drills`);
+   const drillsResponse = await fetch(`${process.env.API_URL}/drills`);
 
    const data = await response.json();
 
@@ -101,7 +101,8 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-   const response = await fetch("http://localhost:3000/api/workouts");
+   const response = await fetch(`${process.env.API_URL}/workouts`);
+
    const workouts = await response.json();
 
    return {
