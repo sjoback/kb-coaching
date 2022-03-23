@@ -1,33 +1,33 @@
 .wrapper {
-    position: relative;
+   position: relative;
 
-    .form {
-        padding: 2rem;
-        border: 1px solid #e6e6e6;
-        border-radius: 10px;
-        width: 600px;
-        max-width: 100%;
-        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-        gap: 30px;
-        display: grid;
-        grid-template-columns: 1fr;
+   .form {
+      padding: 2rem;
+      border: 1px solid #e6e6e6;
+      border-radius: 10px;
+      width: 600px;
+      max-width: 100%;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      gap: 30px;
+      display: grid;
+      grid-template-columns: 1fr;
 
-        h1 {
-            margin-top: 0;
-        }
+      h1 {
+         margin-top: 0;
+      }
 
-        .formContainer {
-            gap: 10px;
-            display: grid;
-            grid-template-columns: 1fr;
-        }
-    }
+      .formContainer {
+         gap: 10px;
+         display: grid;
+         grid-template-columns: 1fr;
+      }
+   }
 }
 
 .container {
-    position: relative;
+   position: relative;
 }
 
 .modal {
-    position: absolute;
+   position: absolute;
 }

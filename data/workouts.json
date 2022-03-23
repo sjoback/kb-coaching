@@ -18,5 +18,15 @@
       "drills": [],
       "warmup": [],
       "mitts": []
+   },
+   {
+      "id": "b0dd28ad-96cb-4fff-94fe-5e9188da7ad3",
+      "added": "2022-03-23T14:47:53.155Z",
+      "updated": "2022-03-23T14:47:53.155Z",
+      "name": "123",
+      "comment": "123",
+      "drills": ["4d67d211-1800-4b66-a034-9721e7128ce9"],
+      "warmup": [],
+      "mitts": []
    }
 ]

@@ -1,0 +1,60 @@
+.container {
+   display: grid;
+   gap: 30px;
+   grid-template-columns: 1fr;
+   box-sizing: border-box;
+   padding: 30px;
+   border: 1px solid #e6e6e6;
+   border-radius: 10px;
+   width: 600px;
+   max-width: 100%;
+   box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
+}
+.inputs {
+   display: grid;
+   gap: 10px;
+
+   label {
+      font-size: 14px;
+   }
+
+   textarea {
+      min-height: 100px;
+   }
+
+   input,
+   textarea {
+      font-size: 16px;
+      padding: 15px;
+      background-color: #f2f2f2;
+      border: 1px solid #e6e6e6;
+      border-radius: 5px;
+      box-shadow: inset rgba(0, 0, 0, 0.1) 0px 3px 8px;
+      transform: 0.15s ease-in-out;
+      outline: none;
+      resize: vertical;
+
+      &:focus {
+         background-color: #fff;
+         transform: 0.15s ease-in-out;
+         box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+      }
+   }
+
+   ul {
+      //   padding: 0;
+      list-style-type: disc;
+   }
+}
+
+.buttons {
+   display: grid;
+   gap: 20px;
+   grid-template-columns: 1fr 1fr;
+}
+
+.timestamp {
+   font-size: 14px;
+   color: #999;
+   font-style: italic;
+}

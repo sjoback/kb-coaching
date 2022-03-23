@@ -1,15 +1,22 @@
 import EditActions from "components/EditActions";
+import FormWorkout from "components/Forms/FormWorkout";
 import GoBackButton from "components/GoBackButton";
 import ModalAdd from "components/ModalAdd";
 import { Router } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "./Style.module.scss";
+import form from "styles/Form.module.scss";
+import ListItem from "components/Form/ListItem";
 
-function WorkoutPage({ drills, workout }) {
+function WorkoutPage({ drills, item }) {
    const [drillsArray, storeDrills] = useState([]);
+   const [name, setName] = useState(String);
+   const [comment, setComment] = useState(String);
 
    useEffect(() => {
-      storeDrills(workout.drills);
+      storeDrills(item.drills);
+      setName(item.name);
+      setComment(item.comment);
    }, []);
 
    function handleAddDrill(drill) {
@@ -26,22 +33,22 @@ function WorkoutPage({ drills, workout }) {
       }
    }
 
-   const saveWorkout = async () => {
-      const response = await fetch(`/api/workouts/${workout.id}`, {
+   const saveItem = async () => {
+      const response = await fetch(`/api/workouts/${item.id}`, {
          method: "PUT",
          body: JSON.stringify({
-            name: workout.name,
-            comment: workout.comment,
-            warmup: workout.warmup,
+            name: name,
+            comment: comment,
+            warmup: item.warmup,
             drills: drillsArray,
-            mitts: workout.mitts,
+            mitts: item.mitts,
          }),
          headers: { "Content-Type": "application/json" },
       });
    };
 
-   const deleteWorkout = async () => {
-      const response = await fetch(`/api/edit/workouts/${workout.id}`, {
+   const deleteItem = async () => {
+      const response = await fetch(`/api/edit/workouts/${item.id}`, {
          method: "DELETE",
          headers: { "Content-Type": "application/json" },
       });
@@ -52,27 +59,51 @@ function WorkoutPage({ drills, workout }) {
    return (
       <div className={styles.wrapper}>
          <div className={styles.inner}>
-            <h1>{workout.name}</h1>
-            <h1>{workout.comment}</h1>
-            <h1>{workout.added}</h1>
+            <form className={form.container}>
+               <div className={form.inputs}>
+                  <label htmlFor="name">Name</label>
+                  <input
+                     type="text"
+                     name="name"
+                     value={name}
+                     onChange={(e) => setName(e.target.value)}
+                  />
+               </div>
 
-            <div className={styles.container}>
-               <span>Workout drills</span>
+               <div className={form.inputs}>
+                  <label htmlFor="comment">Comment</label>
+                  <textarea
+                     name="comment"
+                     value={comment}
+                     onChange={(e) => setComment(e.target.value)}
+                  />
+               </div>
 
-               <ul className={styles.list}>
-                  {drillsArray &&
-                     drillsArray.length > 0 &&
-                     drillsArray.map((drill) => (
-                        <li key={drill.id}>{drill.name}</li>
-                     ))}
-               </ul>
+               <div className={form.inputs}>
+                  <label htmlFor="warmup">Warmup</label>
+                  <ul>
+                     {drillsArray &&
+                        drillsArray.length > 0 &&
+                        drillsArray.map((id) => (
+                           // <li key={drill.id}>{drill}</li>
+                           <ListItem type="drills" id={id} key={id} />
+                        ))}
+                  </ul>
+               </div>
 
-               <ModalAdd data={drills} add={handleAddDrill} />
-            </div>
+               <div className={styles.container}>
+                  <span>Workout drills</span>
 
-            <button onClick={() => saveWorkout()}>Save workout</button>
-            <button onClick={() => deleteWorkout()}>Delete workout</button>
+                  <ModalAdd data={drills} add={handleAddDrill} />
+               </div>
 
+               <div className={form.buttons}>
+                  <button onClick={() => saveItem()}>Save workout</button>
+                  <button onClick={() => deleteItem()}>Delete workout</button>
+               </div>
+
+               <span className={form.timestamp}>Edited: {item.added}</span>
+            </form>
             {/* <GoBackButton /> */}
             {/* <EditActions /> */}
          </div>
@@ -94,7 +125,7 @@ export async function getStaticProps({ params }) {
 
    return {
       props: {
-         workout: data,
+         item: data,
          drills: drills,
       },
    };
