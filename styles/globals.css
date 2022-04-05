@@ -2,6 +2,7 @@ html,
 body {
    padding: 0;
    margin: 0;
+   background-color: #f2f2f2;
    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -20,10 +21,11 @@ main {
    margin-top: 59px;
 }
 
-button {
-   cursor: pointer;
+ul {
+   list-style-type: none;
+   padding: 0;
 }
 
-ul {
+li {
    list-style-type: none;
 }

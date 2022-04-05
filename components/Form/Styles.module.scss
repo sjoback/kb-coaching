@@ -1,0 +1,20 @@
+.container {
+   border-radius: 50px;
+   background-color: #999;
+   color: #fff;
+   font-weight: bold;
+}
+
+.table {
+   font-size: 16px;
+
+   .tableRow {
+      display: flex;
+      width: 100%;
+
+      .cell {
+         padding: 20px 25px;
+         flex: 1;
+      }
+   }
+}

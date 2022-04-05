@@ -1,9 +1,11 @@
 [
    {
       "id": "4d67d211-1800-4b66-a034-9721e7128ce9",
-      "added": "2022-03-17T19:58:58.281Z",
-      "updated": "2022-03-17T19:58:58.281Z",
       "name": "drill 1",
-      "comment": "this isa comment"
+      "comment": "this isa comment",
+      "rounds": 2,
+      "round_time": 3,
+      "added": "2022-03-17T19:58:58.281Z",
+      "updated": "2022-03-17T19:58:58.281Z"
    }
 ]

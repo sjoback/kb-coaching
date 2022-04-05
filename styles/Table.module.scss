@@ -1,0 +1,9 @@
+.row {
+   display: flex;
+   position: relative;
+
+   .cell {
+      flex: 1;
+      padding: 10px 0;
+   }
+}

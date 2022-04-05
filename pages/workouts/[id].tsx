@@ -1,15 +1,16 @@
 import EditActions from "components/EditActions";
-import FormWorkout from "components/Forms/FormWorkout";
 import GoBackButton from "components/GoBackButton";
 import ModalAdd from "components/ModalAdd";
-import { Router } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "./Style.module.scss";
+import table from "styles/Table.module.scss";
 import form from "styles/Form.module.scss";
 import ListItem from "components/Form/ListItem";
+import FormModal from "components/Form/FormModal";
 
 function WorkoutPage({ drills, item }) {
-   const [drillsArray, storeDrills] = useState([]);
+   const [drillIds, storeDrills] = useState([]);
+   const [warmupArray, storeWarmup] = useState([]);
    const [name, setName] = useState(String);
    const [comment, setComment] = useState(String);
 
@@ -21,13 +22,17 @@ function WorkoutPage({ drills, item }) {
 
    function handleAddDrill(drill) {
       // NOTE: make alert modal
-      if (!drillsArray.includes(drill)) {
+      console.log(drillIds);
+
+      if (!drillIds.includes(drill)) {
          const formattedDrill = {
             id: drill.id,
             name: drill.name,
+            rounds: drill.rounds,
+            round_time: drill.round_time,
          };
-         const newDrillsArray = [...drillsArray, formattedDrill];
-         storeDrills(newDrillsArray);
+         const newDrillIds = [...drillIds, formattedDrill];
+         storeDrills(newDrillIds);
       } else {
          window.alert("item exists");
       }
@@ -39,12 +44,14 @@ function WorkoutPage({ drills, item }) {
          body: JSON.stringify({
             name: name,
             comment: comment,
-            warmup: item.warmup,
-            drills: drillsArray,
+            warmup: warmupArray,
+            drills: drillIds,
             mitts: item.mitts,
          }),
          headers: { "Content-Type": "application/json" },
       });
+
+      console.log(response);
    };
 
    const deleteItem = async () => {
@@ -80,22 +87,44 @@ function WorkoutPage({ drills, item }) {
                </div>
 
                <div className={form.inputs}>
-                  <label htmlFor="warmup">Warmup</label>
+                  <label htmlFor="warmup">Drills</label>
+                  <ModalAdd
+                     text="Add drill"
+                     data={drills}
+                     add={handleAddDrill}
+                  />
+
                   <ul>
-                     {drillsArray &&
-                        drillsArray.length > 0 &&
-                        drillsArray.map((id) => (
-                           // <li key={drill.id}>{drill}</li>
-                           <ListItem type="drills" id={id} key={id} />
+                     <div className={table.row}>
+                        <div className={table.cell}>Name</div>
+                        <div className={table.cell}>Rounds</div>
+                        <div className={table.cell}>Round time</div>
+                     </div>
+
+                     {drillIds &&
+                        drillIds.length > 0 &&
+                        drillIds.map((drill) => (
+                           <ListItem
+                              key={drill.id}
+                              name={drill.name}
+                              rounds={drill.rounds}
+                              round_time={drill.round_time}
+                              comment={drill.comment}
+                           />
                         ))}
                   </ul>
                </div>
 
-               <div className={styles.container}>
-                  <span>Workout drills</span>
-
-                  <ModalAdd data={drills} add={handleAddDrill} />
-               </div>
+               {/* <div className={form.inputs}>
+                  <label htmlFor="warmup">Warmup</label>
+                  <ul>
+                     {item.warmup &&
+                        item.warmup.length > 0 &&
+                        item.warmup.map((id) => (
+                           <ListItem items={items} type="warmup" id={id} key={id} />
+                        ))}
+                  </ul>
+               </div> */}
 
                <div className={form.buttons}>
                   <button onClick={() => saveItem()}>Save workout</button>
@@ -114,13 +143,10 @@ function WorkoutPage({ drills, item }) {
 export default WorkoutPage;
 
 export async function getStaticProps({ params }) {
-   const response = await fetch(
-      `${process.env.API_URL}/edit/workouts/${params.id}`
-   );
+   const response = await fetch(`${process.env.API_URL}/workouts/${params.id}`);
    const drillsResponse = await fetch(`${process.env.API_URL}/drills`);
 
    const data = await response.json();
-
    const drills = await drillsResponse.json();
 
    return {

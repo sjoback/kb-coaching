@@ -1,32 +1,32 @@
 import { useEffect, useState } from "react";
+import modal from "styles/Modal.module.scss";
+import container from "styles/Container.module.scss";
+import styles from "./Styles.module.scss";
+import classnames from "classnames";
+import table from "styles/Table.module.scss";
+import ModalExpand from "components/ModalExpand";
 
-function ListItem({ id, type }) {
-   useEffect(() => {
-      getItem();
-   }, []);
-   const [item, setItem] = useState({});
-   const getItem = async () => {
-      const response = await fetch(`/api/edit/${type}/${id}`, {
-         method: "GET",
-      });
+function ListItem({ name, rounds, round_time, comment }) {
+   return (
+      <li className={table.row}>
+         <div className={table.cell}>{name}</div>
+         <div className={table.cell}>{rounds}</div>
+         <div className={table.cell}>{round_time}</div>
+         {/* <div onClick={() => toggleOpen(true)}>+</div> */}
+         <ModalExpand data={comment} />
 
-      const item = await response.json();
-      setItem(item);
-   };
+         {/* {open && (
+            <div className={modal.window}>
+               <div
+                  onClick={() => toggleOpen(false)}
+                  className={modal.overlay}
+               />
 
-   return <li>{item.name}</li>;
+               <div className={classnames(modal.inner, container.main)}></div>
+            </div>
+         )} */}
+      </li>
+   );
 }
 
 export default ListItem;
-
-// export async function getStaticProps({ id, type }) {
-//    const response = await fetch(`${process.env.API_URL}/edit/${type}/${id}`);
-//    const data = await response.json();
-//    console.log(response);
-
-//    return {
-//       props: {
-//          item: data,
-//       },
-//    };
-// }

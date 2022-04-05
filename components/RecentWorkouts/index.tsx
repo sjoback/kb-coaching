@@ -1,5 +1,6 @@
 import LinkButton from "components/LinkButton";
-import data from "data/data.json";
+import data from "data/workouts.json";
+import Link from "next/link";
 
 function RecentWorkouts() {
    return (
@@ -7,9 +8,9 @@ function RecentWorkouts() {
          <h1>Recent Workouts</h1>
 
          <ul>
-            {data.workouts?.map((item) => (
+            {data?.map((item) => (
                <li key={item.id}>
-                  <LinkButton link={`/workouts/${item.id}`} text={item.name} />
+                  <Link href={`/workouts/${item.id}`}>{item.name}</Link>
                </li>
             ))}
          </ul>
