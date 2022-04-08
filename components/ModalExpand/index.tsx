@@ -11,7 +11,8 @@ function ModalExpand(props) {
                <div
                   onClick={() => toggleOpen(false)}
                   className={modal.overlay}
-               ></div>
+               />
+
                <div className={modal.inner}>
                   <div onClick={() => toggleOpen(false)}>X</div>
                   {props.data}

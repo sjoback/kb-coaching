@@ -63,6 +63,10 @@ function WorkoutPage({ drills, item }) {
       // Router.push("/");
    };
 
+   function setDrill(drill, index) {
+      drillIds[index] = drill;
+   }
+
    return (
       <div className={styles.wrapper}>
          <div className={styles.inner}>
@@ -88,6 +92,7 @@ function WorkoutPage({ drills, item }) {
 
                <div className={form.inputs}>
                   <label htmlFor="warmup">Drills</label>
+
                   <ModalAdd
                      text="Add drill"
                      data={drills}
@@ -95,21 +100,24 @@ function WorkoutPage({ drills, item }) {
                   />
 
                   <ul>
-                     <div className={table.row}>
+                     <li className={table.row}>
                         <div className={table.cell}>Name</div>
                         <div className={table.cell}>Rounds</div>
                         <div className={table.cell}>Round time</div>
-                     </div>
+                        <div />
+                     </li>
 
                      {drillIds &&
                         drillIds.length > 0 &&
-                        drillIds.map((drill) => (
+                        drillIds.map((drill, index) => (
                            <ListItem
                               key={drill.id}
-                              name={drill.name}
-                              rounds={drill.rounds}
-                              round_time={drill.round_time}
-                              comment={drill.comment}
+                              // name={drill.name}
+                              // rounds={drill.rounds}
+                              // round_time={drill.round_time}
+                              index={index}
+                              drill={drill}
+                              onChange={setDrill}
                            />
                         ))}
                   </ul>

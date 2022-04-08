@@ -1,30 +1,55 @@
 import { useEffect, useState } from "react";
-import modal from "styles/Modal.module.scss";
 import container from "styles/Container.module.scss";
 import styles from "./Styles.module.scss";
-import classnames from "classnames";
 import table from "styles/Table.module.scss";
 import ModalExpand from "components/ModalExpand";
 
-function ListItem({ name, rounds, round_time, comment }) {
+function ListItem({ index, onChange, drill }) {
+   useEffect(() => {
+      setRoundsState(drill.rounds);
+      setRoundTimeState(drill.round_time);
+   }, []);
+
+   const [rounds, setRoundsState] = useState(Number);
+   const [roundTime, setRoundTimeState] = useState(Number);
+
+   function setRounds(newRounds) {
+      console.log(newRounds);
+
+      setRoundsState(newRounds);
+      saveDrill();
+   }
+
+   function setRoundTime(roundTime) {
+      setRoundTimeState(roundTime);
+      saveDrill();
+   }
+
+   function saveDrill() {
+      drill.rounds = rounds;
+      drill.round_time = roundTime;
+      onChange(drill, index);
+   }
+
    return (
       <li className={table.row}>
-         <div className={table.cell}>{name}</div>
-         <div className={table.cell}>{rounds}</div>
-         <div className={table.cell}>{round_time}</div>
-         {/* <div onClick={() => toggleOpen(true)}>+</div> */}
-         <ModalExpand data={comment} />
+         <div className={table.cell}>{drill.name}</div>
 
-         {/* {open && (
-            <div className={modal.window}>
-               <div
-                  onClick={() => toggleOpen(false)}
-                  className={modal.overlay}
-               />
+         <input
+            name="rounds"
+            type="text"
+            value={rounds}
+            onChange={(e) => setRounds(e.target.value)}
+         />
 
-               <div className={classnames(modal.inner, container.main)}></div>
-            </div>
-         )} */}
+         <input
+            name="round time"
+            type="text"
+            value={roundTime}
+            onChange={(e) => setRoundTime(e.target.value)}
+         />
+
+         <ModalExpand data={drill.comment} />
       </li>
    );
 }
