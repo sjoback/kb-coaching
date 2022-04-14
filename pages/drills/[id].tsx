@@ -1,11 +1,12 @@
 import EditActions from "components/EditActions";
 import GoBackButton from "components/GoBackButton";
-import ModalAdd from "components/ModalAdd";
+
 import { useEffect, useState } from "react";
 import styles from "./Style.module.scss";
 import table from "styles/Table.module.scss";
 import form from "styles/Form.module.scss";
 import ListItem from "components/Form/ListItem";
+import FormModal from "components/Form/FormModalAddDrill";
 
 function WorkoutPage({ drills, item }) {
    const [drillIds, storeDrills] = useState([]);
@@ -20,24 +21,21 @@ function WorkoutPage({ drills, item }) {
    }, []);
 
    function handleAddDrill(drill) {
-      const formattedDrill = {
-         id: drill.id,
-         name: drill.name,
-         rounds: drill.rounds ? drill.rounds : "",
-         round_time: drill.round_time ? drill.round_time : "",
-         notes: drill.notes ? drill.notes : "",
-      };
-      const newDrillIds = [...drillIds, formattedDrill];
-      storeDrills(newDrillIds);
-   }
+      // NOTE: make alert modal
+      console.log(drillIds);
 
-   function removeDrill(drillIndex) {
-      const spliced = drillIds.filter((drill, index) => drillIndex !== index);
-      storeDrills(spliced);
-   }
-
-   function updateDrill(drill, index, type) {
-      drillIds[index][type] = drill;
+      if (!drillIds.includes(drill)) {
+         const formattedDrill = {
+            id: drill.id,
+            name: drill.name,
+            rounds: drill.rounds,
+            round_time: drill.round_time,
+         };
+         const newDrillIds = [...drillIds, formattedDrill];
+         storeDrills(newDrillIds);
+      } else {
+         window.alert("item exists");
+      }
    }
 
    const saveItem = async () => {
@@ -52,6 +50,8 @@ function WorkoutPage({ drills, item }) {
          }),
          headers: { "Content-Type": "application/json" },
       });
+
+      console.log(response);
    };
 
    const deleteItem = async () => {
@@ -62,6 +62,10 @@ function WorkoutPage({ drills, item }) {
 
       // Router.push("/");
    };
+
+   function updateDrill(drill, index, type) {
+      drillIds[index][type] = drill;
+   }
 
    return (
       <div className={styles.wrapper}>
@@ -89,35 +93,25 @@ function WorkoutPage({ drills, item }) {
                <div className={form.inputs}>
                   <label htmlFor="warmup">Drills</label>
 
-                  <ModalAdd
-                     text="Add drill"
-                     data={drills}
-                     add={handleAddDrill}
-                  />
+                  <ul>
+                     <li className={table.row}>
+                        <div className={table.cell}>Name</div>
+                        <div className={table.cell}>Rounds</div>
+                        <div className={table.cell}>Round time(min)</div>
+                        <div />
+                     </li>
 
-                  {drillIds.length > 0 && (
-                     <ul>
-                        <li className={table.row}>
-                           <div className={table.cell}>Name</div>
-                           <div className={table.cell}>Rounds</div>
-                           <div className={table.cell}>Round time(min)</div>
-                           <div className={table.cell}>Notes</div>
-                           <div />
-                        </li>
-
-                        {drillIds &&
-                           drillIds.length > 0 &&
-                           drillIds.map((drill, index) => (
-                              <ListItem
-                                 key={drill.id + index}
-                                 index={index}
-                                 drill={drill}
-                                 onChange={updateDrill}
-                                 removeDrill={removeDrill}
-                              />
-                           ))}
-                     </ul>
-                  )}
+                     {drillIds &&
+                        drillIds.length > 0 &&
+                        drillIds.map((drill, index) => (
+                           <ListItem
+                              key={drill.id}
+                              index={index}
+                              drill={drill}
+                              onChange={updateDrill}
+                           />
+                        ))}
+                  </ul>
                </div>
 
                {/* <div className={form.inputs}>

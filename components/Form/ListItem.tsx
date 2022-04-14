@@ -4,52 +4,53 @@ import styles from "./Styles.module.scss";
 import table from "styles/Table.module.scss";
 import ModalExpand from "components/ModalExpand";
 
-function ListItem({ index, onChange, drill }) {
+function ListItem({ index, removeDrill, onChange, drill }) {
    useEffect(() => {
-      setRoundsState(drill.rounds);
-      setRoundTimeState(drill.round_time);
+      setRounds(drill.rounds);
+      setRoundTime(drill.round_time);
    }, []);
 
-   const [rounds, setRoundsState] = useState(Number);
-   const [roundTime, setRoundTimeState] = useState(Number);
+   const [rounds, setRounds] = useState(Number);
+   const [roundTime, setRoundTime] = useState(Number);
+   const [notes, setNotes] = useState(Number);
 
-   function setRounds(newRounds) {
-      console.log(newRounds);
-
-      setRoundsState(newRounds);
-      saveDrill();
+   function saveRounds(newRounds) {
+      setRounds(newRounds);
+      onChange(newRounds, index, "rounds");
    }
 
-   function setRoundTime(roundTime) {
-      setRoundTimeState(roundTime);
-      saveDrill();
+   function saveRoundTime(newRoundTime) {
+      setRoundTime(newRoundTime);
+      onChange(newRoundTime, index, "round_time");
    }
 
-   function saveDrill() {
-      drill.rounds = rounds;
-      drill.round_time = roundTime;
-      onChange(drill, index);
+   function saveNotes(newNotes) {
+      setNotes(newNotes);
+      onChange(newNotes, index, "notes");
    }
 
    return (
       <li className={table.row}>
-         <div className={table.cell}>{drill.name}</div>
+         <div className={table.cell}>
+            <div onClick={() => removeDrill(index)}>X</div>
+            {drill.name}
+         </div>
 
          <input
             name="rounds"
             type="text"
             value={rounds}
-            onChange={(e) => setRounds(e.target.value)}
+            onChange={(e) => saveRounds(e.target.value)}
          />
 
          <input
             name="round time"
             type="text"
             value={roundTime}
-            onChange={(e) => setRoundTime(e.target.value)}
+            onChange={(e) => saveRoundTime(e.target.value)}
          />
 
-         <ModalExpand data={drill.comment} />
+         <ModalExpand onChange={saveNotes} text={drill.notes} />
       </li>
    );
 }

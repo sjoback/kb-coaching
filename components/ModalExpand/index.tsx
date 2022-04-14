@@ -1,8 +1,9 @@
 import { useState } from "react";
 import modal from "styles/Modal.module.scss";
 
-function ModalExpand(props) {
+function ModalExpand({ onChange, text }) {
    const [open, toggleOpen] = useState(false);
+   const [notes, setNotes] = useState(String);
 
    return (
       <div>
@@ -15,12 +16,17 @@ function ModalExpand(props) {
 
                <div className={modal.inner}>
                   <div onClick={() => toggleOpen(false)}>X</div>
-                  {props.data}
+                  {text}
+                  <textarea
+                     name=""
+                     value={notes}
+                     onChange={(e) => setNotes(e.target.value)}
+                  />
                </div>
             </div>
          )}
 
-         <div onClick={() => toggleOpen(true)}>{props.text} +</div>
+         <div onClick={() => toggleOpen(true)}>+</div>
       </div>
    );
 }

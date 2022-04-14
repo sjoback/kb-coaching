@@ -9,7 +9,9 @@
    font-size: 16px;
 
    .tableRow {
-      display: flex;
+      // display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       width: 100%;
 
       .cell {
