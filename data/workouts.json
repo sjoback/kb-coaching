@@ -13,14 +13,14 @@
         "id": "46d3653f-16bd-4da9-b5a7-cea5363b26c6",
         "added": "2022-03-17T20:06:33.666Z",
         "updated": "2022-03-17T20:06:33.666Z",
-        "name": "Highkicks: Introduction",
+        "name": "Highkicks: Introduction X",
         "comment": "First workout introducing highkicks.",
         "drills": [
             {
                 "id": "0e2e4f2a-4bce-4565-b2b4-be0b6f05a4be",
                 "name": "Bensparring: 1 teknik",
-                "rounds": "x",
-                "round_time": "x",
+                "rounds": "11",
+                "round_time": "222",
                 "notes": ""
             }
         ],

@@ -6,12 +6,17 @@ import styles from "./Style.module.scss";
 import table from "styles/Table.module.scss";
 import form from "styles/Form.module.scss";
 import ListItem from "components/Form/ListItem";
+import ModalSave from "components/ModalSave";
 
 function WorkoutPage({ drills, item }) {
    const [drillIds, storeDrills] = useState([]);
    const [warmupArray, storeWarmup] = useState([]);
    const [name, setName] = useState(String);
    const [comment, setComment] = useState(String);
+   const [apiState, setApiState] = useState({
+      message: "",
+      status: null,
+   });
 
    useEffect(() => {
       storeDrills(item.drills);
@@ -41,17 +46,42 @@ function WorkoutPage({ drills, item }) {
    }
 
    const saveItem = async () => {
-      const response = await fetch(`/api/workouts/${item.id}`, {
-         method: "PUT",
-         body: JSON.stringify({
-            name: name,
-            comment: comment,
-            warmup: warmupArray,
-            drills: drillIds,
-            mitts: item.mitts,
-         }),
-         headers: { "Content-Type": "application/json" },
+      setApiState({
+         message: "Saving..",
+         status: 1,
       });
+
+      try {
+         const response = await fetch(`/api/workouts/${item.id}`, {
+            method: "PUT",
+            body: JSON.stringify({
+               name: name,
+               comment: comment,
+               warmup: warmupArray,
+               drills: drillIds,
+               mitts: item.mitts,
+            }),
+            headers: { "Content-Type": "application/json" },
+         });
+
+         if (response.status == 200) {
+            setTimeout(function () {
+               setApiState({
+                  message: "Saved successful!",
+                  status: 2,
+               });
+            }, 500); //Time befo
+         }
+      } catch (e) {
+         setApiState({
+            message: "Oops, error!",
+            status: 2,
+         });
+      }
+
+      setTimeout(function () {
+         setApiState({ message: "", status: null });
+      }, 1500); //Time befo
    };
 
    const deleteItem = async () => {
@@ -137,6 +167,8 @@ function WorkoutPage({ drills, item }) {
                </div>
 
                <span className={form.timestamp}>Edited: {item.added}</span>
+
+               {apiState.message.length > 0 && <ModalSave state={apiState} />}
             </form>
             {/* <GoBackButton /> */}
             {/* <EditActions /> */}

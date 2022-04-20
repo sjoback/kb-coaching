@@ -3,11 +3,13 @@
    gap: 30px;
    grid-template-columns: 1fr;
    box-sizing: border-box;
-   border: 1px solid #e6e6e6;
-   padding: 40px;
-   background-color: #fff;
-   box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
-   border-radius: 5px 40px 20px 40px;
+   position: relative;
+   overflow: hidden;
+   // padding: 40px;
+   // border: 1px solid #e6e6e6;
+   // background-color: #fff;
+   // box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
+   // border-radius: 5px 40px 20px 40px;
    width: 600px;
    max-width: 100%;
 }
@@ -15,11 +17,11 @@
    display: flex;
    gap: 10px;
    flex-wrap: wrap;
+   color: #fff;
 
    label {
       font-size: 16px;
       font-weight: bold;
-      color: #999;
    }
 
    textarea {
@@ -31,12 +33,12 @@
       width: 100%;
       font-size: 16px;
       padding: 20px 25px;
-      background-color: #f2f2f2;
       box-sizing: border-box;
-      border: 0;
-      border-radius: 25px;
+      border: 0 0 5px 0;
       transform: 0.15s ease-in-out;
       outline: none;
+      color: #fff;
+      background-color: transparent;
       resize: none;
 
       &:focus {
