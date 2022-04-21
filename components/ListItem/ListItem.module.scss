@@ -1,0 +1,7 @@
+.container {
+   display: grid;
+   gap: 20px;
+   grid-template-columns: 3fr 2fr 2fr 1fr;
+   background-color: var(--color-main-gray);
+   border-radius: 25px;
+}

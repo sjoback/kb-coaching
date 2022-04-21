@@ -1,6 +1,6 @@
 import "../styles/fonts.scss";
 import "../styles/globals.scss";
-import Nav from "components/Navigation";
+import Nav from "components/Navigation/Navigation";
 
 export default function App({ Component, pageProps }) {
    return (

@@ -1,27 +1,30 @@
 .container {
+   margin: 60px;
    display: grid;
    gap: 30px;
    grid-template-columns: 1fr;
    box-sizing: border-box;
    position: relative;
    overflow: hidden;
-   // padding: 40px;
-   // border: 1px solid #e6e6e6;
-   // background-color: #fff;
-   // box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
-   // border-radius: 5px 40px 20px 40px;
    width: 600px;
    max-width: 100%;
 }
 .inputs {
    display: flex;
+   position: relative;
    gap: 10px;
    flex-wrap: wrap;
-   color: #fff;
+   align-items: center;
 
    label {
-      font-size: 16px;
-      font-weight: bold;
+      flex: 1;
+   }
+
+   span {
+      position: absolute;
+      left: 80px;
+      // font-weight: bold;
+      color: #666;
    }
 
    textarea {
@@ -31,23 +34,17 @@
    input,
    textarea {
       width: 100%;
-      font-size: 16px;
-      padding: 20px 25px;
+      padding: var(--input-padding);
       background-color: #ebeef1;
       border-radius: 30px;
       box-sizing: border-box;
       border: 0;
-      transform: 0.15s ease-in-out;
+      transition: 0.15s ease-in-out;
       outline: none;
-      color: #999;
 
       resize: none;
 
       &:focus {
-         // background-color: #fff;
-         transform: 0.15s ease-in-out;
-         box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
-         border-radius: 10px;
       }
    }
 

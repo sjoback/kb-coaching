@@ -9,58 +9,16 @@ h3,
 h4,
 h5,
 h6 {
-   font-feature-settings: 'ss02' on;
+   font-feature-settings: "ss02" on;
    margin-top: 0;
    margin-bottom: 0;
 }
 
-h1 {
-   font: var(--font-h1);
-}
-
-h2 {
-   font: var(--font-h2);
-}
-
-h3 {
-   font: var(--font-h3);
-}
-
-h4 {
-   font: var(--font-h4);
-}
-
 a {
    color: inherit;
-   font: var(--font-link);
    letter-spacing: var(--link-letter-spacing);
-}
-
-ul,
-ol {
-   --list-padding: 1rem;
-   padding-inline-start: var(--list-padding);
 }
 
 ul {
    list-style-type: none;
-   font: var(--font-bullet-list);
-}
-
-li::before {
-   content: '';
-   display: inline-block;
-   vertical-align: top;
-   transform: translateY(0.6em) translateX(calc(var(--list-padding) * -1));
-   width: 0.15em;
-   border-radius: 50%;
-   aspect-ratio: 1/1;
-   background-color: currentColor;
-}
-
-strong {
-   font: var(--font-label);
-   text-decoration: underline;
-   text-transform: uppercase;
-   letter-spacing: var(--label-letter-spacing);
 }

@@ -1,10 +1,12 @@
 @import "mixins";
 @import "normalize";
-@import "constants/button";
 @import "constants/colors";
 @import "constants/typography";
+@import "constants/form";
+@import "constants/buttons";
 @import "typography";
 @import "theme";
+@import "buttons";
 
 * {
    box-sizing: border-box;
@@ -12,10 +14,17 @@
 
 html,
 body {
-   padding: 0;
+   padding: 0px;
+   box-sizing: border-box;
    margin: 0;
    background-color: #fff;
+   color: #222;
+   font-size: 16px;
    font-family: "Poppins", sans-serif;
+
+   @include breakpoint("tablet") {
+      font-size: 18px;
+   }
 }
 
 a {
@@ -25,7 +34,6 @@ a {
 
 main {
    padding: 1.5rem;
-   margin-top: 59px;
 }
 
 ul {

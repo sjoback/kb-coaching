@@ -1,19 +1,22 @@
+import React from "react";
 import EditActions from "components/EditActions";
 import GoBackButton from "components/GoBackButton";
 import ModalAdd from "components/Modals/ModalAdd";
 import { useEffect, useState } from "react";
 import styles from "./Style.module.scss";
-import table from "styles/Table.module.scss";
+
 import form from "components/form/Form.module.scss";
-import ListItem from "components/Form/ListItem";
-import ModalSave from "components/Modals/ModalSave";
+import ListItem from "components/ListItem/ListItem";
+import ModalSaving from "components/Modals/ModalSaving/ModalSaving";
 import Button from "components/Button/Button";
+import ModalConfirmDelete from "components/Modals/ModalConfirmDelete/ModalConfirmDelete";
 
 function WorkoutPage({ drills, item }) {
    const [drillIds, storeDrills] = useState([]);
    const [warmupArray, storeWarmup] = useState([]);
    const [name, setName] = useState(String);
    const [comment, setComment] = useState(String);
+   const [userAnswer, confirmDelete] = useState(false);
    const [apiState, setApiState] = useState({
       message: "",
       status: null,
@@ -44,6 +47,10 @@ function WorkoutPage({ drills, item }) {
 
    function updateDrill(drill, index, type) {
       drillIds[index][type] = drill;
+   }
+
+   function setDeleteConfirmed() {
+      confirmDelete(true);
    }
 
    const saveItem = async () => {
@@ -86,12 +93,12 @@ function WorkoutPage({ drills, item }) {
    };
 
    const deleteItem = async () => {
-      const response = await fetch(`/api/edit/workouts/${item.id}`, {
-         method: "DELETE",
-         headers: { "Content-Type": "application/json" },
-      });
-
-      // Router.push("/");
+      if (userAnswer) {
+         const response = await fetch(`/api/edit/workouts/${item.id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+         });
+      }
    };
 
    return (
@@ -100,6 +107,7 @@ function WorkoutPage({ drills, item }) {
             <form className={form.container}>
                <div className={form.inputs}>
                   {/* <label htmlFor="name">Name</label> */}
+
                   <input
                      type="text"
                      name="name"
@@ -130,11 +138,11 @@ function WorkoutPage({ drills, item }) {
 
                   {drillIds.length > 0 && (
                      <ul>
-                        <li className={table.row}>
-                           <div className={table.cell}>Name</div>
-                           <div className={table.cell}>Rounds</div>
-                           <div className={table.cell}>Round time(min)</div>
-                           <div className={table.cell}>Notes</div>
+                        <li>
+                           <div>Name</div>
+                           <div>Rounds</div>
+                           <div>Round time(min)</div>
+                           <div>Notes</div>
                            <div />
                         </li>
 
@@ -174,12 +182,17 @@ function WorkoutPage({ drills, item }) {
                   <Button
                      onClick={() => deleteItem()}
                      text={"Delete workout"}
+                     color={"red"}
                   />
                </div>
 
                <span className={form.timestamp}>Edited: {item.added}</span>
 
-               {apiState.message.length > 0 && <ModalSave state={apiState} />}
+               {apiState.message.length > 0 && <ModalSaving state={apiState} />}
+
+               {confirmDelete.length > 0 && (
+                  <ModalConfirmDelete onClick={() => confirmDelete()} />
+               )}
             </form>
             {/* <GoBackButton /> */}
             {/* <EditActions /> */}

@@ -1,27 +1,28 @@
 import classnames from "classnames";
+import ButtonExpand from "components/ButtonExpand/ButtonExpand";
 import styles from "./Button.module.scss";
 
 function Button({ onClick, text, size = "md", color, type = "default" }) {
-   const buttonSize = {
-      sm: styles.sm,
-      md: styles.md,
-      lg: styles.lg,
-   }[(size as string) || "md"];
-
-   const buttonColor = {
-      green: styles.green,
-      red: styles.red,
-   }[(color as string) || ""];
+   const buttonColor = `btn-${color}`;
+   const buttonSize = `btn-${size}`;
 
    return (
-      <button
-         onClick={() => {
-            onClick();
-         }}
-         className={classnames(styles.button, buttonSize, buttonColor)}
-      >
-         {text}
-      </button>
+      <div className={styles.container}>
+         {type == "default" && (
+            <button
+               onClick={() => {
+                  onClick();
+               }}
+               className={classnames(styles.button, buttonSize, buttonColor)}
+            >
+               {text}
+            </button>
+         )}
+
+         {type == "expand" && (
+            <ButtonExpand onClick={() => onClick()} text={"i"} />
+         )}
+      </div>
    );
 }
 export default Button;

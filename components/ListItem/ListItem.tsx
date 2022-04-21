@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import container from "styles/Container.module.scss";
-import styles from "./Styles.module.scss";
-import table from "styles/Table.module.scss";
+import styles from "./ListItem.module.scss";
 import ModalExpand from "components/Modals/ModalExpand/ModalExpand";
 
 function ListItem({ index, removeDrill, onChange, drill }) {
@@ -30,8 +28,8 @@ function ListItem({ index, removeDrill, onChange, drill }) {
    }
 
    return (
-      <li className={table.row}>
-         <div className={table.cell}>
+      <li className={styles.container}>
+         <div>
             <div onClick={() => removeDrill(index)}>X</div>
             {drill.name}
          </div>

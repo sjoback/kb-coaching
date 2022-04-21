@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ListItem from "../ListItem";
+import ListItem from "../../ListItem/ListItem";
 import styles from "./Styles.module.scss";
 
 function ModalAddDrill({ drills, add }) {

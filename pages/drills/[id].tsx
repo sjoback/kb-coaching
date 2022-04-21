@@ -3,9 +3,8 @@ import GoBackButton from "components/GoBackButton";
 
 import { useEffect, useState } from "react";
 import styles from "./Style.module.scss";
-import table from "styles/Table.module.scss";
 import form from "styles/Form.module.scss";
-import ListItem from "components/Form/ListItem";
+import ListItem from "components/ListItem/ListItem";
 import FormModal from "components/Form/FormModalAddDrill";
 
 function DrillPage({ item }) {

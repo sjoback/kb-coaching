@@ -1,3 +1,4 @@
+import Button from "components/Button/Button";
 import { useState } from "react";
 import modal from "../Modals.module.scss";
 
@@ -15,8 +16,8 @@ function ModalExpand({ onChange, text }) {
                />
 
                <div className={modal.inner}>
-                  <div onClick={() => toggleOpen(false)}>X</div>
                   {text}
+
                   <textarea
                      name=""
                      value={notes}
@@ -26,7 +27,14 @@ function ModalExpand({ onChange, text }) {
             </div>
          )}
 
-         <div onClick={() => toggleOpen(true)}>+</div>
+         <Button
+            onClick={() => toggleOpen(true)}
+            type={"expand"}
+            text={"XX"}
+            color={"green"}
+         />
+
+         {/* <div onClick={() => toggleOpen(true)}>+</div> */}
       </div>
    );
 }
