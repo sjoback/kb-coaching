@@ -54,3 +54,12 @@
       // --button-background: var(--color-red-hover);
    }
 }
+
+.btn-blue {
+   --button-background: var(--color-blue);
+   --button-color: var(--color-white);
+
+   &:hover {
+      // --button-background: var(--color-blue-hover);
+   }
+}

@@ -9,9 +9,9 @@
             {
                 "id": "4d67d211-1800-4b66-a034-9721e7128ce9",
                 "name": "drill 1",
-                "rounds": "",
-                "round_time": "",
-                "notes": ""
+                "rounds": "1",
+                "round_time": "1",
+                "notes": "this is anote"
             }
         ],
         "warmup": [],

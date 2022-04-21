@@ -1,8 +1,8 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import EditActions from "components/EditActions";
 import GoBackButton from "components/GoBackButton";
-import ModalAdd from "components/Modals/ModalAdd";
-import { useEffect, useState } from "react";
+import ModalAdd from "components/Modals/ModalAdd/ModalAdd";
 import styles from "./Style.module.scss";
 
 import form from "components/form/Form.module.scss";
@@ -32,8 +32,8 @@ function WorkoutPage({ drills, item }) {
       const formattedDrill = {
          id: drill.id,
          name: drill.name,
-         rounds: drill.rounds ? drill.rounds : "",
-         round_time: drill.round_time ? drill.round_time : "",
+         rounds: drill.rounds ? drill.rounds : 1,
+         round_time: drill.round_time ? drill.round_time : 1,
          notes: drill.notes ? drill.notes : "",
       };
       const newDrillIds = [...drillIds, formattedDrill];
@@ -43,9 +43,12 @@ function WorkoutPage({ drills, item }) {
    function removeDrill(drillIndex) {
       const spliced = drillIds.filter((drill, index) => drillIndex !== index);
       storeDrills(spliced);
+      console.log("remove drill");
    }
 
    function updateDrill(drill, index, type) {
+      console.log("update");
+
       drillIds[index][type] = drill;
    }
 
@@ -106,8 +109,7 @@ function WorkoutPage({ drills, item }) {
          <div className={styles.inner}>
             <form className={form.container}>
                <div className={form.inputs}>
-                  {/* <label htmlFor="name">Name</label> */}
-
+                  <label htmlFor="name">Name</label>
                   <input
                      type="text"
                      name="name"
@@ -118,7 +120,7 @@ function WorkoutPage({ drills, item }) {
                </div>
 
                <div className={form.inputs}>
-                  {/* <label htmlFor="comment">Comment</label> */}
+                  <label htmlFor="comment">Comment</label>
                   <textarea
                      name="comment"
                      placeholder="Comment"
@@ -128,21 +130,28 @@ function WorkoutPage({ drills, item }) {
                </div>
 
                <div className={form.inputs}>
-                  {/* <label htmlFor="warmup">Drills</label> */}
+                  <div className={form.inputsInner}>
+                     <label htmlFor="warmup">Drills</label>
 
-                  <ModalAdd
-                     text="Add drill"
-                     data={drills}
-                     add={handleAddDrill}
-                  />
+                     <ModalAdd
+                        text="Add drill"
+                        data={drills}
+                        add={handleAddDrill}
+                     />
+                  </div>
 
                   {drillIds.length > 0 && (
                      <ul>
                         <li>
                            <div>Name</div>
-                           <div>Rounds</div>
-                           <div>Round time(min)</div>
+
+                           <div className={styles.listInner}>
+                              <div>Rounds</div>
+                              <div>Round time(min)</div>
+                           </div>
+
                            <div>Notes</div>
+
                            <div />
                         </li>
 
@@ -154,7 +163,7 @@ function WorkoutPage({ drills, item }) {
                                  index={index}
                                  drill={drill}
                                  onChange={updateDrill}
-                                 removeDrill={removeDrill}
+                                 removeDrill={() => removeDrill}
                               />
                            ))}
                      </ul>

@@ -1,5 +1,10 @@
-.wrapper {
-   position: absolute;
+.container {
+   position: relative;
+
+   &Inner {
+      position: absolute;
+      right: 0;
+   }
 }
 
 .overlay {

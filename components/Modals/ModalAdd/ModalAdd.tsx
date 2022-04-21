@@ -1,8 +1,14 @@
+import React, { useEffect } from "react";
 import { useState } from "react";
+import Button from "components/Button/Button";
 import styles from "./ModalAdd.module.scss";
 
 function ModalAdd(props) {
    const [open, toggleOpen] = useState(false);
+
+   useEffect(() => {
+      toggleOpen(false);
+   }, []);
 
    function addHandler(item) {
       props.add(item);
@@ -10,9 +16,9 @@ function ModalAdd(props) {
    }
 
    return (
-      <div>
-         {open ? (
-            <div>
+      <div className={styles.container}>
+         {open ?? (
+            <div className={styles.containerInner}>
                <div
                   onClick={() => toggleOpen(false)}
                   className={styles.modalOverlay}
@@ -38,10 +44,16 @@ function ModalAdd(props) {
                         ))}
                   </ul>
                </div>
+
+               {/* <div className={styles.containerOverlay}></div> */}
             </div>
-         ) : (
-            <button onClick={() => toggleOpen(true)}>{props.text} +</button>
          )}
+         <Button
+            onClick={() => toggleOpen(true)}
+            text={props.text}
+            color={"green"}
+            size={"sm"}
+         />
       </div>
    );
 }

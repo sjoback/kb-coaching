@@ -2,7 +2,14 @@ import classnames from "classnames";
 import ButtonExpand from "components/ButtonExpand/ButtonExpand";
 import styles from "./Button.module.scss";
 
-function Button({ onClick, text, size = "md", color, type = "default" }) {
+function Button({
+   onClick,
+   text,
+   size = "md",
+   color,
+   type = "default",
+   custom = [],
+}) {
    const buttonColor = `btn-${color}`;
    const buttonSize = `btn-${size}`;
 
@@ -20,7 +27,7 @@ function Button({ onClick, text, size = "md", color, type = "default" }) {
          )}
 
          {type == "expand" && (
-            <ButtonExpand onClick={() => onClick()} text={"i"} />
+            <ButtonExpand onClick={() => onClick()} text={text} size={size} />
          )}
       </div>
    );
