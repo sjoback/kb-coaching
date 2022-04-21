@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import container from "styles/Container.module.scss";
 import styles from "./Styles.module.scss";
 import table from "styles/Table.module.scss";
-import ModalExpand from "components/ModalExpand";
+import ModalExpand from "components/Modals/ModalExpand/ModalExpand";
 
 function ListItem({ index, removeDrill, onChange, drill }) {
    useEffect(() => {

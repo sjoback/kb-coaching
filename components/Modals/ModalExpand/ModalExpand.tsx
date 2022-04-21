@@ -1,5 +1,5 @@
 import { useState } from "react";
-import modal from "styles/Modal.module.scss";
+import modal from "../Modals.module.scss";
 
 function ModalExpand({ onChange, text }) {
    const [open, toggleOpen] = useState(false);

@@ -1,12 +1,13 @@
 import EditActions from "components/EditActions";
 import GoBackButton from "components/GoBackButton";
-import ModalAdd from "components/ModalAdd";
+import ModalAdd from "components/Modals/ModalAdd";
 import { useEffect, useState } from "react";
 import styles from "./Style.module.scss";
 import table from "styles/Table.module.scss";
-import form from "styles/Form.module.scss";
+import form from "components/form/Form.module.scss";
 import ListItem from "components/Form/ListItem";
-import ModalSave from "components/ModalSave";
+import ModalSave from "components/Modals/ModalSave";
+import Button from "components/Button/Button";
 
 function WorkoutPage({ drills, item }) {
    const [drillIds, storeDrills] = useState([]);
@@ -70,7 +71,7 @@ function WorkoutPage({ drills, item }) {
                   message: "Saved successful!",
                   status: 2,
                });
-            }, 500); //Time befo
+            }, 500);
          }
       } catch (e) {
          setApiState({
@@ -81,7 +82,7 @@ function WorkoutPage({ drills, item }) {
 
       setTimeout(function () {
          setApiState({ message: "", status: null });
-      }, 1500); //Time befo
+      }, 1500);
    };
 
    const deleteItem = async () => {
@@ -98,26 +99,28 @@ function WorkoutPage({ drills, item }) {
          <div className={styles.inner}>
             <form className={form.container}>
                <div className={form.inputs}>
-                  <label htmlFor="name">Name</label>
+                  {/* <label htmlFor="name">Name</label> */}
                   <input
                      type="text"
                      name="name"
+                     placeholder="Name"
                      value={name}
                      onChange={(e) => setName(e.target.value)}
                   />
                </div>
 
                <div className={form.inputs}>
-                  <label htmlFor="comment">Comment</label>
+                  {/* <label htmlFor="comment">Comment</label> */}
                   <textarea
                      name="comment"
+                     placeholder="Comment"
                      value={comment}
                      onChange={(e) => setComment(e.target.value)}
                   />
                </div>
 
                <div className={form.inputs}>
-                  <label htmlFor="warmup">Drills</label>
+                  {/* <label htmlFor="warmup">Drills</label> */}
 
                   <ModalAdd
                      text="Add drill"
@@ -162,8 +165,16 @@ function WorkoutPage({ drills, item }) {
                </div> */}
 
                <div className={form.buttons}>
-                  <button onClick={() => saveItem()}>Save workout</button>
-                  <button onClick={() => deleteItem()}>Delete workout</button>
+                  <Button
+                     onClick={() => saveItem()}
+                     text={"Save workout"}
+                     color={"green"}
+                  />
+
+                  <Button
+                     onClick={() => deleteItem()}
+                     text={"Delete workout"}
+                  />
                </div>
 
                <span className={form.timestamp}>Edited: {item.added}</span>

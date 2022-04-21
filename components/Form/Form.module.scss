@@ -33,12 +33,14 @@
       width: 100%;
       font-size: 16px;
       padding: 20px 25px;
+      background-color: #ebeef1;
+      border-radius: 30px;
       box-sizing: border-box;
-      border: 0 0 5px 0;
+      border: 0;
       transform: 0.15s ease-in-out;
       outline: none;
-      color: #fff;
-      background-color: transparent;
+      color: #999;
+
       resize: none;
 
       &:focus {

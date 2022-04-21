@@ -1,0 +1,54 @@
+@import "mixins";
+@import "normalize";
+@import "constants/button";
+@import "constants/colors";
+@import "constants/typography";
+@import "typography";
+@import "theme";
+
+* {
+   box-sizing: border-box;
+}
+
+html,
+body {
+   padding: 0;
+   margin: 0;
+   background-color: #fff;
+   font-family: "Poppins", sans-serif;
+}
+
+a {
+   color: inherit;
+   text-decoration: none;
+}
+
+main {
+   padding: 1.5rem;
+   margin-top: 59px;
+}
+
+ul {
+   list-style-type: none;
+   padding: 0;
+
+   li {
+      list-style-type: none;
+   }
+}
+
+form {
+   background-color: var(--form-background);
+   color: var(--form-color);
+
+   input {
+      padding: var(--input-padding);
+      color: var(--input-color);
+      background-color: var(--input-background);
+   }
+   textarea {
+      padding: var(--input-padding);
+      color: var(--input-color);
+      background-color: var(--input-background);
+   }
+}

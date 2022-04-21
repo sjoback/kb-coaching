@@ -3,8 +3,8 @@
         "id": "4d67d211-1800-4b66-a034-9721e7128ce8",
         "added": "2022-03-17T19:58:58.281Z",
         "updated": "2022-03-17T19:58:58.281Z",
-        "name": "2",
-        "comment": "2",
+        "name": "",
+        "comment": "",
         "drills": [],
         "warmup": [],
         "mitts": []
@@ -13,17 +13,9 @@
         "id": "46d3653f-16bd-4da9-b5a7-cea5363b26c6",
         "added": "2022-03-17T20:06:33.666Z",
         "updated": "2022-03-17T20:06:33.666Z",
-        "name": "Highkicks: Introduction X",
-        "comment": "First workout introducing highkicks.",
-        "drills": [
-            {
-                "id": "0e2e4f2a-4bce-4565-b2b4-be0b6f05a4be",
-                "name": "Bensparring: 1 teknik",
-                "rounds": "11",
-                "round_time": "222",
-                "notes": ""
-            }
-        ],
+        "name": "",
+        "comment": "",
+        "drills": [],
         "warmup": [],
         "mitts": []
     }
