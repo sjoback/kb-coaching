@@ -3,54 +3,50 @@ import { useState } from "react";
 import Button from "components/Button/Button";
 import styles from "./ModalAdd.module.scss";
 
-function ModalAdd(props) {
+function ModalAdd({ onClick, data, text }) {
    const [open, toggleOpen] = useState(false);
 
    useEffect(() => {
-      toggleOpen(false);
+      const close = (e) => {
+         if (e.keyCode === 27) {
+            toggleOpen(false);
+         }
+      };
+      window.addEventListener("keydown", close);
+      return () => window.removeEventListener("keydown", close);
    }, []);
 
-   function addHandler(item) {
-      props.add(item);
-      toggleOpen(false);
-   }
-
    return (
-      <div className={styles.container}>
-         {open ?? (
-            <div className={styles.containerInner}>
+      <div className="modal">
+         {open ? (
+            <div className="modal-open">
                <div
                   onClick={() => toggleOpen(false)}
-                  className={styles.modalOverlay}
+                  className="modal-open-overlay"
                />
 
-               <div className={styles.modal}>
-                  <button
-                     onClick={() => toggleOpen(false)}
-                     className={styles.closeModal}
-                  >
-                     X
-                  </button>
-
+               <div className="modal-open-content">
                   <ul>
-                     {props.data &&
-                        props.data.length > 0 &&
-                        props.data.map((item) => (
+                     {data &&
+                        data.length > 0 &&
+                        data.map((item) => (
                            <li key={item.id}>
-                              <button onClick={() => addHandler(item)}>
-                                 {item.name}
-                              </button>
+                              <Button
+                                 onClick={() => onClick(item)}
+                                 text={item.name}
+                                 size={"sm"}
+                              />
                            </li>
                         ))}
                   </ul>
                </div>
-
-               {/* <div className={styles.containerOverlay}></div> */}
             </div>
+         ) : (
+            ""
          )}
          <Button
             onClick={() => toggleOpen(true)}
-            text={props.text}
+            text={text}
             color={"green"}
             size={"sm"}
          />

@@ -6,18 +6,16 @@ function ModalExpand({ onChange, text }) {
    const [open, toggleOpen] = useState(false);
    const [notes, setNotes] = useState(String);
 
-   //Save notes on enter/esc/click
-
    return (
-      <div className={modal.container}>
+      <div className="modal">
          {open && (
-            <div className={modal.containerInner}>
+            <div className="modal-open">
                <div
                   onClick={() => toggleOpen(false)}
-                  className={modal.overlay}
+                  className="modal-open-overlay"
                />
 
-               <div className={modal.inner}>
+               <div className="modal-open-content">
                   {text}
 
                   <textarea
@@ -36,8 +34,6 @@ function ModalExpand({ onChange, text }) {
             color={"green"}
             size={"sm"}
          />
-
-         {/* <div onClick={() => toggleOpen(true)}>+</div> */}
       </div>
    );
 }
