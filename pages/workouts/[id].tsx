@@ -60,6 +60,8 @@ function WorkoutPage({ drills, item }) {
       e.preventDefault();
    }
 
+   console.log("mounted");
+
    const saveItem = async () => {
       setApiState({
          message: "Saving..",
@@ -226,7 +228,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-   const response = await fetch(`${process.env.API_URL}/workouts`);
+   const response = await fetch(`${process.env.DB_HOST}/workouts`);
 
    const workouts = await response.json();
 

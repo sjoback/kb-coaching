@@ -29,7 +29,7 @@ function WorkoutsPage({ data }) {
 export default WorkoutsPage;
 
 export async function getStaticProps() {
-   const response = await fetch(`${process.env.API_URL}/workouts`);
+   const response = await fetch(`${process.env.DB_HOST}/workouts`);
 
    const data = await response.json();
    console.log(data);
