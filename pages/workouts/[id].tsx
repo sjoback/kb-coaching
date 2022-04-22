@@ -1,18 +1,25 @@
+import React from "react";
+import { useEffect, useState } from "react";
 import EditActions from "components/EditActions";
 import GoBackButton from "components/GoBackButton";
-import ModalAdd from "components/ModalAdd";
-import { useEffect, useState } from "react";
+import ModalAdd from "components/Modals/ModalAdd/ModalAdd";
 import styles from "./Style.module.scss";
-import table from "styles/Table.module.scss";
-import form from "styles/Form.module.scss";
+import form from "components/form/Form.module.scss";
 import ListItem from "components/ListItem/ListItem";
-
+import ModalSaving from "components/Modals/ModalSaving/ModalSaving";
+import Button from "components/Button/Button";
+import ModalConfirmDelete from "components/Modals/ModalConfirmDelete/ModalConfirmDelete";
 
 function WorkoutPage({ drills, item }) {
    const [drillIds, storeDrills] = useState([]);
    const [warmupArray, storeWarmup] = useState([]);
    const [name, setName] = useState(String);
    const [comment, setComment] = useState(String);
+   const [userAnswer, confirmDelete] = useState(false);
+   const [apiState, setApiState] = useState({
+      message: "",
+      status: null,
+   });
 
    useEffect(() => {
       storeDrills(item.drills);
@@ -24,8 +31,8 @@ function WorkoutPage({ drills, item }) {
       const formattedDrill = {
          id: drill.id,
          name: drill.name,
-         rounds: drill.rounds ? drill.rounds : "",
-         round_time: drill.round_time ? drill.round_time : "",
+         rounds: drill.rounds ? drill.rounds : 1,
+         round_time: drill.round_time ? drill.round_time : 1,
          notes: drill.notes ? drill.notes : "",
       };
       const newDrillIds = [...drillIds, formattedDrill];
@@ -35,9 +42,12 @@ function WorkoutPage({ drills, item }) {
    function removeDrill(drillIndex) {
       const spliced = drillIds.filter((drill, index) => drillIndex !== index);
       storeDrills(spliced);
+      console.log("remove drill");
    }
 
    function updateDrill(drill, index, type) {
+      console.log("update");
+
       drillIds[index][type] = drill;
    }
 
@@ -50,26 +60,51 @@ function WorkoutPage({ drills, item }) {
    }
 
    const saveItem = async () => {
-      const response = await fetch(`/api/workouts/${item.id}`, {
-         method: "PUT",
-         body: JSON.stringify({
-            name: name,
-            comment: comment,
-            warmup: warmupArray,
-            drills: drillIds,
-            mitts: item.mitts,
-         }),
-         headers: { "Content-Type": "application/json" },
+      setApiState({
+         message: "Saving..",
+         status: 1,
       });
+
+      try {
+         const response = await fetch(`/api/workouts/${item.id}`, {
+            method: "PUT",
+            body: JSON.stringify({
+               name: name,
+               comment: comment,
+               warmup: warmupArray,
+               drills: drillIds,
+               mitts: item.mitts,
+            }),
+            headers: { "Content-Type": "application/json" },
+         });
+
+         if (response.status == 200) {
+            setTimeout(function () {
+               setApiState({
+                  message: "Saved successful!",
+                  status: 2,
+               });
+            }, 500);
+         }
+      } catch (e) {
+         setApiState({
+            message: "Oops, error!",
+            status: 2,
+         });
+      }
+
+      setTimeout(function () {
+         setApiState({ message: "", status: null });
+      }, 1500);
    };
 
    const deleteItem = async () => {
-      const response = await fetch(`/api/edit/workouts/${item.id}`, {
-         method: "DELETE",
-         headers: { "Content-Type": "application/json" },
-      });
-
-      // Router.push("/");
+      if (userAnswer) {
+         const response = await fetch(`/api/edit/workouts/${item.id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+         });
+      }
    };
 
    return (
@@ -81,6 +116,7 @@ function WorkoutPage({ drills, item }) {
                   <input
                      type="text"
                      name="name"
+                     placeholder="Name"
                      value={name}
                      onChange={(e) => setName(e.target.value)}
                   />
@@ -90,13 +126,15 @@ function WorkoutPage({ drills, item }) {
                   <label htmlFor="comment">Comment</label>
                   <textarea
                      name="comment"
+                     placeholder="Comment"
                      value={comment}
                      onChange={(e) => setComment(e.target.value)}
                   />
                </div>
 
                <div className={form.inputs}>
-                  <label htmlFor="warmup">Drills</label>
+                  <div className={form.inputsInner}>
+                     <label htmlFor="warmup">Drills</label>
 
                      <ModalAdd
                         text="Add drill"
@@ -123,7 +161,7 @@ function WorkoutPage({ drills, item }) {
                                  index={index}
                                  drill={drill}
                                  onChange={updateDrill}
-                                 removeDrill={removeDrill}
+                                 removeDrill={() => removeDrill}
                               />
                            ))}
                      </ul>
@@ -142,8 +180,17 @@ function WorkoutPage({ drills, item }) {
                </div> */}
 
                <div className={form.buttons}>
-                  <button onClick={() => saveItem()}>Save workout</button>
-                  <button onClick={() => deleteItem()}>Delete workout</button>
+                  <Button
+                     onClick={() => saveItem()}
+                     text={"Save workout"}
+                     color={"green"}
+                  />
+
+                  <Button
+                     onClick={() => deleteItem()}
+                     text={"Delete workout"}
+                     color={"red"}
+                  />
                </div>
 
                <span className={form.timestamp}>Edited: {item.added}</span>

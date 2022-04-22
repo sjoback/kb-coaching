@@ -3,17 +3,11 @@ import GoBackButton from "components/GoBackButton";
 
 import { useEffect, useState } from "react";
 import styles from "./Style.module.scss";
-<<<<<<< Updated upstream
 import table from "styles/Table.module.scss";
-import form from "styles/Form.module.scss";
-import ListItem from "components/Form/ListItem";
-=======
 import form from "components/form/Form.module.scss";
 import ListItem from "components/ListItem/ListItem";
->>>>>>> Stashed changes
-import FormModal from "components/Form/FormModalAddDrill";
 
-function WorkoutPage({ drills, item }) {
+function DrillPage({ item }) {
    const [drillIds, storeDrills] = useState([]);
    const [warmupArray, storeWarmup] = useState([]);
    const [name, setName] = useState(String);
@@ -44,7 +38,7 @@ function WorkoutPage({ drills, item }) {
    }
 
    const saveItem = async () => {
-      const response = await fetch(`/api/workouts/${item.id}`, {
+      const response = await fetch(`/api/drills/${item.id}`, {
          method: "PUT",
          body: JSON.stringify({
             name: name,
@@ -60,7 +54,7 @@ function WorkoutPage({ drills, item }) {
    };
 
    const deleteItem = async () => {
-      const response = await fetch(`/api/edit/workouts/${item.id}`, {
+      const response = await fetch(`/api/edit/drills/${item.id}`, {
          method: "DELETE",
          headers: { "Content-Type": "application/json" },
       });
@@ -95,30 +89,6 @@ function WorkoutPage({ drills, item }) {
                   />
                </div>
 
-               <div className={form.inputs}>
-                  <label htmlFor="warmup">Drills</label>
-
-                  <ul>
-                     <li className={table.row}>
-                        <div className={table.cell}>Name</div>
-                        <div className={table.cell}>Rounds</div>
-                        <div className={table.cell}>Round time(min)</div>
-                        <div />
-                     </li>
-
-                     {drillIds &&
-                        drillIds.length > 0 &&
-                        drillIds.map((drill, index) => (
-                           <ListItem
-                              key={drill.id}
-                              index={index}
-                              drill={drill}
-                              onChange={updateDrill}
-                           />
-                        ))}
-                  </ul>
-               </div>
-
                {/* <div className={form.inputs}>
                   <label htmlFor="warmup">Warmup</label>
                   <ul>
@@ -131,8 +101,8 @@ function WorkoutPage({ drills, item }) {
                </div> */}
 
                <div className={form.buttons}>
-                  <button onClick={() => saveItem()}>Save workout</button>
-                  <button onClick={() => deleteItem()}>Delete workout</button>
+                  <button onClick={() => saveItem()}>Save drill</button>
+                  <button onClick={() => deleteItem()}>Delete drill</button>
                </div>
 
                <span className={form.timestamp}>Edited: {item.added}</span>
@@ -144,33 +114,33 @@ function WorkoutPage({ drills, item }) {
    );
 }
 
-export default WorkoutPage;
+export default DrillPage;
 
 export async function getStaticProps({ params }) {
-   const response = await fetch(`${process.env.API_URL}/workouts/${params.id}`);
-   const drillsResponse = await fetch(`${process.env.API_URL}/drills`);
+   const response = await fetch(`${process.env.API_URL}/drills/${params.id}`);
+   // const drillsResponse = await fetch(`${process.env.API_URL}/drills`);
 
    const data = await response.json();
-   const drills = await drillsResponse.json();
+   // const drills = await drillsResponse.json();
 
    return {
       props: {
          item: data,
-         drills: drills,
+         // drills: drills,
       },
    };
 }
 
 export async function getStaticPaths() {
-   const response = await fetch(`${process.env.API_URL}/workouts`);
+   const response = await fetch(`${process.env.API_URL}/drills`);
 
-   const workouts = await response.json();
+   const drills = await response.json();
 
    return {
-      paths: workouts.map((workout: any) => {
+      paths: drills.map((drill: any) => {
          return {
             params: {
-               id: workout.id,
+               id: drill.id,
             },
          };
       }),

@@ -1,0 +1,19 @@
+.theme-light {
+   --theme-background: var(--color-brand--light);
+   --theme-background--alt: var(--color-brand--lighter);
+   --theme-color: var(--color-brand--darker);
+   --theme-accent: var(--color-orange--dark);
+}
+
+.theme-dark {
+   --theme-background: var(--color-brand--dark);
+   --theme-background--alt: var(--color-lavender);
+   --theme-color: var(--color-brand--light);
+   --theme-accent: var(--color-orange--dark);
+}
+
+
+[class*='theme-'] {
+   background: var(--theme-background);
+   color: var(--theme-color);
+}

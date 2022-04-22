@@ -1,0 +1,156 @@
+// ======================================================================================
+//  Helper functions
+// ======================================================================================
+
+@function map-deep-get($map, $keys...) {
+   $value: $map;
+
+   @each $key in $keys {
+      $value: map-get($value, $key);
+   }
+
+   @return $value;
+}
+
+// ======================================================================================
+//  Responsive
+// ======================================================================================
+
+@mixin breakpoint($breakpoint, $mode: null, $media: all) {
+   //  @param string $breakpoint: Name of a pre-specified breakpoint, or a space separated list of pixel values to be used as min and max, or a single pixel value as max-width
+   //  @param integer $mode: Optionally add "and-over" or "and-under"
+   //  @param string $media: Apply only to a specific media type
+
+   $breakpoints: (
+      'mobile': (
+         'min': 0px,
+         'max': 767px,
+      ),
+      'tablet': (
+         'min': 768px,
+         'max': null,
+      ),
+      'desktop': (
+         'min': 1280px,
+         'max': null,
+      ),
+      'laptop': (
+         'min': 1279px,
+         'max': null,
+      ),
+      'display': (
+         'min': 1920px,
+         'max': null,
+      ),
+      'xs': (
+         // small mobile
+         'min': 0px,
+         'max': 374px,
+      ),
+      's': (
+         // normal mobile
+         'min': 375px,
+         'max': 767px,
+      ),
+      'm': (
+         // tablet portrait
+         'min': 768px,
+         'max': 1023px,
+      ),
+      'l': (
+         // tablet landscape
+         'min': 1024px,
+         'max': 1279px,
+      ),
+      'xl': (
+         // desktop
+         'min': 1280px,
+         'max': 1919px,
+      ),
+      'xxl': (
+         // extra wide desktop
+         'min': 1920px,
+         'max': null,
+      ),
+   );
+
+   // Defining default values
+   $min: 0;
+   $max: 100%;
+
+   @if type-of($breakpoint) == list {
+      // A list has been supplied, pixels or breakpoint names, use the first for min and second for max
+      @if type-of(nth($breakpoint, 1)) == string {
+         $min: map-deep-get($breakpoints, nth($breakpoint, 1), 'min');
+      } @else {
+         $min: nth($breakpoint, 1);
+      }
+
+      @if type-of(nth($breakpoint, 2)) == string {
+         $max: map-deep-get($breakpoints, nth($breakpoint, 2), 'max');
+      } @else {
+         $max: nth($breakpoint, 2);
+      }
+   } @else if type-of($breakpoint) == string {
+      // A prespecified breakpoint name was given
+      $min: map-deep-get($breakpoints, $breakpoint, 'min');
+      $max: map-deep-get($breakpoints, $breakpoint, 'max');
+
+      @if $max == null and $mode == null {
+         // If there's no max value set
+         $mode: 'and-over';
+      }
+   } @else {
+      // Number
+      $min: $breakpoint;
+      $max: $breakpoint;
+   }
+
+   // Output media query
+   @if $mode == 'and-over' {
+      @media only #{$media} and (min-width: $min) {
+         @content;
+      }
+   } @else if $mode == 'and-under' {
+      @media only #{$media} and (max-width: $max) {
+         @content;
+      }
+   } @else if $mode == 'under' {
+      @media only #{$media} and (max-width: #{$min - 1px}) {
+         @content;
+      }
+   } @else if $mode == 'over' {
+      @media only #{$media} and (min-width: #{$min + 1px}) {
+         @content;
+      }
+   } @else {
+      @media only #{$media} and (min-width: $min) and (max-width: $max) {
+         @content;
+      }
+   }
+}
+
+// ====================================================================================
+//  Transitions
+// ====================================================================================
+@mixin transition($properties, $time: 0.2s, $easing: ease, $delay: 0s) {
+   $transition: ();
+   @for $i from 1 through length($properties) {
+      @for $j from 0 to (length($properties)) - (length($time)) {
+         $time: join($time, nth($time, -1));
+      }
+      @for $j from 0 to (length($properties)) - (length($easing)) {
+         $easing: join($easing, nth($easing, -1));
+      }
+      @for $j from 0 to (length($properties)) - (length($delay)) {
+         $delay: join($delay, nth($delay, -1));
+      }
+
+      $transition: append(
+         $transition,
+         (nth($properties, $i) nth($time, $i) nth($easing, $i) nth($delay, $i)),
+         $separator: comma
+      );
+   }
+   transition: $transition;
+}

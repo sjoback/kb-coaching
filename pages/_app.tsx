@@ -1,13 +1,14 @@
-import "../styles/globals.css";
-import Nav from "components/Navigation";
+import "../styles/fonts.scss";
+import "../styles/globals.scss";
+import Nav from "components/Navigation/Navigation";
 
 export default function App({ Component, pageProps }) {
-  return (
-    <div>
-      <Nav />
-      <main>
-        <Component {...pageProps} />
-      </main>
-    </div>
-  );
+   return (
+      <div>
+         <Nav />
+         <main>
+            <Component {...pageProps} />
+         </main>
+      </div>
+   );
 }

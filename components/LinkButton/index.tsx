@@ -1,9 +1,6 @@
 import styles from "./LinkButton.module.scss";
 import Link from "next/link";
-import { faCoffee, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-function LinkButton({ link, text, icon }) {
+function LinkButton({ link, text }) {
    return (
       <div className={styles.wrapper}>
          <Link href={link}>

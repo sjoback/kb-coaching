@@ -1,27 +1,18 @@
 .wrapper {
-<<<<<<< Updated upstream
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: #222;
-    width: 100vw;
-    color: #fff;
-=======
-   // position: fixed;
-   // top: 0;
-   // left: 0;
    background: #222;
    width: 100vw;
    color: #fff;
    position: relative;
    z-index: 99;
->>>>>>> Stashed changes
 
-    a {
-        margin: 0 20px;
-    }
+   a {
+      padding: 20px;
+      &:hover {
+         text-decoration: underline;
+      }
+   }
 }
 
 .navLogo {
-    padding: 20px 25px;
+   padding: 20px 25px;
 }
