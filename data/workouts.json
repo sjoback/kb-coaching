@@ -3,9 +3,51 @@
         "id": "4d67d211-1800-4b66-a034-9721e7128ce8",
         "added": "2022-03-17T19:58:58.281Z",
         "updated": "2022-03-17T19:58:58.281Z",
+<<<<<<< Updated upstream
         "name": "2",
         "comment": "2",
         "drills": [],
+=======
+        "name": "a new workoutxx",
+        "comment": "a coment",
+        "drills": [
+            {
+                "id": "4d67d211-1800-4b66-a034-9721e7128ce9",
+                "name": "drill 1",
+                "rounds": "1",
+                "round_time": "1",
+                "notes": "this is anote"
+            },
+            {
+                "id": "0faec7c9-129e-489a-81aa-0c6496b12a90",
+                "name": "x",
+                "rounds": 1,
+                "round_time": 1,
+                "notes": ""
+            },
+            {
+                "id": "4d67d211-1800-4b66-a034-9721e7128ce9",
+                "name": "drill 1",
+                "rounds": 1,
+                "round_time": 1,
+                "notes": ""
+            },
+            {
+                "id": "4d67d211-1800-4b66-a034-9721e7128ce9",
+                "name": "drill 1",
+                "rounds": 1,
+                "round_time": 1,
+                "notes": ""
+            },
+            {
+                "id": "0faec7c9-129e-489a-81aa-0c6496b12a90",
+                "name": "x",
+                "rounds": 1,
+                "round_time": 1,
+                "notes": ""
+            }
+        ],
+>>>>>>> Stashed changes
         "warmup": [],
         "mitts": []
     },

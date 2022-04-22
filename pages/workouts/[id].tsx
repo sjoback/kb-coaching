@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import styles from "./Style.module.scss";
 import table from "styles/Table.module.scss";
 import form from "styles/Form.module.scss";
-import ListItem from "components/Form/ListItem";
+import ListItem from "components/ListItem/ListItem";
+
 
 function WorkoutPage({ drills, item }) {
    const [drillIds, storeDrills] = useState([]);
@@ -40,6 +41,14 @@ function WorkoutPage({ drills, item }) {
       drillIds[index][type] = drill;
    }
 
+   function setDeleteConfirmed() {
+      confirmDelete(true);
+   }
+
+   function submit(e) {
+      e.preventDefault();
+   }
+
    const saveItem = async () => {
       const response = await fetch(`/api/workouts/${item.id}`, {
          method: "PUT",
@@ -66,7 +75,7 @@ function WorkoutPage({ drills, item }) {
    return (
       <div className={styles.wrapper}>
          <div className={styles.inner}>
-            <form className={form.container}>
+            <form className={form.container} onSubmit={(e) => submit(e)}>
                <div className={form.inputs}>
                   <label htmlFor="name">Name</label>
                   <input
@@ -89,27 +98,28 @@ function WorkoutPage({ drills, item }) {
                <div className={form.inputs}>
                   <label htmlFor="warmup">Drills</label>
 
-                  <ModalAdd
-                     text="Add drill"
-                     data={drills}
-                     add={handleAddDrill}
-                  />
+                     <ModalAdd
+                        text="Add drill"
+                        data={drills}
+                        onClick={handleAddDrill}
+                     />
+                  </div>
 
                   {drillIds.length > 0 && (
-                     <ul>
-                        <li className={table.row}>
-                           <div className={table.cell}>Name</div>
-                           <div className={table.cell}>Rounds</div>
-                           <div className={table.cell}>Round time(min)</div>
-                           <div className={table.cell}>Notes</div>
-                           <div />
+                     <ul className={form.drillsList}>
+                        <li>
+                           <div></div>
+                           <div>Name</div>
+                           <div>Rounds</div>
+                           <div>Minuets</div>
+                           <div></div>
                         </li>
 
                         {drillIds &&
                            drillIds.length > 0 &&
                            drillIds.map((drill, index) => (
                               <ListItem
-                                 key={drill.id + index}
+                                 key={`${drill.id}-${index}`}
                                  index={index}
                                  drill={drill}
                                  onChange={updateDrill}
@@ -137,9 +147,13 @@ function WorkoutPage({ drills, item }) {
                </div>
 
                <span className={form.timestamp}>Edited: {item.added}</span>
+
+               {/* {apiState.message.length > 0 && <ModalSaving state={apiState} />} */}
+
+               {/* {confirmDelete.length > 0 && (
+                  <ModalConfirmDelete onClick={() => confirmDelete()} />
+               )} */}
             </form>
-            {/* <GoBackButton /> */}
-            {/* <EditActions /> */}
          </div>
       </div>
    );

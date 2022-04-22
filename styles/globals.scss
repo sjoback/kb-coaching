@@ -1,0 +1,68 @@
+@import "mixins";
+@import "normalize";
+@import "constants/colors";
+@import "constants/typography";
+@import "constants/form";
+@import "constants/buttons";
+@import "typography";
+@import "theme";
+@import "buttons";
+@import "modal";
+
+* {
+   box-sizing: border-box;
+}
+
+html,
+body {
+   padding: 0px;
+   box-sizing: border-box;
+   margin: 0;
+   background-color: #fff;
+   color: #222;
+   font-size: 16px;
+   font-family: "Poppins", sans-serif;
+
+   @include breakpoint("tablet") {
+      font-size: 18px;
+   }
+}
+
+a {
+   color: inherit;
+   text-decoration: none;
+}
+
+main {
+   padding: 1.5rem;
+}
+
+ul {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+
+   li {
+      list-style-type: none;
+   }
+}
+
+button {
+   outline: none;
+}
+
+form {
+   background-color: var(--form-background);
+   color: var(--form-color);
+
+   input {
+      padding: var(--input-padding);
+      color: var(--input-color);
+      background-color: var(--input-background);
+   }
+   textarea {
+      padding: var(--input-padding);
+      color: var(--input-color);
+      background-color: var(--input-background);
+   }
+}

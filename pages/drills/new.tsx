@@ -1,7 +1,7 @@
 import GoBackButton from "components/GoBackButton";
 import styles from "./Style.module.scss";
 import { useState } from "react";
-import form from "styles/Form.module.scss";
+import form from "components/form/Form.module.scss";
 
 function AddDrill() {
    const [name, setName] = useState(String);

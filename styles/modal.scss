@@ -1,0 +1,57 @@
+.modal {
+   position: relative;
+   display: flex;
+
+   &-open {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+
+      &-content {
+         z-index: 2;
+         position: relative;
+         animation: 0.4s scale-in;
+         padding: 20px;
+         background-color: var(--color-white);
+         box-shadow: rgba(50, 50, 93, 0.3) 0px 50px 100px -20px,
+            rgba(0, 0, 0, 0.15) 0px 30px 60px -30px;
+         border-radius: 50px;
+      }
+
+      &-overlay {
+         position: fixed;
+         z-index: 1;
+         top: 0;
+         left: 0;
+         height: 100%;
+         width: 100%;
+         background-color: rgba(255, 255, 255, 0.8);
+      }
+
+      @keyframes scale-in {
+         0% {
+            transform: scale(0.9);
+         }
+         33% {
+            transform: scale(1.1);
+         }
+         100% {
+            transform: scale(1);
+         }
+      }
+   }
+
+   // Types
+   .modal-add {
+      ul {
+         border-radius: 15px;
+         display: grid;
+         gap: 10px;
+
+         li {
+            width: 100%;
+            display: flex;
+         }
+      }
+   }
+}
