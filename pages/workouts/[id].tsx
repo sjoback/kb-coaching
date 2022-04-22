@@ -4,7 +4,7 @@ import EditActions from "components/EditActions";
 import GoBackButton from "components/GoBackButton";
 import ModalAdd from "components/Modal/ModalAdd/ModalAdd";
 import styles from "./Style.module.scss";
-import form from "components/form/Form.module.scss";
+import form from "components/Form/Form.module.scss";
 import ListItem from "components/ListItem/ListItem";
 import ModalSaving from "components/Modal/ModalSaving/ModalSaving";
 import Button from "components/Button/Button";
