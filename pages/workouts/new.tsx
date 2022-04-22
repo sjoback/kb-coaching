@@ -1,7 +1,7 @@
 import GoBackButton from "components/GoBackButton";
 import styles from "./Style.module.scss";
 import { useState } from "react";
-import ModalAdd from "components/Modals/ModalAdd/ModalAdd";
+import ModalAdd from "components/Modal/ModalAdd/ModalAdd";
 
 function AddWorkout() {
    const [name, setName] = useState(String);

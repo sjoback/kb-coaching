@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./ListItem.module.scss";
-import ModalExpand from "components/Modals/ModalExpand/ModalExpand";
+import ModalExpand from "components/Modal/ModalExpand/ModalExpand";
 import Button from "components/Button/Button";
 
 function ListItem({ index, removeDrill, onChange, drill }) {
@@ -32,25 +32,23 @@ function ListItem({ index, removeDrill, onChange, drill }) {
       <li className={styles.container}>
          <Button onClick={() => removeDrill()} text={"X"} color={"red"} />
 
-         <div className={styles.containerInner}>
-            <div>Rm</div>
+         {/* <div className={styles.containerInner}> */}
+         <div>{drill.name}</div>
 
-            {/* <div>{drill.name}</div> */}
+         <input
+            name="rounds"
+            type="text"
+            value={rounds}
+            onChange={(e) => saveRounds(e.target.value)}
+         />
 
-            <input
-               name="rounds"
-               type="text"
-               value={rounds}
-               onChange={(e) => saveRounds(e.target.value)}
-            />
-
-            <input
-               name="round time"
-               type="text"
-               value={roundTime}
-               onChange={(e) => saveRoundTime(e.target.value)}
-            />
-         </div>
+         <input
+            name="round time"
+            type="text"
+            value={roundTime}
+            onChange={(e) => saveRoundTime(e.target.value)}
+         />
+         {/* </div> */}
 
          <ModalExpand onChange={saveNotes} text={drill.notes} />
       </li>

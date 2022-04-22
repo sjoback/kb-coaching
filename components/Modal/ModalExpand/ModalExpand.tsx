@@ -1,10 +1,19 @@
 import Button from "components/Button/Button";
-import { useState } from "react";
-import modal from "../Modals.module.scss";
+import { useEffect, useState } from "react";
 
 function ModalExpand({ onChange, text }) {
    const [open, toggleOpen] = useState(false);
    const [notes, setNotes] = useState(String);
+
+   useEffect(() => {
+      const close = (e) => {
+         if (e.keyCode === 27) {
+            toggleOpen(false);
+         }
+      };
+      window.addEventListener("keydown", close);
+      return () => window.removeEventListener("keydown", close);
+   }, []);
 
    return (
       <div className="modal">

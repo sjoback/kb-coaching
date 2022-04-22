@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Button from "components/Button/Button";
-import styles from "./ModalAdd.module.scss";
 
 function ModalAdd({ onClick, data, text }) {
    const [open, toggleOpen] = useState(false);
@@ -25,7 +24,7 @@ function ModalAdd({ onClick, data, text }) {
                   className="modal-open-overlay"
                />
 
-               <div className="modal-open-content">
+               <div className="modal-open-content modal-add">
                   <ul>
                      {data &&
                         data.length > 0 &&
@@ -48,7 +47,8 @@ function ModalAdd({ onClick, data, text }) {
             onClick={() => toggleOpen(true)}
             text={text}
             color={"green"}
-            size={"sm"}
+            size={"xs"}
+            component="default"
          />
       </div>
    );

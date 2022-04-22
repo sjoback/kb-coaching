@@ -2,13 +2,14 @@ import React from "react";
 import { useEffect, useState } from "react";
 import EditActions from "components/EditActions";
 import GoBackButton from "components/GoBackButton";
-import ModalAdd from "components/Modals/ModalAdd/ModalAdd";
+import ModalAdd from "components/Modal/ModalAdd/ModalAdd";
 import styles from "./Style.module.scss";
 import form from "components/form/Form.module.scss";
 import ListItem from "components/ListItem/ListItem";
-import ModalSaving from "components/Modals/ModalSaving/ModalSaving";
+import ModalSaving from "components/Modal/ModalSaving/ModalSaving";
 import Button from "components/Button/Button";
-import ModalConfirmDelete from "components/Modals/ModalConfirmDelete/ModalConfirmDelete";
+import ModalConfirmDelete from "components/Modal/ModalConfirmDelete/ModalConfirmDelete";
+import Modal from "components/Modal/Modal";
 
 function WorkoutPage({ drills, item }) {
    const [drillIds, storeDrills] = useState([]);
@@ -136,10 +137,11 @@ function WorkoutPage({ drills, item }) {
                   <div className={form.inputsInner}>
                      <label htmlFor="warmup">Drills</label>
 
-                     <ModalAdd
-                        text="Add drill"
-                        data={drills}
+                     <Modal
                         onClick={handleAddDrill}
+                        data={drills}
+                        text="Add drill"
+                        component="modal_add"
                      />
                   </div>
 
