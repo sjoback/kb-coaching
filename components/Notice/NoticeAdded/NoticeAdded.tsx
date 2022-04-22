@@ -1,9 +1,3 @@
-
-function NoticeAdded({ text, component, timeOut }) {
-
-    return (
-
-    )
-}
+function NoticeAdded({ text, component, timeOut }) {}
 
 export default NoticeAdded;
