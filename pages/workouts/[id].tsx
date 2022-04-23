@@ -211,9 +211,11 @@ export async function getStaticProps({ params }) {
    // const response = await fetch(`${process.env.DB_HOST}/workouts/${params.id}`);
    // const drillsResponse = await fetch(`${process.env.DB_HOST}/drills`);
    const response = await fetch(
-      `http://localhost:3005/api/workouts/${params.id}`
+      `https://kb-coach.netlify.app/api/workouts/${params.id}`
    );
-   const drillsResponse = await fetch(`http://localhost:3005/api/drills`);
+   const drillsResponse = await fetch(
+      `https://kb-coach.netlify.app/api/drills`
+   );
 
    const data = await response.json();
    const drills = await drillsResponse.json();
@@ -227,7 +229,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-   const response = await fetch(`http://localhost:3005/api/workouts`);
+   const response = await fetch(`https://kb-coach.netlify.app/api/workouts`);
 
    const workouts = await response.json();
 

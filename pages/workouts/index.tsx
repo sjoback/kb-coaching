@@ -30,7 +30,7 @@ export default WorkoutsPage;
 
 export async function getStaticProps() {
    // const response = await fetch(`${process.env.DB_HOST}/workouts`);
-   const response = await fetch(`http://localhost:3005/api/workouts`);
+   const response = await fetch(`https://kb-coach.netlify.app/api/workouts`);
 
    const data = await response.json();
 
