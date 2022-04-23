@@ -208,10 +208,12 @@ function WorkoutPage({ drills, item }) {
 export default WorkoutPage;
 
 export async function getStaticProps({ params }) {
-   const response = await fetch(`${process.env.DB_HOST}/workouts/${params.id}`);
-   const drillsResponse = await fetch(`${process.env.DB_HOST}/drills`);
+   // const response = await fetch(`${process.env.DB_HOST}/workouts/${params.id}`);
+   // const drillsResponse = await fetch(`${process.env.DB_HOST}/drills`);
+   const response = await fetch(`localhost:3005/api/workouts/${params.id}`);
+   const drillsResponse = await fetch(`localhost:3005/api/drills`);
 
-   const data = await response.json();
+   http: const data = await response.json();
    const drills = await drillsResponse.json();
 
    return {
@@ -223,7 +225,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-   const response = await fetch(`${process.env.DB_HOST}/workouts`);
+   const response = await fetch(`localhost:3005/api/workouts`);
 
    const workouts = await response.json();
 
