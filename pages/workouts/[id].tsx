@@ -43,12 +43,9 @@ function WorkoutPage({ drills, item }) {
    function removeDrill(drillIndex) {
       const spliced = drillIds.filter((drill, index) => drillIndex !== index);
       storeDrills(spliced);
-      console.log("remove drill");
    }
 
    function updateDrill(drill, index, type) {
-      console.log("update");
-
       drillIds[index][type] = drill;
    }
 
@@ -59,8 +56,6 @@ function WorkoutPage({ drills, item }) {
    function submit(e) {
       e.preventDefault();
    }
-
-   console.log("mounted");
 
    const saveItem = async () => {
       setApiState({
