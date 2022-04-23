@@ -213,8 +213,8 @@ function WorkoutPage({ drills, item }) {
 export default WorkoutPage;
 
 export async function getStaticProps({ params }) {
-   const response = await fetch(`${process.env.API_URL}/workouts/${params.id}`);
-   const drillsResponse = await fetch(`${process.env.API_URL}/drills`);
+   const response = await fetch(`${process.env.DB_HOST}/workouts/${params.id}`);
+   const drillsResponse = await fetch(`${process.env.DB_HOST}/drills`);
 
    const data = await response.json();
    const drills = await drillsResponse.json();
