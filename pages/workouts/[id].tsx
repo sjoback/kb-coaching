@@ -213,7 +213,7 @@ export async function getStaticProps({ params }) {
    const response = await fetch(`localhost:3005/api/workouts/${params.id}`);
    const drillsResponse = await fetch(`localhost:3005/api/drills`);
 
-   http: const data = await response.json();
+   const data = await response.json();
    const drills = await drillsResponse.json();
 
    return {
