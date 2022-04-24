@@ -1,7 +1,7 @@
 import LinkButton from "components/LinkButton";
 import Link from "next/link";
 
-function WorkoutsPage({ data }) {
+function Workouts({ data }) {
    return (
       <div>
          <h1>Workouts</h1>
@@ -9,8 +9,8 @@ function WorkoutsPage({ data }) {
             <ul>
                {data.map((workout) => {
                   return (
-                     <li key={workout.id}>
-                        <Link href={`/workouts/${workout.id}`}>
+                     <li key={`name + ${workout._id}`}>
+                        <Link href={`/workouts/${workout._id}`}>
                            {workout.name}
                         </Link>
                      </li>
@@ -21,20 +21,28 @@ function WorkoutsPage({ data }) {
             <div>No workouts added</div>
          )}
 
-         <LinkButton link={"/workouts/new"} text={"Add new workout"} />
+         <LinkButton link={"/workouts/add"} text={"Add new workout"} />
       </div>
    );
 }
 
-export default WorkoutsPage;
+export async function getServerSideProps() {
+   // get the current environment
 
-export async function getStaticProps() {
-   // const response = await fetch(`${process.env.DB_HOST}/workouts`);
-   const response = await fetch(`https://kb-coach.netlify.app/api/workouts`);
+   let dev = process.env.NODE_ENV !== "production";
+   let { DEV_URL, PROD_URL } = process.env;
 
-   const data = await response.json();
+   // request posts from api
+   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/workouts`);
+
+   // extract the data
+   let data = await response.json();
 
    return {
-      props: { data },
+      props: {
+         data: data["message"],
+      },
    };
 }
+
+export default Workouts;

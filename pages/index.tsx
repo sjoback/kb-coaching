@@ -1,14 +1,31 @@
 import QuickActions from "components/QuickActions";
 import RecentWorkouts from "components/RecentWorkouts";
 
-function HomePage() {
-  return (
-    <div>
-      <QuickActions />
+function Home() {
+   return (
+      <div>
+         <QuickActions />
 
-      <RecentWorkouts />
-    </div>
-  );
+         <RecentWorkouts />
+      </div>
+   );
 }
 
-export default HomePage;
+// export async function getServerSideProps(ctx) {
+//    // get the current environment
+//    let dev = process.env.NODE_ENV !== "production";
+//    let { DEV_URL, PROD_URL } = process.env;
+
+//    // request posts from api
+//    let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/workouts`);
+//    // extract the data
+//    let data = await response.json();
+
+//    return {
+//       props: {
+//          data: data["message"],
+//       },
+//    };
+// }
+
+export default Home;
