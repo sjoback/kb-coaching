@@ -50,7 +50,6 @@ function Workout({ drillsData, workout }) {
    const updateWorkout = async (e) => {
       e.preventDefault();
 
-      // reset error and message
       setSaving(true);
       setMessage("Saving workout..");
 
@@ -126,16 +125,14 @@ function Workout({ drillsData, workout }) {
          <div className="form-container-inputs">
             <div className={styles.inputsInner}>
                <label htmlFor="warmup">Drills</label>
-
                <Modal
                   component="add"
                   onClick={addDrill}
                   data={drillsData}
                   text="Add drill"
+                  size="add"
                />
             </div>
-
-            {/* <FormDrillsList data={drills} /> */}
 
             {drills.length > 0 ? (
                <ul className={styles.drillsList}>
@@ -207,18 +204,15 @@ function Workout({ drillsData, workout }) {
 }
 
 export async function getServerSideProps({ params }) {
-   // get the current environment
    let dev = process.env.NODE_ENV !== "production";
    let { DEV_URL, PROD_URL } = process.env;
 
-   // requests from api
    let response = await fetch(
       `${dev ? DEV_URL : PROD_URL}/api/workouts/${params.id}`
    );
 
    let drillsResponse = await fetch(`${dev ? DEV_URL : PROD_URL}/api/drills`);
 
-   // extract the data
    const data = await response.json();
    const drillsData = await drillsResponse.json();
 

@@ -32,6 +32,12 @@
    --button-padding: 30px 45px;
 }
 
+// Custom Sizes
+.btn-add {
+   --button-padding: 7.5px;
+   font-size: 14px;
+}
+
 // Colors
 .btn-default {
    --button-color: var(--color-white);

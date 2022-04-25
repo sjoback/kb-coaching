@@ -28,17 +28,15 @@ async function getDrills(req, res) {
 
 async function addDrill(req, res) {
    try {
-      // connect to the database
       let { db } = await connectToDatabase();
-      // add the post
+
       await db.collection("drills").insertOne(JSON.parse(req.body));
-      // return a message
+
       return res.json({
          message: "Workout added successfully",
          success: true,
       });
    } catch (error) {
-      // return an error
       return res.json({
          message: new Error(error).message,
          success: false,

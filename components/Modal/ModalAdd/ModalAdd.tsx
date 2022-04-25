@@ -8,7 +8,7 @@ function ModalAdd({ onClick, data }) {
          {data &&
             data.length > 0 &&
             data.map((item) => (
-               <li key={item.id}>
+               <li key={item._id + item.id}>
                   <Button
                      onClick={() => onClick(item)}
                      text={item.name}

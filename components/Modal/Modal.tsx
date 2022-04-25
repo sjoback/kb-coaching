@@ -52,7 +52,7 @@ function Modal(props) {
             onClick={() => toggleOpen(true)}
             text={props.text}
             color={"green"}
-            size={"sm"}
+            size={props.size}
             component="default"
          />
       </div>

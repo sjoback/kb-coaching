@@ -28,11 +28,10 @@ async function getWorkouts(req, res) {
 
 async function addWorkout(req, res) {
    try {
-      // connect to the database
       let { db } = await connectToDatabase();
-      // add the post
+
       await db.collection("workouts").insertOne(JSON.parse(req.body));
-      // return a message
+
       console.log(res);
 
       return res.json({
@@ -40,7 +39,6 @@ async function addWorkout(req, res) {
          success: true,
       });
    } catch (error) {
-      // return an error
       return res.json({
          message: new Error(error).message,
          success: false,
@@ -49,7 +47,6 @@ async function addWorkout(req, res) {
 }
 
 export default async function handler(req, res) {
-   // switch the methods
    switch (req.method) {
       case "GET": {
          return getWorkouts(req, res);

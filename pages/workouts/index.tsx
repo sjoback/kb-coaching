@@ -5,7 +5,7 @@ function Workouts({ data }) {
    return (
       <div>
          <h1>Workouts</h1>
-         <List items={data} />
+         <List linkType="workouts" items={data} />
 
          <div className="link-list-button">
             <Button

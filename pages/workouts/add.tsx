@@ -1,6 +1,4 @@
 import router, { useRouter } from "next/router";
-import GoBackButton from "components/GoBackButton";
-import styles from "./Style.module.scss";
 import { useState } from "react";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 
@@ -14,17 +12,19 @@ function AddWorkout() {
    const handleWorkout = async (e) => {
       e.preventDefault();
 
-      // reset error and message
       setError("");
-      // setMessage('');
+      setMessage("");
 
-      if (!name) return setError("All fields are required");
+      if (!name.length) {
+         return setError("All fields are required");
+         console.log("eror");
+      }
 
       let workout = {
          name: name,
          note: note,
-         published: false,
-         createdAt: new Date().toISOString(),
+         added: new Date().toISOString(),
+         edited: "",
       };
 
       let response = await fetch("/api/workouts", {
@@ -44,8 +44,6 @@ function AddWorkout() {
 
    return (
       <form onSubmit={handleWorkout} className="form-container">
-         <h1>Add workout</h1>
-
          <div className="form-container-inputs">
             <label htmlFor="name">Name</label>
             <input

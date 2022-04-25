@@ -1,106 +1,72 @@
-import { useRouter } from "next/router";
 import { useState } from "react";
-import ModalAdd from "components/Modal/ModalAdd/ModalAdd";
-import form from "components/Form/Form.module.scss";
+import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 
-function AddWorkout() {
+function AddDrill() {
    const [name, setName] = useState("");
-   // const [content, setContent] = useState('');
+   const [note, setNote] = useState("");
+   const [images, setImages] = useState("");
    const [message, setMessage] = useState("");
    const [error, setError] = useState("");
 
-   const handleWorkout = async (e) => {
+   const handleDrill = async (e) => {
       e.preventDefault();
 
-      // reset error and message
       setError("");
-      // setMessage('');
+      setMessage("");
 
-      // fields check
-      if (!name) return setError("All fields are required");
+      if (!name) return setError("Name field is required");
 
-      // post structure
-      let post = {
+      let drill = {
          name: name,
-         published: false,
-         createdAt: new Date().toISOString(),
+         note: note,
+         images: images,
+         added: new Date().toISOString(),
+         updated: "",
       };
-      // save the post
-      let response = await fetch("/api/workouts", {
-         method: "POST",
-         body: JSON.stringify(post),
-      });
 
-      // get the data
+      let response = await fetch("/api/drills", {
+         method: "POST",
+         body: JSON.stringify(drill),
+      });
+      console.log(response);
+
       let data = await response.json();
 
       if (data.success) {
-         // reset the fields
-         setName("");
-
-         // set the message
          return setMessage(data.message);
       } else {
-         // set the error
          return setError(data.message);
       }
    };
-   // const saveWorkout = async () => {
-   //    const response = await fetch("/api/workouts", {
-   //       method: "POST",
-   //       body: JSON.stringify({
-   //          name: name,
-   //          comment: comment,
-   //          drills: [],
-   //          warmup: [],
-   //          mitts: [],
-   //       }),
-   //       headers: {
-   //          "Content-Type": "application/json",
-   //       },
-   //    });
-
-   //    const data = await response.json();
-   // };
 
    return (
-      <div className={styles.wrapper}>
-         <GoBackButton />
+      <form onSubmit={handleDrill} className="form-container">
+         <div className="form-container-inputs">
+            <label htmlFor="name">Name*</label>
+            <input
+               autoFocus
+               placeholder="E.g: Dutch slip 'n rip"
+               name="name"
+               type="text"
+               required
+               value={name}
+               onChange={(e) => setName(e.target.value)}
+            />
+         </div>
 
-         <form onSubmit={handleWorkout} className={form.container}>
-            <h1>new workout</h1>
+         <div className="form-container-inputs">
+            <label htmlFor="name">Notexx</label>
+            <textarea
+               placeholder="Note"
+               name="note"
+               value={note}
+               onChange={(e) => setNote(e.target.value)}
+            />
+         </div>
 
-            <div className={form.inputs}>
-               <label htmlFor="name">Name</label>
-               <input
-                  placeholder="E.g: Dutch slip 'n rip"
-                  name="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-               />
-            </div>
-
-            {/* <div className={form.inputs}>
-               <label htmlFor="comment">Comment</label>
-               <textarea
-                  name="comment"
-                  placeholder="E.g: This is a good for etc etc.."
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-               />
-            </div> */}
-
-            <div className={form.inputs}>
-               {/* <ModalAdd data={drills} add={handleAddDrill} /> */}
-            </div>
-
-            <div>
-               <button type="submit">Save workout</button>
-            </div>
-         </form>
-      </div>
+         <ButtonSubmit text={"Add drill"} color={"green"} />
+      </form>
    );
 }
 
-export default AddWorkout;
+export default AddDrill;

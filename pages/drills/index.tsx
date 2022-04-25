@@ -6,7 +6,7 @@ function Drills({ data }) {
       <div>
          <h1>Drills</h1>
 
-         <List items={data} />
+         <List linkType="drills" items={data} />
 
          <div className="link-list-button">
             <Button

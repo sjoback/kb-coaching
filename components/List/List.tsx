@@ -1,7 +1,7 @@
 import Button from "components/Button/Button";
 import styles from "./List.module.scss";
 
-function List({ items }) {
+function List({ items, linkType }) {
    return (
       <div className={styles.container}>
          {items.length > 0 ? (
@@ -12,7 +12,7 @@ function List({ items }) {
                         <Button
                            text={item.name}
                            component="link"
-                           link={`/workouts/${item._id}`}
+                           link={`/${linkType}/${item._id}`}
                         />
                      </li>
                   );
