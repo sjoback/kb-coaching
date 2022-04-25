@@ -204,7 +204,7 @@ function Workout({ drillsData, workout }) {
 }
 
 export async function getServerSideProps({ params }) {
-   let dev = process.env.NODE_ENV !== "production";
+   let dev = process.env.NODE_ENV == "development";
    let { DEV_URL, PROD_URL } = process.env;
 
    let response = await fetch(
