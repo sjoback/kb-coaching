@@ -1,0 +1,14 @@
+.main {
+   padding: 20px;
+   cursor: pointer;
+   color: #fff;
+   background-color: gray;
+
+   > svg {
+      margin-right: 10px;
+   }
+}
+
+.wrapper {
+   display: flex;
+}
