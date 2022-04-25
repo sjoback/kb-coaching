@@ -8,6 +8,7 @@ async function getWorkout(req, res) {
       let workout = await db
          .collection("workouts")
          .findOne({ _id: new ObjectId(req.query.id) }, {});
+      console.log(workout);
 
       return res.json({
          message: JSON.parse(JSON.stringify(workout)),

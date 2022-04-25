@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import ListItem from "../../ListItem/ListItem";
 import styles from "./Styles.module.scss";
 
-function ModalAddDrill({ drills, add }) {
+function FormModalAddDrill({ drills, add }) {
    const [open, toggleOpen] = useState(false);
    // const [drills, setDrills] = useState([]);
 
@@ -60,7 +59,7 @@ function ModalAddDrill({ drills, add }) {
    );
 }
 
-export default ModalAddDrill;
+export default FormModalAddDrill;
 
 // export async function getStaticProps({ params }) {
 //    const response = await fetch(`${process.env.API_URL}/drills`);

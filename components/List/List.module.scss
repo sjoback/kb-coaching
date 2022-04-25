@@ -1,0 +1,28 @@
+.container {
+}
+
+.list {
+   display: grid;
+   gap: 10px;
+   width: 600px;
+   max-width: calc(100% - 20px);
+   margin: 40px 0;
+
+   li {
+      display: flex;
+   }
+}
+
+.empty {
+   margin: 30px 0;
+   font-style: italic;
+   h2 {
+      font-weight: 300;
+   }
+}
+
+.link-list-button {
+   display: flex;
+   width: 600px;
+   max-width: calc(100% - 20px);
+}

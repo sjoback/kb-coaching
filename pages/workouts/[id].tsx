@@ -141,7 +141,7 @@ function Workout({ drillsData, workout }) {
                <ul className={styles.drillsList}>
                   <li>
                      <div></div>
-                     <div>Name</div>
+                     <div></div>
                      <div>Rounds</div>
                      <div>Minuets</div>
                      <div></div>

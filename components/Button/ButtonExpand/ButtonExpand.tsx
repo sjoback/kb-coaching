@@ -1,6 +1,6 @@
 import classnames from "classnames";
 
-function ButtonExpand({ onClick, text, classes, style }) {
+function ButtonExpand({ onClick, text, classes }) {
    return (
       <button
          onClick={() => {
@@ -8,7 +8,6 @@ function ButtonExpand({ onClick, text, classes, style }) {
          }}
          type="button"
          className={classnames(classes)}
-         style={style}
       >
          {text}
       </button>
