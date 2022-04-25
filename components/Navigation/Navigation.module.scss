@@ -1,10 +1,9 @@
 .wrapper {
-   // position: fixed;
-   // top: 0;
-   // left: 0;
    background: #222;
    width: 100vw;
    color: #fff;
+   position: relative;
+   z-index: 99;
 
    a {
       padding: 20px;

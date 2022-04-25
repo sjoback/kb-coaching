@@ -4,10 +4,9 @@
    padding: var(--button-padding);
    transition: 0.15s ease-in-out;
    border: 0;
-   border-radius: 30px;
+   border-radius: var(--button-border-radius);
    letter-spacing: 0.5px;
    font-weight: 700;
-   padding: var(--button-padding);
    text-transform: uppercase;
    cursor: pointer;
    &:hover {
@@ -16,6 +15,11 @@
 }
 
 // Sizes
+.btn-xs {
+   --button-padding: 10px 10px;
+   font-size: 14px;
+}
+
 .btn-sm {
    --button-padding: 15px 20px;
 }
@@ -26,6 +30,12 @@
 
 .btn-lg {
    --button-padding: 30px 45px;
+}
+
+// Custom Sizes
+.btn-add {
+   --button-padding: 7.5px;
+   font-size: 14px;
 }
 
 // Colors
@@ -51,7 +61,7 @@
    --button-color: var(--color-white);
 
    &:hover {
-      // --button-background: var(--color-red-hover);
+      --button-background-hover: var(--color-green-hover);
    }
 }
 
@@ -62,4 +72,13 @@
    &:hover {
       // --button-background: var(--color-blue-hover);
    }
+}
+
+// Aligns
+.btn-left {
+   text-align: left;
+}
+
+.btn-right {
+   text-align: right;
 }

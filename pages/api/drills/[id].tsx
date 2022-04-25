@@ -1,30 +1,92 @@
-import data from "data/drills.json";
-const fs = require("fs");
+const { connectToDatabase } = require("/lib/mongodb");
+const ObjectId = require("mongodb").ObjectId;
 
-export default function handler(req, res) {
-   const { id } = req.query;
-   const item = data.find((item) => item.id === id);
-   const itemIndex = data.findIndex((n) => n.id === id);
+async function getDrill(req, res) {
+   try {
+      let { db } = await connectToDatabase();
 
-   switch (req.method) {
-      case "GET":
-         res.status(200).json(item);
-         break;
+      let drill = await db
+         .collection("drills")
+         .findOne({ _id: new ObjectId(req.query.id) }, {});
+      console.log(drill);
 
-      //  case "DELETE":
-      //     concatData[type].splice(itemIndex, 1);
-      //     saveData(concatData[type]);
-      //     res.json({ data: concatData[type] });
-      //     break;
-
-      case "PUT":
-         const updated = { ...item, ...req.body };
-         data[itemIndex] = updated;
-         res.status(200).json(updated);
-         saveData();
-         break;
+      return res.json({
+         message: JSON.parse(JSON.stringify(drill)),
+         success: true,
+      });
+   } catch (error) {
+      return res.json({
+         message: new Error(error).message,
+         success: false,
+      });
    }
-   function saveData() {
-      fs.writeFileSync(`data/drills.json`, JSON.stringify(data, null, 4));
+}
+
+async function updateDrill(req, res) {
+   try {
+      let { db } = await connectToDatabase();
+
+      // Parse body
+      const jsonBody = JSON.parse(req.body);
+
+      // update the workout
+      await db.collection("drills").updateOne(
+         { _id: new ObjectId(req.query.id) },
+         {
+            $set: {
+               name: jsonBody.name,
+               comment: jsonBody.comment,
+               drills: jsonBody.drills,
+               warmups: jsonBody.warmups,
+               mitts: jsonBody.mitts,
+            },
+         }
+      );
+
+      return res.json({
+         message: "Drill updated successfully",
+         success: true,
+      });
+   } catch (error) {
+      return res.json({
+         message: new Error(error).message,
+         success: false,
+      });
+   }
+}
+
+async function deleteDrill(req, res) {
+   try {
+      let { db } = await connectToDatabase();
+
+      await db.collection("drills").deleteOne({
+         _id: new ObjectId(req.body),
+      });
+
+      return res.json({
+         message: "Drill deleted successfully",
+         success: true,
+      });
+   } catch (error) {
+      return res.json({
+         message: new Error(error).message,
+         success: false,
+      });
+   }
+}
+
+export default async function handler(req, res) {
+   switch (req.method) {
+      case "GET": {
+         return getDrill(req, res);
+      }
+
+      case "PUT": {
+         return updateDrill(req, res);
+      }
+
+      case "DELETE": {
+         return deleteDrill(req, res);
+      }
    }
 }

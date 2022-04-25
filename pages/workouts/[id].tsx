@@ -1,176 +1,168 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import EditActions from "components/EditActions";
-import GoBackButton from "components/GoBackButton";
-import ModalAdd from "components/Modals/ModalAdd/ModalAdd";
 import styles from "./Style.module.scss";
-
-import form from "components/form/Form.module.scss";
-import ListItem from "components/ListItem/ListItem";
-import ModalSaving from "components/Modals/ModalSaving/ModalSaving";
+// import form from "components/Form/Form.module.scss";
 import Button from "components/Button/Button";
-import ModalConfirmDelete from "components/Modals/ModalConfirmDelete/ModalConfirmDelete";
+import Modal from "components/Modal/Modal";
+import { useRouter } from "next/router";
+import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
+import ApiOverlay from "components/ApiOverlay/ApiOverlay";
+import ListItem from "components/ListItem/ListItem";
 
-function WorkoutPage({ drills, item }) {
-   const [drillIds, storeDrills] = useState([]);
-   const [warmupArray, storeWarmup] = useState([]);
-   const [name, setName] = useState(String);
-   const [comment, setComment] = useState(String);
-   const [userAnswer, confirmDelete] = useState(false);
-   const [apiState, setApiState] = useState({
-      message: "",
-      status: null,
-   });
+function Workout({ drillsData, workout }) {
+   const [name, setName] = useState(workout.name);
+   const [comment, setComment] = useState(workout.comment);
+   const [drills, setDrills] = useState(workout.drills);
+   const [warmups, setWarmups] = useState(workout.warmups);
+   const [mitts, setMitts] = useState(workout.mitts);
 
-   useEffect(() => {
-      storeDrills(item.drills);
-      setName(item.name);
-      setComment(item.comment);
-   }, []);
+   const [saving, setSaving] = useState(false);
+   const [deleting, setDeleting] = useState(false);
+   const [message, setMessage] = useState("");
+   const [error, setError] = useState("");
+   const router = useRouter();
 
-   function handleAddDrill(drill) {
-      const formattedDrill = {
+   function addDrill(drill) {
+      const drillToAdd = {
          id: drill.id,
          name: drill.name,
-         rounds: drill.rounds ? drill.rounds : 1,
-         round_time: drill.round_time ? drill.round_time : 1,
-         notes: drill.notes ? drill.notes : "",
+         rounds: 1,
+         round_time: 1,
+         notes: "",
       };
-      const newDrillIds = [...drillIds, formattedDrill];
-      storeDrills(newDrillIds);
+
+      const newDrills = [...drills, drillToAdd];
+      setDrills(newDrills);
+   }
+
+   function updateDrill(value, index, key) {
+      const updatedDrill = drills[index];
+      updatedDrill[key] = value;
    }
 
    function removeDrill(drillIndex) {
-      const spliced = drillIds.filter((drill, index) => drillIndex !== index);
-      storeDrills(spliced);
-      console.log("remove drill");
+      const filteredDrills = drills.filter(
+         (drill, index) => index !== drillIndex
+      );
+      setDrills(filteredDrills);
    }
 
-   function updateDrill(drill, index, type) {
-      console.log("update");
+   const updateWorkout = async (e) => {
+      e.preventDefault();
 
-      drillIds[index][type] = drill;
-   }
+      setSaving(true);
+      setMessage("Saving workout..");
 
-   function setDeleteConfirmed() {
-      confirmDelete(true);
-   }
+      if (!name) return setError("All fields are required");
 
-   const saveItem = async () => {
-      setApiState({
-         message: "Saving..",
-         status: 1,
+      let updatedWorkout = {
+         name: name,
+         comment: comment,
+         drills: drills,
+         warmups: warmups,
+         mitts: mitts,
+         updated_at: new Date().toISOString(),
+      };
+
+      let response = await fetch(`/api/workouts/${router.query.id}`, {
+         method: "PUT",
+         body: JSON.stringify(updatedWorkout),
       });
 
-      try {
-         const response = await fetch(`/api/workouts/${item.id}`, {
-            method: "PUT",
-            body: JSON.stringify({
-               name: name,
-               comment: comment,
-               warmup: warmupArray,
-               drills: drillIds,
-               mitts: item.mitts,
-            }),
-            headers: { "Content-Type": "application/json" },
-         });
+      let data = await response.json();
 
-         if (response.status == 200) {
-            setTimeout(function () {
-               setApiState({
-                  message: "Saved successful!",
-                  status: 2,
-               });
-            }, 500);
-         }
-      } catch (e) {
-         setApiState({
-            message: "Oops, error!",
-            status: 2,
-         });
+      if (data.success) {
+         setMessage(data.message);
+
+         setTimeout(function () {
+            setSaving(false);
+         }, 600);
+      } else {
+         return setError(data.message);
       }
-
-      setTimeout(function () {
-         setApiState({ message: "", status: null });
-      }, 1500);
    };
 
-   const deleteItem = async () => {
-      if (userAnswer) {
-         const response = await fetch(`/api/edit/workouts/${item.id}`, {
+   const deleteWorkout = async (e) => {
+      setDeleting(true);
+
+      try {
+         await fetch(`/api/workouts/${router.query.id}`, {
             method: "DELETE",
-            headers: { "Content-Type": "application/json" },
          });
+
+         setDeleting(false);
+
+         // reload the page
+         return router.push(router.asPath);
+      } catch (error) {
+         // stop deleting state
+         return setDeleting(false);
       }
    };
 
    return (
-      <div className={styles.wrapper}>
-         <div className={styles.inner}>
-            <form className={form.container}>
-               <div className={form.inputs}>
-                  <label htmlFor="name">Name</label>
-                  <input
-                     type="text"
-                     name="name"
-                     placeholder="Name"
-                     value={name}
-                     onChange={(e) => setName(e.target.value)}
-                  />
-               </div>
+      <form onSubmit={updateWorkout} className="form-container">
+         <div className="form-container-inputs">
+            <label htmlFor="name">Name</label>
+            <input
+               autoFocus
+               type="text"
+               value={name}
+               onChange={(e) => setName(e.target.value)}
+            />
+         </div>
 
-               <div className={form.inputs}>
-                  <label htmlFor="comment">Comment</label>
-                  <textarea
-                     name="comment"
-                     placeholder="Comment"
-                     value={comment}
-                     onChange={(e) => setComment(e.target.value)}
-                  />
-               </div>
+         <div className="form-container-inputs">
+            <label htmlFor="comment">Comment</label>
+            <textarea
+               name="comment"
+               placeholder="Comment"
+               value={comment}
+               onChange={(e) => setComment(e.target.value)}
+            />
+         </div>
 
-               <div className={form.inputs}>
-                  <div className={form.inputsInner}>
-                     <label htmlFor="warmup">Drills</label>
+         <div className="form-container-inputs">
+            <div className={styles.inputsInner}>
+               <label htmlFor="warmup">Drills</label>
+               <Modal
+                  component="add"
+                  onClick={addDrill}
+                  data={drillsData}
+                  text="Add drill"
+                  size="add"
+               />
+            </div>
 
-                     <ModalAdd
-                        text="Add drill"
-                        data={drills}
-                        add={handleAddDrill}
-                     />
-                  </div>
+            {drills.length > 0 ? (
+               <ul className={styles.drillsList}>
+                  <li>
+                     <div></div>
+                     <div></div>
+                     <div>Rounds</div>
+                     <div>Minuets</div>
+                     <div></div>
+                  </li>
 
-                  {drillIds.length > 0 && (
-                     <ul>
-                        <li>
-                           <div>Name</div>
+                  {drills.length > 0 &&
+                     drills.map((drill, index) => (
+                        <ListItem
+                           key={`${drill.name}-${index}`}
+                           index={index}
+                           drill={drill}
+                           onChange={updateDrill}
+                           removeDrill={removeDrill}
+                        />
+                     ))}
+               </ul>
+            ) : (
+               <ul className={styles.drillsList}>
+                  <li>no drills</li>
+               </ul>
+            )}
+         </div>
 
-                           <div className={styles.listInner}>
-                              <div>Rounds</div>
-                              <div>Round time(min)</div>
-                           </div>
-
-                           <div>Notes</div>
-
-                           <div />
-                        </li>
-
-                        {drillIds &&
-                           drillIds.length > 0 &&
-                           drillIds.map((drill, index) => (
-                              <ListItem
-                                 key={drill.id + index}
-                                 index={index}
-                                 drill={drill}
-                                 onChange={updateDrill}
-                                 removeDrill={() => removeDrill}
-                              />
-                           ))}
-                     </ul>
-                  )}
-               </div>
-
-               {/* <div className={form.inputs}>
+         {/* <div className={form.inputs}>
                   <label htmlFor="warmup">Warmup</label>
                   <ul>
                      {item.warmup &&
@@ -181,65 +173,55 @@ function WorkoutPage({ drills, item }) {
                   </ul>
                </div> */}
 
-               <div className={form.buttons}>
-                  <Button
-                     onClick={() => saveItem()}
-                     text={"Save workout"}
-                     color={"green"}
-                  />
+         <div className="form-buttons">
+            <ButtonSubmit text={"Save workout"} color={"green"} />
 
-                  <Button
-                     onClick={() => deleteItem()}
-                     text={"Delete workout"}
-                     color={"red"}
-                  />
-               </div>
-
-               <span className={form.timestamp}>Edited: {item.added}</span>
-
-               {apiState.message.length > 0 && <ModalSaving state={apiState} />}
-
-               {confirmDelete.length > 0 && (
-                  <ModalConfirmDelete onClick={() => confirmDelete()} />
-               )}
-            </form>
-            {/* <GoBackButton /> */}
-            {/* <EditActions /> */}
+            <Button
+               onClick={() => deleteWorkout(workout.id)}
+               text={"Delete workout"}
+               color={"red"}
+            />
          </div>
-      </div>
+
+         <div className="form-meta">
+            <span>
+               <b>Added:</b> {workout.added}
+            </span>
+            <span>
+               <b>Updated:</b> {workout.updated}
+            </span>
+         </div>
+
+         {saving && (
+            <ApiOverlay
+               text={message}
+               requestState={saving}
+               component="saving"
+            />
+         )}
+      </form>
    );
 }
 
-export default WorkoutPage;
+export async function getServerSideProps({ params }) {
+   let dev = process.env.NODE_ENV !== "production";
+   let { DEV_URL, PROD_URL } = process.env;
 
-export async function getStaticProps({ params }) {
-   const response = await fetch(`${process.env.API_URL}/workouts/${params.id}`);
-   const drillsResponse = await fetch(`${process.env.API_URL}/drills`);
+   let response = await fetch(
+      `${dev ? DEV_URL : PROD_URL}/api/workouts/${params.id}`
+   );
+
+   let drillsResponse = await fetch(`${dev ? DEV_URL : PROD_URL}/api/drills`);
 
    const data = await response.json();
-   const drills = await drillsResponse.json();
+   const drillsData = await drillsResponse.json();
 
    return {
       props: {
-         item: data,
-         drills: drills,
+         workout: data["message"],
+         drillsData: drillsData["message"],
       },
    };
 }
 
-export async function getStaticPaths() {
-   const response = await fetch(`${process.env.API_URL}/workouts`);
-
-   const workouts = await response.json();
-
-   return {
-      paths: workouts.map((workout: any) => {
-         return {
-            params: {
-               id: workout.id,
-            },
-         };
-      }),
-      fallback: false,
-   };
-}
+export default Workout;

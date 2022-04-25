@@ -1,38 +1,38 @@
-import LinkButton from "components/LinkButton";
-import Link from "next/link";
+import Button from "components/Button/Button";
+import List from "components/List/List";
 
-function DrillsPage({ data }) {
+function Drills({ data }) {
    return (
       <div>
          <h1>Drills</h1>
-         {data ? (
-            <ul>
-               {data.map((drill) => {
-                  return (
-                     <li key={drill.id}>
-                        <Link href={`/drills/${drill.id}`}>{drill.name}</Link>
-                     </li>
-                  );
-               })}
-            </ul>
-         ) : (
-            <div>No workouts added</div>
-         )}
 
-         <LinkButton link={"/drills/new"} text={"Add new drill"} />
+         <List linkType="drills" items={data} />
+
+         <div className="link-list-button">
+            <Button
+               color="green"
+               text="Add new drill"
+               component="link"
+               link="/drills/add"
+            />
+         </div>
       </div>
    );
 }
 
-export default DrillsPage;
+export async function getServerSideProps() {
+   let dev = process.env.NODE_ENV !== "production";
+   let { DEV_URL, PROD_URL } = process.env;
 
-export async function getStaticProps() {
-   const response = await fetch(`${process.env.API_URL}/drills`);
+   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/drills`);
 
-   const data = await response.json();
-   console.log(data);
+   let data = await response.json();
 
    return {
-      props: { data },
+      props: {
+         data: data["message"],
+      },
    };
 }
+
+export default Drills;

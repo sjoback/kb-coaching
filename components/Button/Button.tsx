@@ -1,35 +1,45 @@
 import classnames from "classnames";
-import ButtonExpand from "components/ButtonExpand/ButtonExpand";
-import styles from "./Button.module.scss";
+import ButtonDefault from "./ButtonDefault/ButtonDefault";
+import ButtonDelete from "./ButtonDelete/ButtonDelete";
+import ButtonExpand from "./ButtonExpand/ButtonExpand";
+import ButtonLink from "./ButtonLink/ButtonLink";
 
 function Button({
-   onClick,
+   onClick = () => {},
    text,
    size = "md",
-   color,
+   customSize = [],
+   color = "default",
    type = "default",
-   custom = [],
+   align = "center",
+   component = "default",
+   borderRadius = [],
+   link = "",
 }) {
    const buttonColor = `btn-${color}`;
-   const buttonSize = `btn-${size}`;
+   const buttonAlign = `btn-${align}`;
+   const buttonSize = customSize.length > 0 ? `btn-custom` : `btn-${size}`;
+   const buttonClasses = [buttonSize, buttonColor, buttonAlign];
 
-   return (
-      <div className={styles.container}>
-         {type == "default" && (
-            <button
-               onClick={() => {
-                  onClick();
-               }}
-               className={classnames(styles.button, buttonSize, buttonColor)}
-            >
-               {text}
-            </button>
-         )}
+   const Components = {
+      default: ButtonDefault,
+      delete: ButtonDelete,
+      expand: ButtonExpand,
+      link: ButtonLink,
+   };
 
-         {type == "expand" && (
-            <ButtonExpand onClick={() => onClick()} text={text} size={size} />
-         )}
-      </div>
-   );
+   if (typeof Components[component] !== "undefined") {
+      const Component = Components[component];
+      return (
+         <Component
+            text={text}
+            link={link}
+            onClick={onClick}
+            classes={buttonClasses}
+         />
+      );
+   } else {
+      return <p>{component} is not yet defined.</p>;
+   }
 }
 export default Button;

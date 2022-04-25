@@ -7,6 +7,9 @@
 @import "typography";
 @import "theme";
 @import "buttons";
+@import "form";
+@import "modal";
+@import "list";
 
 * {
    box-sizing: border-box;
@@ -39,10 +42,16 @@ main {
 ul {
    list-style-type: none;
    padding: 0;
+   margin: 0;
 
    li {
       list-style-type: none;
    }
+}
+
+button {
+   outline: none;
+   border: 0;
 }
 
 form {
@@ -53,10 +62,12 @@ form {
       padding: var(--input-padding);
       color: var(--input-color);
       background-color: var(--input-background);
+      border-radius: var(--input-border-radius);
    }
    textarea {
       padding: var(--input-padding);
       color: var(--input-color);
       background-color: var(--input-background);
+      border-radius: var(--input-border-radius);
    }
 }
