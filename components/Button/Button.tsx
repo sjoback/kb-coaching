@@ -1,16 +1,16 @@
-import ButtonDefault from "components/ButtonDefault/ButtonDefault";
-import ButtonDelete from "components/ButtonDelete/ButtonDelete";
-import ButtonExpand from "components/ButtonExpand/ButtonExpand";
+import classnames from "classnames";
+import ButtonDefault from "./ButtonDefault/ButtonDefault";
+import ButtonDelete from "./ButtonDelete/ButtonDelete";
+import ButtonExpand from "./ButtonExpand/ButtonExpand";
 
 function Button({
-   onClick,
+   onClick = () => {},
    text,
    size = "md",
    customSize = [],
    color = "default",
    type = "default",
    align = "center",
-   custom = [],
    component = "default",
 }) {
    const buttonColor = `btn-${color}`;
