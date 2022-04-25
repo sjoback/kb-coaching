@@ -1,14 +1,5 @@
-import QuickActions from "components/QuickActions";
-import RecentWorkouts from "components/RecentWorkouts";
-
 function Home() {
-   return (
-      <div>
-         <QuickActions />
-
-         <RecentWorkouts />
-      </div>
-   );
+   return <div>home</div>;
 }
 
 // export async function getServerSideProps(ctx) {
