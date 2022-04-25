@@ -1,5 +1,5 @@
 function ApiOverlaySaving({ component, text }) {
-   return <div>{text}</div>;
+   return <h1>{text}</h1>;
 }
 
 export default ApiOverlaySaving;
