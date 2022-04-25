@@ -1,4 +1,4 @@
-import LinkButton from "components/LinkButton";
+import LinkButton from "components/Button/ButtonLink/ButtonLink";
 import data from "data/workouts.json";
 import Link from "next/link";
 

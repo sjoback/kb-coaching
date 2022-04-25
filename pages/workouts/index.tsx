@@ -1,41 +1,30 @@
-import LinkButton from "components/LinkButton";
-import Link from "next/link";
+import Button from "components/Button/Button";
+import List from "components/List/List";
 
 function Workouts({ data }) {
    return (
       <div>
          <h1>Workouts</h1>
-         {data ? (
-            <ul>
-               {data.map((workout) => {
-                  return (
-                     <li key={`name + ${workout._id}`}>
-                        <Link href={`/workouts/${workout._id}`}>
-                           {workout.name}
-                        </Link>
-                     </li>
-                  );
-               })}
-            </ul>
-         ) : (
-            <div>No workouts added</div>
-         )}
+         <List items={data} />
 
-         <LinkButton link={"/workouts/add"} text={"Add new workout"} />
+         <div className="link-list-button">
+            <Button
+               color="green"
+               text="Add new workout"
+               component="link"
+               link="/workouts/add"
+            />
+         </div>
       </div>
    );
 }
 
 export async function getServerSideProps() {
-   // get the current environment
-
    let dev = process.env.NODE_ENV !== "production";
    let { DEV_URL, PROD_URL } = process.env;
 
-   // request posts from api
    let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/workouts`);
 
-   // extract the data
    let data = await response.json();
 
    return {

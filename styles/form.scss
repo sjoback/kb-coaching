@@ -1,7 +1,7 @@
 .form-container {
    //    margin: 30px;
    display: grid;
-   gap: 50px;
+   gap: 30px;
    grid-template-columns: 1fr;
    box-sizing: border-box;
    position: relative;
@@ -54,46 +54,14 @@
          background-color: #ebeef1;
          --input-border-radius: 30px;
          box-sizing: border-box;
-         border: 0;
+         border: 1px solid #ebeef1;
          transition: 0.15s ease-in-out;
          outline: none;
          resize: none;
 
          &:focus {
-         }
-      }
-
-      .drillsList {
-         width: 100%;
-         margin: 0;
-         display: grid;
-         gap: 10px;
-         background-color: var(--color-main-gray);
-         border-radius: 40px;
-         padding: 20px;
-
-         li {
-            font-size: 14px;
-            font-weight: 600;
-            display: grid;
-            grid-template-columns: 60px 1fr 80px 80px 60px;
-
-            gap: 10px;
-            padding: 7.5px;
-
-            div:first-child {
-               display: flex;
-               align-items: center;
-               color: var(--color-white);
-            }
-
-            input {
-               --input-padding: 5px 15px;
-               --input-border-radius: 5px;
-               --input-color: #fff;
-               font-size: 20px;
-               background-color: #96a6b6;
-            }
+            border-color: var(--color-green-hover);
+            border-color: #c3ccd5;
          }
       }
    }
@@ -102,13 +70,26 @@
 .form-buttons {
    display: grid;
    gap: 10px;
-   grid-template-columns: 1fr 1fr;
+
    button {
       &:first-child {
-         --button-border-radius: 50px 10px 10px 50px;
+         --button-border-radius: 30px 30px 5px 5px;
       }
       &:last-child {
-         --button-border-radius: 10px 50px 50px 10px;
+         --button-border-radius: 5px 5px 30px 30px;
+      }
+   }
+
+   @include breakpoint("tablet") {
+      grid-template-columns: 1fr 1fr;
+
+      button {
+         &:first-child {
+            --button-border-radius: 50px 10px 10px 50px;
+         }
+         &:last-child {
+            --button-border-radius: 10px 50px 50px 10px;
+         }
       }
    }
 }

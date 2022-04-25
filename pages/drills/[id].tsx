@@ -1,17 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import EditActions from "components/EditActions";
-import GoBackButton from "components/GoBackButton";
-import ModalAdd from "components/Modal/ModalAdd/ModalAdd";
 import styles from "./Style.module.scss";
 import form from "components/Form/Form.module.scss";
-import ListItem from "components/ListItem/ListItem";
-import ModalSaving from "components/Modal/ModalSaving/ModalSaving";
+
 import Button from "components/Button/Button";
-import ModalConfirmDelete from "components/Modal/ModalConfirmDelete/ModalConfirmDelete";
 import Modal from "components/Modal/Modal";
 import { useRouter } from "next/router";
-import { faLightbulb } from "@fortawesome/free-solid-svg-icons";
+import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 
 function Workout({ workout }) {
    const [name, setName] = useState("");
@@ -69,15 +64,15 @@ function Workout({ workout }) {
    };
 
    // Delete workout
-   const deleteWorkout = async (workoutId) => {
+   const deleteDrill = async (drillId) => {
       //change deleting state
       setDeleting(true);
 
       try {
          // Delete workout
-         await fetch("/api/workouts", {
+         await fetch("/api/drills", {
             method: "DELETE",
-            body: workoutId,
+            body: drillId,
          });
 
          // reset the deleting state
@@ -114,54 +109,6 @@ function Workout({ workout }) {
                   />
                </div>
 
-               <div className={form.inputs}>
-                  <div className={form.inputsInner}>
-                     <label htmlFor="warmup">Drills</label>
-
-                     <Modal
-                        onClick={addDrill}
-                        data={drills}
-                        text="Add drill"
-                        component="modal_add"
-                     />
-                  </div>
-
-                  {drillIds.length > 0 && (
-                     <ul className={form.drillsList}>
-                        <li>
-                           <div></div>
-                           <div>Name</div>
-                           <div>Rounds</div>
-                           <div>Minuets</div>
-                           <div></div>
-                        </li>
-
-                        {drillIds &&
-                           drillIds.length > 0 &&
-                           drillIds.map((drill, index) => (
-                              <ListItem
-                                 key={`${drill.id}-${index}`}
-                                 index={index}
-                                 drill={drill}
-                                 onChange={updateDrill}
-                                 removeDrill={() => removeDrill}
-                              />
-                           ))}
-                     </ul>
-                  )}
-               </div>
-
-               {/* <div className={form.inputs}>
-                  <label htmlFor="warmup">Warmup</label>
-                  <ul>
-                     {item.warmup &&
-                        item.warmup.length > 0 &&
-                        item.warmup.map((id) => (
-                           <ListItem items={items} type="warmup" id={id} key={id} />
-                        ))}
-                  </ul>
-               </div> */}
-
                <div className={form.buttons}>
                   {/* <Button
                      onClick={updateWorkout}
@@ -171,19 +118,30 @@ function Workout({ workout }) {
                   <button type="submit">submitx</button>
 
                   <Button
-                     onClick={() => deleteWorkout(workout.id)}
+                     onClick={() => deleteDrill(workout.id)}
                      text={"Delete workout"}
                      color={"red"}
                   />
                </div>
 
-               {/* <span className={form.timestamp}>Edited: {workout.added}</span> */}
+               <div className="form-buttons">
+                  <ButtonSubmit text={"Save drill"} color={"green"} />
 
-               {/* {apiState.message.length > 0 && <ModalSaving state={apiState} />} */}
+                  <Button
+                     onClick={() => deleteDrill(workout.id)}
+                     text={"Delete workout"}
+                     color={"red"}
+                  />
+               </div>
 
-               {/* {confirmDelete.length > 0 && (
-                  <ModalConfirmDelete onClick={() => confirmDelete()} />
-               )} */}
+               <div className="form-meta">
+                  <span>
+                     <b>Added:</b> {workout.added}
+                  </span>
+                  <span>
+                     <b>Updated:</b> {workout.updated}
+                  </span>
+               </div>
             </form>
          </div>
       </div>

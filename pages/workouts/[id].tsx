@@ -2,13 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import styles from "./Style.module.scss";
 // import form from "components/Form/Form.module.scss";
-import ListItem from "components/ListItem/ListItem";
 import Button from "components/Button/Button";
 import Modal from "components/Modal/Modal";
 import { useRouter } from "next/router";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
-import ModalAdd from "components/Modal/ModalAdd/ModalAdd";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
+import ListItem from "components/ListItem/ListItem";
 
 function Workout({ drillsData, workout }) {
    const [name, setName] = useState(workout.name);
@@ -78,7 +77,7 @@ function Workout({ drillsData, workout }) {
 
          setTimeout(function () {
             setSaving(false);
-         }, 500);
+         }, 600);
       } else {
          return setError(data.message);
       }
@@ -107,6 +106,7 @@ function Workout({ drillsData, workout }) {
          <div className="form-container-inputs">
             <label htmlFor="name">Name</label>
             <input
+               autoFocus
                type="text"
                value={name}
                onChange={(e) => setName(e.target.value)}
@@ -135,7 +135,9 @@ function Workout({ drillsData, workout }) {
                />
             </div>
 
-            {drills.length > 0 && (
+            {/* <FormDrillsList data={drills} /> */}
+
+            {drills.length > 0 ? (
                <ul className={styles.drillsList}>
                   <li>
                      <div></div>
@@ -155,6 +157,10 @@ function Workout({ drillsData, workout }) {
                            removeDrill={removeDrill}
                         />
                      ))}
+               </ul>
+            ) : (
+               <ul className={styles.drillsList}>
+                  <li>no drills</li>
                </ul>
             )}
          </div>
@@ -189,7 +195,13 @@ function Workout({ drillsData, workout }) {
             </span>
          </div>
 
-         {saving && <ApiOverlay text={message} component="saving" />}
+         {saving && (
+            <ApiOverlay
+               text={message}
+               requestState={saving}
+               component="saving"
+            />
+         )}
       </form>
    );
 }

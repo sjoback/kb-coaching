@@ -1,8 +1,10 @@
+@import "/styles/mixins";
+
 .drillsList {
    width: 100%;
    margin: 0;
    display: grid;
-   gap: 10px;
+   gap: 5px;
    background-color: var(--color-main-gray);
    border-radius: 40px;
    padding: 20px;
@@ -11,7 +13,11 @@
       font-size: 14px;
       font-weight: 600;
       display: grid;
-      grid-template-columns: 60px 1fr 80px 80px 60px;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      @include breakpoint("tablet") {
+         grid-template-columns: 60px 1fr 100px 100px 60px;
+      }
 
       gap: 10px;
       padding: 7.5px;
