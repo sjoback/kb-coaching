@@ -1,19 +1,19 @@
 const { connectToDatabase } = require("/lib/mongodb");
 const ObjectId = require("mongodb").ObjectId;
 
-async function getWorkouts(req, res) {
+async function getDrills(req, res) {
    try {
       // connect to the database
       let { db } = await connectToDatabase();
-      // fetch the workouts
-      let workouts = await db
-         .collection("workouts")
+      // fetch the posts
+      let drills = await db
+         .collection("drills")
          .find({})
-         .sort({ added: 1 })
+         .sort({ added: -1 })
          .toArray();
 
       return res.json({
-         message: JSON.parse(JSON.stringify(workouts)),
+         message: JSON.parse(JSON.stringify(drills)),
          success: true,
       });
    } catch (error) {
@@ -26,15 +26,13 @@ async function getWorkouts(req, res) {
    }
 }
 
-async function addWorkout(req, res) {
+async function addDrill(req, res) {
    try {
       // connect to the database
       let { db } = await connectToDatabase();
       // add the post
-      await db.collection("workouts").insertOne(JSON.parse(req.body));
+      await db.collection("drills").insertOne(JSON.parse(req.body));
       // return a message
-      console.log(res);
-
       return res.json({
          message: "Workout added successfully",
          success: true,
@@ -49,22 +47,13 @@ async function addWorkout(req, res) {
 }
 
 export default async function handler(req, res) {
-   // switch the methods
    switch (req.method) {
       case "GET": {
-         return getWorkouts(req, res);
+         return getDrills(req, res);
       }
 
       case "POST": {
-         return addWorkout(req, res);
+         return addDrill(req, res);
       }
-
-      // case "PUT": {
-      //    return updateWorkout(req, res);
-      // }
-
-      // case "DELETE": {
-      //    return deleteWorkout(req, res);
-      // }
    }
 }

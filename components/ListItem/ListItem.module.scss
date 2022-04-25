@@ -2,4 +2,15 @@
    background-color: var(--color-blue);
    background-color: #b4bfcb;
    border-radius: 30px;
+
+   .buttonDelete {
+      border-radius: 25px 5px 5px 25px;
+   }
+}
+
+.name {
+   color: #fff;
+   padding-left: 10px;
+   display: flex;
+   align-items: center;
 }

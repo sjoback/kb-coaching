@@ -1,12 +1,13 @@
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import GoBackButton from "components/GoBackButton";
 import styles from "./Style.module.scss";
 import { useState } from "react";
-import ModalAdd from "components/Modal/ModalAdd/ModalAdd";
+import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 
 function AddWorkout() {
    const [name, setName] = useState("");
-   // const [content, setContent] = useState('');
+   const [note, setNote] = useState("");
+
    const [message, setMessage] = useState("");
    const [error, setError] = useState("");
 
@@ -17,90 +18,62 @@ function AddWorkout() {
       setError("");
       // setMessage('');
 
-      // fields check
       if (!name) return setError("All fields are required");
 
-      // post structure
-      let post = {
-         name,
+      let workout = {
+         name: name,
+         note: note,
          published: false,
          createdAt: new Date().toISOString(),
       };
-      // save the post
+
       let response = await fetch("/api/workouts", {
          method: "POST",
-         body: JSON.stringify(post),
+         body: JSON.stringify(workout),
       });
 
-      // get the data
       let data = await response.json();
+      console.log(data);
 
       if (data.success) {
-         // reset the fields
-         setName("");
-
-         // set the message
-         return setMessage(data.message);
+         return router.push(router.asPath.replace("/add", ""));
       } else {
-         // set the error
          return setError(data.message);
       }
    };
-   // const saveWorkout = async () => {
-   //    const response = await fetch("/api/workouts", {
-   //       method: "POST",
-   //       body: JSON.stringify({
-   //          name: name,
-   //          comment: comment,
-   //          drills: [],
-   //          warmup: [],
-   //          mitts: [],
-   //       }),
-   //       headers: {
-   //          "Content-Type": "application/json",
-   //       },
-   //    });
-
-   //    const data = await response.json();
-   // };
 
    return (
-      <div className={styles.wrapper}>
-         <GoBackButton />
+      <form onSubmit={handleWorkout} className="form-container">
+         <h1>Add workout</h1>
 
-         <form onSubmit={handleWorkout} className={styles.form}>
-            <h1>new workout</h1>
+         <div className="form-container-inputs">
+            <label htmlFor="name">Name</label>
+            <input
+               autoFocus
+               placeholder="E.g: Dutch slip 'n rip"
+               name="name"
+               type="text"
+               value={name}
+               onChange={(e) => setName(e.target.value)}
+            />
+         </div>
 
-            <div className={styles.formContainer}>
-               <label htmlFor="name">Name</label>
-               <input
-                  placeholder="E.g: Dutch slip 'n rip"
-                  name="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-               />
-            </div>
+         <div className="form-container-inputs">
+            <label htmlFor="name">Note</label>
+            <textarea
+               placeholder="Note"
+               name="note"
+               value={note}
+               onChange={(e) => setNote(e.target.value)}
+            />
+         </div>
 
-            {/* <div className={styles.formContainer}>
-               <label htmlFor="comment">Comment</label>
-               <textarea
-                  name="comment"
-                  placeholder="E.g: This is a good for etc etc.."
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-               />
-            </div> */}
+         <div className="form-container-inputs">
+            {/* <ModalAdd data={drills} add={handleAddDrill} /> */}
+         </div>
 
-            <div className={styles.formContainer}>
-               {/* <ModalAdd data={drills} add={handleAddDrill} /> */}
-            </div>
-
-            <div>
-               <button type="submit">Save workout</button>
-            </div>
-         </form>
-      </div>
+         <ButtonSubmit text={"Add workout"} color={"green"} />
+      </form>
    );
 }
 

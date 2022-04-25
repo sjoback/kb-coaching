@@ -4,7 +4,7 @@
    padding: var(--button-padding);
    transition: 0.15s ease-in-out;
    border: 0;
-   border-radius: 30px;
+   border-radius: var(--button-border-radius);
    letter-spacing: 0.5px;
    font-weight: 700;
    text-transform: uppercase;
@@ -55,7 +55,7 @@
    --button-color: var(--color-white);
 
    &:hover {
-      // --button-background: var(--color-red-hover);
+      --button-background-hover: var(--color-green-hover);
    }
 }
 

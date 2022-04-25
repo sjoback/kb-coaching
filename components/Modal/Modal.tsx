@@ -1,19 +1,62 @@
-import { Component } from "react";
+import Button from "components/Button/Button";
+import { Component, useEffect, useState } from "react";
 import ModalAdd from "./ModalAdd/ModalAdd";
 import ModalExpand from "./ModalExpand/ModalExpand";
 
-function Modal({ onClick, data, text, component }) {
+function Modal(props) {
+   const [open, toggleOpen] = useState(false);
+
    const Components = {
-      modal_add: ModalAdd,
-      modal_expand: ModalExpand,
+      add: ModalAdd,
+      expand: ModalExpand,
    };
 
-   if (typeof Components[component] !== "undefined") {
-      const Component = Components[component];
-      return <Component text={text} data={data} onClick={onClick} />;
-   } else {
-      return <p>{component} is not yet defined.</p>;
-   }
+   const Component = Components[props.component];
+
+   // Enable ESC for closing modal
+   useEffect(() => {
+      const close = (e) => {
+         if (e.keyCode === 27) {
+            toggleOpen(false);
+         }
+      };
+      window.addEventListener("keydown", close);
+      return () => window.removeEventListener("keydown", close);
+   }, []);
+
+   return (
+      <div className="modal">
+         {open ? (
+            <div className="modal-open">
+               <div
+                  onClick={() => toggleOpen(false)}
+                  className="modal-open-overlay"
+               />
+               <div className="modal-open-content modal-add">
+                  {typeof Components[props.component] == "undefined" ? (
+                     <p>{props.component} is undefined</p>
+                  ) : (
+                     <Component
+                        data={props.data}
+                        onClick={props.onClick}
+                        onChange={props.onChange}
+                     />
+                  )}
+               </div>
+            </div>
+         ) : (
+            ""
+         )}
+
+         <Button
+            onClick={() => toggleOpen(true)}
+            text={props.text}
+            color={"green"}
+            size={"sm"}
+            component="default"
+         />
+      </div>
+   );
 }
 
 export default Modal;

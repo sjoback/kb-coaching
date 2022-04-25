@@ -1,33 +1,46 @@
-.wrapper {
-   position: relative;
+.drillsList {
+   width: 100%;
+   margin: 0;
+   display: grid;
+   gap: 10px;
+   background-color: var(--color-main-gray);
+   border-radius: 40px;
+   padding: 20px;
 
-   .form {
-      padding: 2rem;
-      border: 1px solid #e6e6e6;
-      border-radius: 10px;
-      width: 600px;
-      max-width: 100%;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-      gap: 10px;
+   li {
+      font-size: 14px;
+      font-weight: 600;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 60px 1fr 80px 80px 60px;
 
-      h1 {
-         margin-top: 0;
+      gap: 10px;
+      padding: 7.5px;
+
+      div:first-child {
+         display: flex;
+         align-items: center;
+         color: var(--color-white);
       }
 
-      .formContainer {
-         gap: 10px;
-         display: grid;
-         grid-template-columns: 1fr;
+      input {
+         --input-padding: 5px 15px;
+         --input-border-radius: 5px;
+         --input-color: #fff;
+         font-size: 20px;
+         background-color: #96a6b6;
       }
    }
 }
 
-.container {
-   position: relative;
-}
+.inputsInner {
+   margin-bottom: 10px;
+   display: grid;
+   grid-template-columns: 1fr 140px;
+   width: 100%;
 
-.modal {
-   position: absolute;
+   label {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: -8px !important;
+   }
 }
