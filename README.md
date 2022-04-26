@@ -1,6 +1,12 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/58f16a0a-15da-4d0b-a2c4-b1bdf389474a/deploy-status)](https://app.netlify.com/sites/kb-coach/deploys)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# KB-COACHING
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with a [MongoDB](https://www.mongodb.com/) connection.
+
+## IDEA
+
+When I'm not coding or googling I'm coaching in kickboxing. I was using the notes on my iPhone to create and manage every kickboxing workout. So rather than using that app I wanted to create a webapp of my own, customized to my liking, whilst also increasing my experience with NextJS.
 
 ## Getting Started
 
