@@ -14,8 +14,17 @@ First, change the file `.env.example` to `.env` and change to variables to:
 
 ```
 MONGODB_URI="mongodb+srv://sjoback:Cxkiwn12345@cluster0.ldupk.mongodb.net/test?retryWrites=true&w=majority"
+```
+
+```
 DB_NAME="kb-coaching"
+```
+
+```
 DEV_URL="http://localhost:3000"
+```
+
+```
 PROD_URL="https://kb-coach.netlify.app"
 ```
 
