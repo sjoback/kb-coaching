@@ -34,4 +34,4 @@ Second, run the development server and enjoy:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser of choiche, preferably [Chrome](https://www.google.com/chrome/), to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser of choiche, preferably [Chrome](https://www.google.com/chrome/) :sunglasses:, to see the result.
