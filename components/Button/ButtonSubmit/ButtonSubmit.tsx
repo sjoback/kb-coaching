@@ -1,4 +1,6 @@
 import classnames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 
 function ButtonSubmit({
    text,
@@ -15,6 +17,10 @@ function ButtonSubmit({
 
    return (
       <button type="submit" className={classnames(buttonClasses)}>
+         <FontAwesomeIcon
+            icon={faFloppyDisk}
+            style={{ fontSize: 20, color: "#fff" }}
+         />
          {text}
       </button>
    );

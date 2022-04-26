@@ -1,6 +1,7 @@
 import classnames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function ButtonExpand({ onClick, text, classes }) {
+function ButtonExpand({ onClick, icon, text, classes }) {
    return (
       <button
          onClick={() => {
@@ -9,6 +10,7 @@ function ButtonExpand({ onClick, text, classes }) {
          type="button"
          className={classnames(classes)}
       >
+         {icon}
          {text}
       </button>
    );

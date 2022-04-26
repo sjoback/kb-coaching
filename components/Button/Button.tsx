@@ -1,25 +1,16 @@
 import classnames from "classnames";
+
+// Types
 import ButtonDefault from "./ButtonDefault/ButtonDefault";
 import ButtonDelete from "./ButtonDelete/ButtonDelete";
 import ButtonExpand from "./ButtonExpand/ButtonExpand";
 import ButtonLink from "./ButtonLink/ButtonLink";
 
-function Button({
-   onClick = () => {},
-   text,
-   size = "md",
-   customSize = [],
-   color = "default",
-   type = "default",
-   align = "center",
-   component = "default",
-   borderRadius = [],
-   link = "",
-}) {
+function Button({ text, onClick, size, color, component, link }) {
    const buttonColor = `btn-${color}`;
-   const buttonAlign = `btn-${align}`;
-   const buttonSize = customSize.length > 0 ? `btn-custom` : `btn-${size}`;
-   const buttonClasses = [buttonSize, buttonColor, buttonAlign];
+
+   const buttonSize = `btn-${size}`;
+   const buttonClasses = [buttonSize, buttonColor];
 
    const Components = {
       default: ButtonDefault,

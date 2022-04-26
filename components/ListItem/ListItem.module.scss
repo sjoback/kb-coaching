@@ -1,10 +1,26 @@
 .container {
+   display: grid;
+   grid-template-columns: 40px 1fr;
+   padding: 7.5px 20px 7.5px 7.5px;
+   gap: 20px;
+   font-size: 16px;
+   position: relative;
+
    background-color: var(--color-blue);
-   background-color: #b4bfcb;
    border-radius: 30px;
 
+   .containerInner {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      color: #fff;
+   }
+
    .buttonDelete {
-      border-radius: 25px 5px 5px 25px;
+      --button-padding: 10px;
+      border-radius: 50px;
+      display: flex;
+      justify-content: center;
    }
 }
 

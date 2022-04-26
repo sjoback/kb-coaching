@@ -43,13 +43,11 @@ async function updateWorkout(req, res) {
          }
       );
 
-      // return a message
       return res.json({
          message: "Workout updated successfully",
          success: true,
       });
    } catch (error) {
-      // return an error
       return res.json({
          message: new Error(error).message,
          success: false,
@@ -59,21 +57,18 @@ async function updateWorkout(req, res) {
 
 async function deleteWorkout(req, res) {
    try {
-      // Connecting to the database
       let { db } = await connectToDatabase();
 
-      // Deleting the post
       await db.collection("workouts").deleteOne({
-         _id: new ObjectId(req.body),
+         _id: new ObjectId(req.query.id),
       });
 
-      // returning a message
       return res.json({
          message: "Workout deleted successfully",
          success: true,
       });
+      console.log(res);
    } catch (error) {
-      // returning an error
       return res.json({
          message: new Error(error).message,
          success: false,
