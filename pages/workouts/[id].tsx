@@ -203,7 +203,7 @@ function Workout({ drillsData, workout }) {
    );
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
    let dev = process.env.NODE_ENV == "development";
    let { DEV_URL, PROD_URL } = process.env;
 
@@ -224,43 +224,28 @@ export async function getStaticProps({ params }) {
    };
 }
 
-export function getAllWorkoutIds(paths) {
-   // const fileNames = fs.readdirSync(postsDirectory);
+// export function getAllWorkoutIds(paths) {
+//    return paths.map((path) => {
+//       return {
+//          params: {
+//             id: path._id,
+//          },
+//       };
+//    });
+// }
 
-   // Returns an array that looks like this:
-   // [
-   //   {
-   //     params: {
-   //       id: 'ssg-ssr'
-   //     }
-   //   },
-   //   {
-   //     params: {
-   //       id: 'pre-rendering'
-   //     }
-   //   }
-   // ]
-   return paths.map((path) => {
-      return {
-         params: {
-            id: path._id,
-         },
-      };
-   });
-}
+// export async function getStaticPaths() {
+//    let dev = process.env.NODE_ENV == "development";
+//    let { DEV_URL, PROD_URL } = process.env;
 
-export async function getStaticPaths() {
-   let dev = process.env.NODE_ENV == "development";
-   let { DEV_URL, PROD_URL } = process.env;
+//    let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/workouts`);
+//    const data = await response.json();
 
-   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/workouts`);
-   const data = await response.json();
-
-   const paths = getAllWorkoutIds(data["message"]);
-   return {
-      paths,
-      fallback: false,
-   };
-}
+//    const paths = getAllWorkoutIds(data["message"]);
+//    return {
+//       paths,
+//       fallback: false,
+//    };
+// }
 
 export default Workout;
