@@ -6,11 +6,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## IDEA
 
-When I'm not coding or googling I'm coaching in kickboxing. I was using the notes on my iPhone to create and manage every kickboxing workout, which as you can imagine got very tiresome. So, rather than using notes I decided to create my own webapp, customized to my liking, whilst also increasing my experience with NextJS.
+When I'm not coding or googling I'm a coach in kickboxing. I was using the notes on my iPhone to create and manage every kickboxing workout, which as you can imagine got very tiresome. So, rather than using notes I decided to create my own webapp, customized to my liking, whilst also increasing my experience with NextJS & Netlify <3
 
 ## Getting Started
 
-First, change the file `.env.example` to `.env` and change to variables to:
+First, change the file `.env.example` to `.env` and change variables to:
 
 ```
 MONGODB_URI="mongodb+srv://sjoback:Cxkiwn12345@cluster0.ldupk.mongodb.net/test?retryWrites=true&w=majority"
@@ -25,7 +25,7 @@ DEV_URL="http://localhost:3000"
 ```
 
 ```
-PROD_URL="https://kb-coach.netlify.app"
+PROD_URL="http://localhost:3000"
 ```
 
 Second, run the development server and enjoy:
