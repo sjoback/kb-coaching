@@ -6,7 +6,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## IDEA
 
-When I'm not coding or googling I'm a coach in kickboxing. I was using the notes on my iPhone to create and manage every kickboxing workout, which as you can imagine got very tiresome. So, rather than using notes I decided to create my own webapp, customized to my liking, whilst also increasing my experience with NextJS & Netlify <3
+When I'm not coding or googling I'm a coach in kickboxing. I was using the notes on my iPhone to create and manage every kickboxing workout, which as you can imagine got very tiresome. So, rather than using notes I decided to create my own webapp, customized to my liking, whilst also increasing my experience with NextJS & Netlify :smiling_face_with_three_hearts:
 
 ## Getting Started
 
