@@ -1,41 +1,12 @@
 @import "/styles/mixins";
 
 .drillsList {
+   background-color: #ebeef1;
    width: 100%;
-   margin: 0;
+   padding: 15px;
+   border-radius: 20px;
    display: grid;
-   gap: 5px;
-   background-color: var(--color-main-gray);
-   border-radius: 40px;
-   padding: 20px;
-
-   li {
-      font-size: 14px;
-      font-weight: 600;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-
-      @include breakpoint("tablet") {
-         grid-template-columns: 60px 1fr 100px 100px 60px;
-      }
-
-      gap: 10px;
-      padding: 7.5px;
-
-      div:first-child {
-         display: flex;
-         align-items: center;
-         color: var(--color-white);
-      }
-
-      input {
-         --input-padding: 5px 15px;
-         --input-border-radius: 5px;
-         --input-color: #fff;
-         font-size: 20px;
-         background-color: #96a6b6;
-      }
-   }
+   gap: 10px;
 }
 
 .inputsInner {
@@ -48,5 +19,11 @@
       display: flex;
       align-items: flex-end;
       margin-bottom: -8px !important;
+   }
+}
+.addButton {
+   button {
+      border-radius: 30px;
+      margin-top: 30px;
    }
 }

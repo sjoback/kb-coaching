@@ -1,78 +1,173 @@
-import router, { useRouter } from "next/router";
-import { useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
+import styles from "./Style.module.scss";
+import Button from "components/Button/Button";
+import Modal from "components/Modal/Modal";
+import { useRouter } from "next/router";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
+import ApiOverlay from "components/ApiOverlay/ApiOverlay";
+import ListItem from "components/ListItem/ListItem";
+import classnames from "classnames";
 
-function AddWorkout() {
+function AddWorkout({ drillsData }) {
    const [name, setName] = useState("");
    const [note, setNote] = useState("");
+   const [drills, setDrills] = useState([]);
+   const [warmups, setWarmups] = useState([]);
+   const [mitts, setMitts] = useState([]);
 
+   const [saving, setSaving] = useState(false);
    const [message, setMessage] = useState("");
    const [error, setError] = useState("");
+   const router = useRouter();
 
-   const handleWorkout = async (e) => {
+   function addDrill(drill) {
+      const newDrills = [...drills, drill];
+      setDrills(newDrills);
+   }
+
+   function updateDrill(value, index, key) {
+      const updatedDrill = drills[index];
+      updatedDrill[key] = value;
+   }
+
+   function removeDrill(drillIndex) {
+      const filteredDrills = drills.filter(
+         (drill, index) => index !== drillIndex
+      );
+      setDrills(filteredDrills);
+   }
+
+   const updateWorkout = async (e) => {
       e.preventDefault();
 
-      setError("");
-      setMessage("");
+      setSaving(true);
+      setMessage("Saving workout..");
 
-      if (!name.length) {
-         return setError("All fields are required");
-         console.log("eror");
-      }
+      if (!name) return setError("All fields are required");
 
-      let workout = {
+      let newWorkout = {
          name: name,
          note: note,
-         added: new Date().toISOString(),
+         drills: drills,
+         warmups: warmups,
+         mitts: mitts,
          edited: "",
+         added: new Date().toISOString(),
       };
 
-      let response = await fetch("/api/workouts", {
+      let response = await fetch(`/api/workouts`, {
          method: "POST",
-         body: JSON.stringify(workout),
+         body: JSON.stringify(newWorkout),
       });
 
       let data = await response.json();
-      console.log(data);
 
       if (data.success) {
-         return router.push(router.asPath.replace("/add", ""));
+         setMessage(data.message);
+
+         setTimeout(function () {
+            setSaving(false);
+            router.push(`/workouts/${data.id}`);
+         }, 600);
       } else {
          return setError(data.message);
       }
    };
 
    return (
-      <form onSubmit={handleWorkout} className="form-container">
+      <form onSubmit={updateWorkout} className="form-container">
          <div className="form-container-inputs">
             <label htmlFor="name">Name</label>
             <input
                autoFocus
-               placeholder="E.g: Dutch slip 'n rip"
-               name="name"
                type="text"
+               placeholder="name"
                value={name}
                onChange={(e) => setName(e.target.value)}
             />
          </div>
 
          <div className="form-container-inputs">
-            <label htmlFor="name">Note</label>
+            <label htmlFor="note">Note</label>
             <textarea
-               placeholder="Note"
                name="note"
+               placeholder="note"
                value={note}
                onChange={(e) => setNote(e.target.value)}
             />
          </div>
 
          <div className="form-container-inputs">
-            {/* <ModalAdd data={drills} add={handleAddDrill} /> */}
+            <div className={styles.inputsInner}>
+               <label htmlFor="warmup">Drills</label>
+               <Modal
+                  component="add"
+                  onClick={addDrill}
+                  data={drillsData}
+                  text="Add drill"
+                  size="add"
+               />
+            </div>
+
+            {drills.length > 0 ? (
+               <ul className={styles.drillsList}>
+                  {drills.length > 0 &&
+                     drills.map((drill, index) => (
+                        <ListItem
+                           key={`${drill.name}-${index}`}
+                           index={index}
+                           drill={drill}
+                           removeDrill={removeDrill}
+                        />
+                     ))}
+               </ul>
+            ) : (
+               <ul className={styles.drillsList}>
+                  <li>no drills</li>
+               </ul>
+            )}
          </div>
 
-         <ButtonSubmit text={"Add workout"} color={"green"} />
+         {/* <div className={form.inputs}>
+                  <label htmlFor="warmup">Warmup</label>
+                  <ul>
+                     {item.warmup &&
+                        item.warmup.length > 0 &&
+                        item.warmup.map((id) => (
+                           <ListItem items={items} type="warmup" id={id} key={id} />
+                        ))}
+                  </ul>
+               </div> */}
+
+         <div className={classnames(styles.addButton, "form-buttons")}>
+            <ButtonSubmit text={"Save workout"} color={"green"} />
+         </div>
+
+         {saving && (
+            <ApiOverlay
+               text={message}
+               requestState={saving}
+               component="saving"
+            />
+         )}
       </form>
    );
+}
+
+export async function getServerSideProps({ params }) {
+   let dev = process.env.NODE_ENV == "development";
+   let { DEV_URL, PROD_URL } = process.env;
+
+   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/drills`);
+
+   const data = await response.json();
+
+   return {
+      props: {
+         drillsData: data["message"],
+      },
+   };
 }
 
 export default AddWorkout;

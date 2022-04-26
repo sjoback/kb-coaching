@@ -2,7 +2,7 @@
 
 const nextConfig = {
    reactStrictMode: true,
-   target: "serverless",
+   // target: "serverless",
    // async redirects() {
    //    return [
    //       {

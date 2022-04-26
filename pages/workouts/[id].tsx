@@ -8,10 +8,11 @@ import { useRouter } from "next/router";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 import ListItem from "components/ListItem/ListItem";
+import ButtonDelete from "components/Button/ButtonDelete/ButtonDelete";
 
 function Workout({ drillsData, workout }) {
    const [name, setName] = useState(workout.name);
-   const [comment, setComment] = useState(workout.comment);
+   const [note, setNote] = useState(workout.comment);
    const [drills, setDrills] = useState(workout.drills);
    const [warmups, setWarmups] = useState(workout.warmups);
    const [mitts, setMitts] = useState(workout.mitts);
@@ -23,15 +24,7 @@ function Workout({ drillsData, workout }) {
    const router = useRouter();
 
    function addDrill(drill) {
-      const drillToAdd = {
-         id: drill.id,
-         name: drill.name,
-         rounds: 1,
-         round_time: 1,
-         notes: "",
-      };
-
-      const newDrills = [...drills, drillToAdd];
+      const newDrills = [...drills, drill];
       setDrills(newDrills);
    }
 
@@ -48,6 +41,8 @@ function Workout({ drillsData, workout }) {
    }
 
    const updateWorkout = async (e) => {
+      console.log("updae");
+
       e.preventDefault();
 
       setSaving(true);
@@ -57,7 +52,7 @@ function Workout({ drillsData, workout }) {
 
       let updatedWorkout = {
          name: name,
-         comment: comment,
+         note: note,
          drills: drills,
          warmups: warmups,
          mitts: mitts,
@@ -90,12 +85,9 @@ function Workout({ drillsData, workout }) {
             method: "DELETE",
          });
 
-         setDeleting(false);
-
-         // reload the page
-         return router.push(router.asPath);
+         return router.push("/workouts");
+         // setDeleting(false);
       } catch (error) {
-         // stop deleting state
          return setDeleting(false);
       }
    };
@@ -113,12 +105,12 @@ function Workout({ drillsData, workout }) {
          </div>
 
          <div className="form-container-inputs">
-            <label htmlFor="comment">Comment</label>
+            <label htmlFor="note">Note</label>
             <textarea
-               name="comment"
-               placeholder="Comment"
-               value={comment}
-               onChange={(e) => setComment(e.target.value)}
+               name="note"
+               placeholder="note"
+               value={note}
+               onChange={(e) => setNote(e.target.value)}
             />
          </div>
 
@@ -136,21 +128,12 @@ function Workout({ drillsData, workout }) {
 
             {drills.length > 0 ? (
                <ul className={styles.drillsList}>
-                  <li>
-                     <div></div>
-                     <div></div>
-                     <div>Rounds</div>
-                     <div>Minuets</div>
-                     <div></div>
-                  </li>
-
                   {drills.length > 0 &&
                      drills.map((drill, index) => (
                         <ListItem
                            key={`${drill.name}-${index}`}
                            index={index}
                            drill={drill}
-                           onChange={updateDrill}
                            removeDrill={removeDrill}
                         />
                      ))}
@@ -176,10 +159,9 @@ function Workout({ drillsData, workout }) {
          <div className="form-buttons">
             <ButtonSubmit text={"Save workout"} color={"green"} />
 
-            <Button
+            <ButtonDelete
                onClick={() => deleteWorkout(workout.id)}
                text={"Delete workout"}
-               color={"red"}
             />
          </div>
 
