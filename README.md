@@ -10,8 +10,7 @@ When I'm not coding or googling I'm coaching in kickboxing. I was using the note
 
 ## Getting Started
 
-First, change `.env.example` to `.env`.
-Then edit the file as follows:
+First, change the file `.env.example` to `.env` and change to variables to:
 
 ```
 MONGODB_URI="mongodb+srv://sjoback:Cxkiwn12345@cluster0.ldupk.mongodb.net/test?retryWrites=true&w=majority"
@@ -20,16 +19,10 @@ DEV_URL="http://localhost:3000"
 PROD_URL="https://kb-coach.netlify.app"
 ```
 
-After
-
-Second, run the development server:
+Second, run the development server and enjoy:
 
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/workouts](http://localhost:3000/api/workouts)..
