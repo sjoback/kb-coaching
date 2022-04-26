@@ -20,7 +20,7 @@ function Workouts({ data }) {
    );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
    let { db } = await connectToDatabase();
 
    let workouts = await db
