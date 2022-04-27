@@ -1,26 +1,34 @@
 [
     {
-        "id": "4d67d211-1800-4b66-a034-9721e7128ce9",
-        "name": "drill 1",
-        "information": "this isa information",
-        "added": "2022-03-17T19:58:58.281Z",
-        "updated": "2022-03-17T19:58:58.281Z"
+        "id": "7a665e51-1f2c-44dd-974b-af2f9392cb84",
+        "name": "123",
+        "note": "",
+        "images": "",
+        "added": "2022-04-27T14:52:30.640Z",
+        "updated": ""
     },
     {
-        "id": "0faec7c9-129e-489a-81aa-0c6496b12a90",
-        "name": "x",
-        "information": "x",
-        "images": [],
-        "added": "2022-04-14T11:45:40.954Z",
-        "updated": "2022-04-14T11:45:40.954Z"
+        "id": "a8ff3e89-ec6a-41f7-8b52-bed01971c12e",
+        "name": "123",
+        "note": "",
+        "images": "",
+        "added": "2022-04-27T14:52:32.759Z",
+        "updated": ""
     },
     {
-        "id": "0e2e4f2a-4bce-4565-b2b4-be0b6f05a4be",
-        "name": "Bensparring: 1 teknik",
-        "information": "Elever kastar varsin teknik, utan skydd",
+        "id": "885b3974-8d96-405d-a2fa-5081321b948b",
+        "name": "123",
+        "note": "123",
         "images": [],
-        "added": "2022-04-14T11:55:01.913Z",
-        "updated": "2022-04-14T11:55:01.913Z",
-        "warmup": []
+        "added": "2022-04-27T14:53:13.519Z",
+        "updated": ""
+    },
+    {
+        "id": "345ccfa1-c4c8-4181-9dcd-abc1720d5b48",
+        "name": "asd",
+        "note": "asd",
+        "images": [],
+        "added": "2022-04-27T14:53:27.090Z",
+        "updated": ""
     }
 ]

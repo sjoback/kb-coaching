@@ -1,92 +1,68 @@
-const { connectToDatabase } = require("/lib/mongodb");
-const ObjectId = require("mongodb").ObjectId;
+import drills from "data/drills.json";
+const fs = require("fs");
 
-async function getDrill(req, res) {
-   try {
-      let { db } = await connectToDatabase();
-
-      let drill = await db
-         .collection("drills")
-         .findOne({ _id: new ObjectId(req.query.id) }, {});
-      console.log(drill);
-
-      return res.json({
-         message: JSON.parse(JSON.stringify(drill)),
-         success: true,
-      });
-   } catch (error) {
-      return res.json({
-         message: new Error(error).message,
-         success: false,
-      });
-   }
-}
-
-async function updateDrill(req, res) {
-   try {
-      let { db } = await connectToDatabase();
-
-      // Parse body
-      const jsonBody = JSON.parse(req.body);
-
-      // update the workout
-      await db.collection("drills").updateOne(
-         { _id: new ObjectId(req.query.id) },
-         {
-            $set: {
-               name: jsonBody.name,
-               comment: jsonBody.comment,
-               drills: jsonBody.drills,
-               warmups: jsonBody.warmups,
-               mitts: jsonBody.mitts,
-            },
-         }
-      );
-
-      return res.json({
-         message: "Drill updated successfully",
-         success: true,
-      });
-   } catch (error) {
-      return res.json({
-         message: new Error(error).message,
-         success: false,
-      });
-   }
-}
-
-async function deleteDrill(req, res) {
-   try {
-      let { db } = await connectToDatabase();
-
-      await db.collection("drills").deleteOne({
-         _id: new ObjectId(req.body),
-      });
-
-      return res.json({
-         message: "Drill deleted successfully",
-         success: true,
-      });
-   } catch (error) {
-      return res.json({
-         message: new Error(error).message,
-         success: false,
-      });
-   }
+function saveData(data) {
+   fs.writeFileSync(`data/drills.json`, JSON.stringify(data, null, 4));
 }
 
 export default async function handler(req, res) {
    switch (req.method) {
       case "GET": {
-         return getDrill(req, res);
+         try {
+            const drill = drills.filter((drill) => drill.id == req.query.id);
+
+            return res.json({
+               message: "Drill fetched",
+               response: JSON.parse(JSON.stringify(drill)),
+               success: true,
+            });
+         } catch (error) {
+            return res.json({
+               message: new Error(error).message,
+               success: false,
+            });
+         }
       }
 
       case "PUT": {
-         return updateDrill(req, res);
+         try {
+            const drill = drills.filter((drill) => drill.id == req.query.id);
+            const i = drills.findIndex((n) => n.id === req.query.id);
+            const updatedDrill = { ...drill[0], ...JSON.parse(req.body) };
+
+            drills[i] = updatedDrill;
+
+            saveData(drills);
+
+            return res.json({
+               message: "Drill updated successfully",
+               success: true,
+            });
+         } catch (error) {
+            return res.json({
+               message: new Error(error).message,
+               success: false,
+            });
+         }
       }
 
       case "DELETE": {
-         return deleteDrill(req, res);
+         try {
+            const newDrills = drills.filter(
+               (drill) => drill.id != req.query.id
+            );
+            saveData(newDrills);
+
+            return res.json({
+               message: "Drill deleted successfully",
+               success: true,
+            });
+         } catch (error) {
+            return res.json({
+               message: new Error(error).message,
+               success: false,
+            });
+         }
       }
    }
 }

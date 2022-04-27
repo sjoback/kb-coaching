@@ -28,7 +28,7 @@ export async function getServerSideProps() {
 
    return {
       props: {
-         data: data["message"],
+         data: data["response"],
       },
    };
 }

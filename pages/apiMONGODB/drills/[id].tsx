@@ -1,17 +1,16 @@
 const { connectToDatabase } = require("/lib/mongodb");
 const ObjectId = require("mongodb").ObjectId;
 
-async function getWorkout(req, res) {
+async function getDrill(req, res) {
    try {
       let { db } = await connectToDatabase();
-
-      let workout = await db
-         .collection("workouts")
+      let drill = await db
+         .collection("drills")
          .findOne({ _id: new ObjectId(req.query.id) }, {});
-      console.log(workout);
 
       return res.json({
-         message: JSON.parse(JSON.stringify(workout)),
+         message: "Drill fetched",
+         response: JSON.parse(JSON.stringify(drill)),
          success: true,
       });
    } catch (error) {
@@ -22,13 +21,11 @@ async function getWorkout(req, res) {
    }
 }
 
-async function updateWorkout(req, res) {
+async function updateDrill(req, res) {
    try {
       let { db } = await connectToDatabase();
-
       const jsonBody = JSON.parse(req.body);
-
-      await db.collection("workouts").updateOne(
+      await db.collection("drills").updateOne(
          { _id: new ObjectId(req.query.id) },
          {
             $set: {
@@ -37,13 +34,13 @@ async function updateWorkout(req, res) {
                drills: jsonBody.drills,
                warmups: jsonBody.warmups,
                mitts: jsonBody.mitts,
-               updated: jsonBody.updated,
+               updated: new Date().toISOString(),
             },
          }
       );
 
       return res.json({
-         message: "Workout updated successfully",
+         message: "Drill updated successfully",
          success: true,
       });
    } catch (error) {
@@ -54,19 +51,18 @@ async function updateWorkout(req, res) {
    }
 }
 
-async function deleteWorkout(req, res) {
+async function deleteDrill(req, res) {
    try {
       let { db } = await connectToDatabase();
 
-      await db.collection("workouts").deleteOne({
-         _id: new ObjectId(req.query.id),
+      await db.collection("drills").deleteOne({
+         _id: new ObjectId(req.body),
       });
 
       return res.json({
-         message: "Workout deleted successfully",
+         message: "Drill deleted successfully",
          success: true,
       });
-      console.log(res);
    } catch (error) {
       return res.json({
          message: new Error(error).message,
@@ -78,15 +74,15 @@ async function deleteWorkout(req, res) {
 export default async function handler(req, res) {
    switch (req.method) {
       case "GET": {
-         return getWorkout(req, res);
+         return getDrill(req, res);
       }
 
       case "PUT": {
-         return updateWorkout(req, res);
+         return updateDrill(req, res);
       }
 
       case "DELETE": {
-         return deleteWorkout(req, res);
+         return deleteDrill(req, res);
       }
    }
 }

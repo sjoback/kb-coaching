@@ -8,7 +8,6 @@ function ModalAdd({ onClick, data }) {
 
    const [rounds, setRounds] = useState("");
    const [roundTime, setRoundTime] = useState("");
-   // const [note, setNote] = useState("");
 
    function handleOnClick() {
       const formattedDrill = {
@@ -16,22 +15,10 @@ function ModalAdd({ onClick, data }) {
          rounds: rounds,
          round_time: roundTime,
       };
-      console.log(formattedDrill);
 
       onClick(formattedDrill);
       setState("add");
    }
-
-   // Enable ENTER for handleOnClick
-   // useEffect(() => {
-   //    const click = (e) => {
-   //       if (e.keyCode === 13 && state == "add") {
-   //          handleOnClick();
-   //       }
-   //    };
-   //    window.addEventListener("keydown", click);
-   //    return () => window.removeEventListener("keydown", click);
-   // }, []);
 
    return (
       <div>

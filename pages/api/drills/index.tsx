@@ -1,9 +1,9 @@
-import workouts from "data/workouts.json";
+import drills from "data/drills.json";
 const fs = require("fs");
 import { v4 as uuidv4 } from "uuid";
 
 function saveData() {
-   fs.writeFileSync(`data/workouts.json`, JSON.stringify(workouts, null, 4));
+   fs.writeFileSync(`data/drills.json`, JSON.stringify(drills, null, 4));
 }
 
 export default async function handler(req, res) {
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       case "GET": {
          try {
             return res.json({
-               response: JSON.parse(JSON.stringify(workouts)),
+               response: JSON.parse(JSON.stringify(drills)),
                success: true,
             });
          } catch (error) {
@@ -27,17 +27,16 @@ export default async function handler(req, res) {
 
          try {
             const request = JSON.parse(req.body);
-            const newWorkout = {
+            const newDrill = {
                id: id,
                ...request,
             };
-            workouts.push(newWorkout);
+            drills.push(newDrill);
 
             saveData();
 
             return res.json({
-               id: id,
-               message: "Workout added successfully",
+               message: "Success",
                success: true,
             });
          } catch (error) {

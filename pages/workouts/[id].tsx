@@ -12,7 +12,9 @@ import ButtonDelete from "components/Button/ButtonDelete/ButtonDelete";
 
 function Workout({ drillsData, workout }) {
    const [name, setName] = useState(workout.name);
-   const [note, setNote] = useState(workout.comment);
+   const [note, setNote] = useState(
+      workout.note.length > 0 ? workout.note : ""
+   );
    const [drills, setDrills] = useState(workout.drills);
    const [warmups, setWarmups] = useState(workout.warmups);
    const [mitts, setMitts] = useState(workout.mitts);
@@ -56,7 +58,7 @@ function Workout({ drillsData, workout }) {
          drills: drills,
          warmups: warmups,
          mitts: mitts,
-         updated_at: new Date().toISOString(),
+         updated: new Date().toISOString(),
       };
 
       let response = await fetch(`/api/workouts/${router.query.id}`, {
@@ -71,6 +73,7 @@ function Workout({ drillsData, workout }) {
 
          setTimeout(function () {
             setSaving(false);
+            router.reload();
          }, 600);
       } else {
          return setError(data.message);
@@ -93,7 +96,7 @@ function Workout({ drillsData, workout }) {
    };
 
    return (
-      <form onSubmit={updateWorkout} className="form-container">
+      <form onSubmit={(e) => e.preventDefault()} className="form-container">
          <div className="form-container-inputs">
             <label htmlFor="name">Name</label>
             <input
@@ -157,7 +160,11 @@ function Workout({ drillsData, workout }) {
                </div> */}
 
          <div className="form-buttons">
-            <ButtonSubmit text={"Save workout"} color={"green"} />
+            <ButtonSubmit
+               onClick={updateWorkout}
+               text={"Save workout"}
+               color={"green"}
+            />
 
             <ButtonDelete
                onClick={() => deleteWorkout(workout.id)}
@@ -167,11 +174,13 @@ function Workout({ drillsData, workout }) {
 
          <div className="form-meta">
             <span>
-               <b>Added:</b> {workout.added}
+               <b>Added:</b> {workout.added.split("T")[0]}
             </span>
-            <span>
-               <b>Updated:</b> {workout.updated}
-            </span>
+            {workout.updated && (
+               <span>
+                  <b>Updated:</b> {workout.updated.split("T")[0]}
+               </span>
+            )}
          </div>
 
          {saving && (

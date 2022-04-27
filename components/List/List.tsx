@@ -8,11 +8,11 @@ function List({ items, linkType }) {
             <ul className="link-list">
                {items.map((item) => {
                   return (
-                     <li key={`name + ${item._id}`}>
+                     <li key={`${item.name} + ${item.id}`}>
                         <Button
                            text={item.name}
                            component="link"
-                           link={`/${linkType}/${item._id}`}
+                           link={`/${linkType}/${item.id}`}
                         />
                      </li>
                   );
@@ -20,7 +20,7 @@ function List({ items, linkType }) {
             </ul>
          ) : (
             <div className={styles.empty}>
-               <h2>No workouts added</h2>
+               <h2>No {linkType} added</h2>
             </div>
          )}
       </div>

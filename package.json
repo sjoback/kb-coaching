@@ -20,10 +20,13 @@
       "next": "12.1.0",
       "next-connect": "^0.12.2",
       "react": "17.0.2",
+      "react-calendar": "^3.7.0",
+      "react-datepicker": "^4.7.0",
       "react-dom": "17.0.2",
       "react-router": "^6.3.0",
       "react-router-dom": "^6.3.0",
-      "sass": "^1.49.9"
+      "sass": "^1.49.9",
+      "uuid": "^8.3.2"
    },
    "devDependencies": {
       "@types/node": "^17.0.21",

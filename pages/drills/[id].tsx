@@ -5,39 +5,31 @@ import Button from "components/Button/Button";
 import { useRouter } from "next/router";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
+import ButtonDelete from "components/Button/ButtonDelete/ButtonDelete";
 
 function Drill({ drill }) {
-   const [name, setName] = useState("");
-   const [note, setNote] = useState("");
-   const [images, setImages] = useState("");
+   const [name, setName] = useState(drill.name);
+   const [note, setNote] = useState(drill.note);
+   const [images, setImages] = useState(drill.images);
    const [saving, setSaving] = useState(false);
    const [deleting, setDeleting] = useState(false);
    const [message, setMessage] = useState("");
    const [error, setError] = useState("");
    const router = useRouter();
 
-   useEffect(() => {
-      setName(drill.name);
-      setNote(drill.comment);
-      setImages(drill.images);
-   }, []);
-
    const updateDrill = async (e) => {
       e.preventDefault();
 
       setSaving(true);
-      setMessage("");
-
-      if (!name) return setError("All fields are required");
+      setMessage("Saving..");
 
       let updatedDrill = {
          name: name,
          note: note,
          images: images,
-         updated: new Date().toISOString(),
       };
 
-      let response = await fetch(`/api/workouts/${router.query.id}`, {
+      let response = await fetch(`/api/drills/${router.query.id}`, {
          method: "PUT",
          body: JSON.stringify(updatedDrill),
       });
@@ -46,10 +38,11 @@ function Drill({ drill }) {
 
       if (data.success) {
          setMessage(data.message);
-
          setTimeout(function () {
+            // router.push("/drills");
+            // router.push("/drills");
             setSaving(false);
-         }, 600);
+         }, 1200);
       } else {
          return setError(data.message);
       }
@@ -59,21 +52,22 @@ function Drill({ drill }) {
       setDeleting(true);
 
       try {
-         await fetch("/api/drills", {
+         await fetch(`/api/drills/${router.query.id}`, {
+            // await fetch("/api/drills", {
             method: "DELETE",
-            body: drillId,
+            // body: drillId,
          });
 
          setDeleting(false);
 
-         return router.push(router.asPath);
+         return router.push("/drills");
       } catch (error) {
          return setDeleting(false);
       }
    };
 
    return (
-      <form onSubmit={updateDrill} className="form-container">
+      <form onSubmit={(e) => e.preventDefault()} className="form-container">
          <div className="form-container-inputs">
             <label htmlFor="name">Name</label>
             <input
@@ -95,9 +89,13 @@ function Drill({ drill }) {
          </div>
 
          <div className="form-buttons">
-            <ButtonSubmit text={"Save drill"} color={"green"} />
+            <ButtonSubmit
+               onClick={updateDrill}
+               text={"Save drill"}
+               color={"green"}
+            />
 
-            <Button
+            <ButtonDelete
                onClick={() => deleteDrill(drill.id)}
                text={"Delete drill"}
                color={"red"}
@@ -113,13 +111,7 @@ function Drill({ drill }) {
             </span>
          </div>
 
-         {saving && (
-            <ApiOverlay
-               text={message}
-               requestState={saving}
-               component="saving"
-            />
-         )}
+         {saving && <ApiOverlay message={message} />}
       </form>
    );
 }
@@ -136,7 +128,7 @@ export async function getServerSideProps({ params }) {
 
    return {
       props: {
-         drill: data["message"],
+         drill: data["response"][0],
       },
    };
 }

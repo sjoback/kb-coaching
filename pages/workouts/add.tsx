@@ -1,15 +1,18 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import styles from "./Style.module.scss";
-import Button from "components/Button/Button";
 import Modal from "components/Modal/Modal";
 import { useRouter } from "next/router";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 import ListItem from "components/ListItem/ListItem";
 import classnames from "classnames";
+import DatePicker from "components/DatePicker/DatePicker";
+import { v4 as uuidv4 } from "uuid";
+const id = uuidv4();
 
 function AddWorkout({ drillsData }) {
+   const [date, setDate] = useState("");
    const [name, setName] = useState("");
    const [note, setNote] = useState("");
    const [drills, setDrills] = useState([]);
@@ -38,7 +41,7 @@ function AddWorkout({ drillsData }) {
       setDrills(filteredDrills);
    }
 
-   const updateWorkout = async (e) => {
+   const saveWorkout = async (e) => {
       e.preventDefault();
 
       setSaving(true);
@@ -47,12 +50,14 @@ function AddWorkout({ drillsData }) {
       if (!name) return setError("All fields are required");
 
       let newWorkout = {
+         id: id,
+         date: date,
          name: name,
          note: note,
          drills: drills,
          warmups: warmups,
          mitts: mitts,
-         edited: "",
+         updated: "",
          added: new Date().toISOString(),
       };
 
@@ -67,7 +72,6 @@ function AddWorkout({ drillsData }) {
          setMessage(data.message);
 
          setTimeout(function () {
-            setSaving(false);
             router.push(`/workouts/${data.id}`);
          }, 600);
       } else {
@@ -76,7 +80,12 @@ function AddWorkout({ drillsData }) {
    };
 
    return (
-      <form onSubmit={updateWorkout} className="form-container">
+      <form className="form-container">
+         <div className="form-container-inputs">
+            <label htmlFor="date">Date</label>
+            <DatePicker onChange={setDate} />
+         </div>
+
          <div className="form-container-inputs">
             <label htmlFor="name">Name</label>
             <input
@@ -141,7 +150,11 @@ function AddWorkout({ drillsData }) {
                </div> */}
 
          <div className={classnames(styles.addButton, "form-buttons")}>
-            <ButtonSubmit text={"Save workout"} color={"green"} />
+            <ButtonSubmit
+               onClick={saveWorkout}
+               text={"Save workout"}
+               color={"green"}
+            />
          </div>
 
          {saving && (
@@ -155,17 +168,18 @@ function AddWorkout({ drillsData }) {
    );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps() {
    let dev = process.env.NODE_ENV == "development";
    let { DEV_URL, PROD_URL } = process.env;
 
    let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/drills`);
 
    const data = await response.json();
+   console.log(response);
 
    return {
       props: {
-         drillsData: data["message"],
+         drillsData: data["response"],
       },
    };
 }
