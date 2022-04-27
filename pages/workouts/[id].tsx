@@ -11,7 +11,7 @@ import ListItem from "components/ListItem/ListItem";
 import ButtonDelete from "components/Button/ButtonDelete/ButtonDelete";
 
 function Workout({ drillsData, workout }) {
-   const [name, setName] = useState(workout.name);
+   // const [name, setName] = useState(workout.name);
    const [note, setNote] = useState(workout.note);
    const [drills, setDrills] = useState(workout.drills);
    const [warmups, setWarmups] = useState(workout.warmups);
@@ -48,10 +48,10 @@ function Workout({ drillsData, workout }) {
       setSaving(true);
       setMessage("Saving workout..");
 
-      if (!name) return setError("All fields are required");
+      // if (!name) return setError("All fields are required");
 
       let updatedWorkout = {
-         name: name,
+         // name: name,
          note: note,
          drills: drills,
          warmups: warmups,
@@ -95,7 +95,7 @@ function Workout({ drillsData, workout }) {
 
    return (
       <form onSubmit={(e) => e.preventDefault()} className="form-container">
-         <div className="form-container-inputs">
+         {/* <div className="form-container-inputs">
             <label htmlFor="name">Name</label>
             <input
                autoFocus
@@ -103,7 +103,13 @@ function Workout({ drillsData, workout }) {
                value={name}
                onChange={(e) => setName(e.target.value)}
             />
+         </div> */}
+         <div>
+            <h2>{workout.name}</h2>
+            <br></br>
+            <h3>{workout.date.split("T")[0]}</h3>
          </div>
+
          <div className="form-container-inputs">
             <label htmlFor="note">Note</label>
             <textarea
@@ -113,6 +119,7 @@ function Workout({ drillsData, workout }) {
                onChange={(e) => setNote(e.target.value)}
             />
          </div>
+
          <div className="form-container-inputs">
             {drillsData.length > 0 && (
                <div className={styles.inputsInner}>

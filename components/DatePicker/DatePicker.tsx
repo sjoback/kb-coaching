@@ -24,6 +24,8 @@ function DatePicker({ onChange }) {
 
    // Enable ESC for closing modal
    useEffect(() => {
+      onChange(date);
+
       const close = (e) => {
          if (e.keyCode === 27) {
             toggleOpen(false);

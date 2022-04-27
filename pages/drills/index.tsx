@@ -14,6 +14,8 @@ function Drills({ data }) {
                text="Add new drill"
                component="link"
                link="/drills/add"
+               onClick={false}
+               size={false}
             />
          </div>
       </div>

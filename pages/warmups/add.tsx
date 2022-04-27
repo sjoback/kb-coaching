@@ -20,7 +20,7 @@ function AddDrill() {
       setSaving(true);
       setMessage("Adding..");
 
-      let drill = {
+      let warmup = {
          name: name,
          note: note,
          images: images,
@@ -28,9 +28,9 @@ function AddDrill() {
          updated: "",
       };
 
-      let response = await fetch("/api/drills/add", {
+      let response = await fetch("/api/warmups/add", {
          method: "POST",
-         body: JSON.stringify(drill),
+         body: JSON.stringify(warmup),
       });
 
       let data = await response.json();

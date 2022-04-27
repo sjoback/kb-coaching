@@ -54,6 +54,7 @@ function Modal(props) {
             color={"blue"}
             size={props.size}
             component="default"
+            link={false}
          />
       </div>
    );

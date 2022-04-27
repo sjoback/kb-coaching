@@ -1,5 +1,3 @@
-import classnames from "classnames";
-
 // Types
 import ButtonDefault from "./ButtonDefault/ButtonDefault";
 import ButtonDelete from "./ButtonDelete/ButtonDelete";

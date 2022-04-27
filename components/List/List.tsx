@@ -10,6 +10,9 @@ function List({ items, linkType }) {
                   return (
                      <li key={`${item.name} + ${item.id}`}>
                         <Button
+                           onClick={() => {}}
+                           color="default"
+                           size="sm"
                            text={item.name}
                            component="link"
                            link={`/${linkType}/${item.id}`}
