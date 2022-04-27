@@ -1,24 +1,24 @@
 [
     {
-        "id": "c707ea78-39e6-42bc-9f31-06f33f8c0211",
-        "date": "",
-        "name": "asd",
-        "note": "asd",
+        "id": "76a27163-a3b7-4ec1-923f-4bc24009094c",
+        "date": "2022-04-26T22:00:00.000Z",
+        "name": "1",
+        "note": "1",
         "drills": [
             {
-                "id": "345ccfa1-c4c8-4181-9dcd-abc1720d5b48",
-                "name": "asd",
-                "note": "asd",
+                "id": "7b7c2c43-7cce-456d-89fa-6e33951a4275",
+                "name": "123",
+                "note": "1",
                 "images": [],
-                "added": "2022-04-27T14:53:27.090Z",
+                "added": "2022-04-27T15:14:10.649Z",
                 "updated": "",
-                "rounds": "123",
-                "round_time": "123"
+                "rounds": "1",
+                "round_time": "1"
             }
         ],
         "warmups": [],
         "mitts": [],
-        "updated": "",
-        "added": "2022-04-27T14:54:24.078Z"
+        "updated": "2022-04-27T15:50:37.927Z",
+        "added": "2022-04-27T15:49:44.492Z"
     }
 ]

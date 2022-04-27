@@ -1,92 +1,72 @@
-const { connectToDatabase } = require("/lib/mongodb");
-const ObjectId = require("mongodb").ObjectId;
+import workouts from "data/workouts.json";
+const fs = require("fs");
 
-async function getWorkout(req, res) {
-   try {
-      let { db } = await connectToDatabase();
-
-      let workout = await db
-         .collection("workouts")
-         .findOne({ _id: new ObjectId(req.query.id) }, {});
-      console.log(workout);
-
-      return res.json({
-         message: JSON.parse(JSON.stringify(workout)),
-         success: true,
-      });
-   } catch (error) {
-      return res.json({
-         message: new Error(error).message,
-         success: false,
-      });
-   }
-}
-
-async function updateWorkout(req, res) {
-   try {
-      let { db } = await connectToDatabase();
-
-      const jsonBody = JSON.parse(req.body);
-
-      await db.collection("workouts").updateOne(
-         { _id: new ObjectId(req.query.id) },
-         {
-            $set: {
-               name: jsonBody.name,
-               comment: jsonBody.comment,
-               drills: jsonBody.drills,
-               warmups: jsonBody.warmups,
-               mitts: jsonBody.mitts,
-               updated: jsonBody.updated,
-            },
-         }
-      );
-
-      return res.json({
-         message: "Workout updated successfully",
-         success: true,
-      });
-   } catch (error) {
-      return res.json({
-         message: new Error(error).message,
-         success: false,
-      });
-   }
-}
-
-async function deleteWorkout(req, res) {
-   try {
-      let { db } = await connectToDatabase();
-
-      await db.collection("workouts").deleteOne({
-         _id: new ObjectId(req.query.id),
-      });
-
-      return res.json({
-         message: "Workout deleted successfully",
-         success: true,
-      });
-      console.log(res);
-   } catch (error) {
-      return res.json({
-         message: new Error(error).message,
-         success: false,
-      });
-   }
+function saveData(data) {
+   fs.writeFileSync(`data/workouts.json`, JSON.stringify(data, null, 4));
 }
 
 export default async function handler(req, res) {
    switch (req.method) {
       case "GET": {
-         return getWorkout(req, res);
+         try {
+            const workout = workouts.filter(
+               (workout) => workout.id == req.query.id
+            );
+
+            return res.json({
+               message: "Success",
+               response: JSON.parse(JSON.stringify(workout)),
+               success: true,
+            });
+         } catch (error) {
+            return res.json({
+               message: new Error(error).message,
+               success: false,
+            });
+         }
       }
 
       case "PUT": {
-         return updateWorkout(req, res);
+         try {
+            const workout = workouts.filter(
+               (workout) => workout.id == req.query.id
+            );
+            const i = workouts.findIndex((n) => n.id === req.query.id);
+            const updatedWorkout = { ...workout[0], ...JSON.parse(req.body) };
+
+            workouts[i] = updatedWorkout;
+
+            saveData(workouts);
+
+            return res.json({
+               message: "Success",
+               success: true,
+            });
+         } catch (error) {
+            return res.json({
+               message: new Error(error).message,
+               success: false,
+            });
+         }
       }
 
       case "DELETE": {
-         return deleteWorkout(req, res);
+         try {
+            const newWorkouts = workouts.filter(
+               (workout) => workout.id != req.query.id
+            );
+            saveData(newWorkouts);
+
+            return res.json({
+               message: "Success",
+               success: true,
+            });
+         } catch (error) {
+            return res.json({
+               message: new Error(error).message,
+               success: false,
+            });
+         }
       }
    }
 }

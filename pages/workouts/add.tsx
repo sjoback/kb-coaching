@@ -8,8 +8,6 @@ import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 import ListItem from "components/ListItem/ListItem";
 import classnames from "classnames";
 import DatePicker from "components/DatePicker/DatePicker";
-import { v4 as uuidv4 } from "uuid";
-const id = uuidv4();
 
 function AddWorkout({ drillsData }) {
    const [date, setDate] = useState("");
@@ -50,7 +48,6 @@ function AddWorkout({ drillsData }) {
       if (!name) return setError("All fields are required");
 
       let newWorkout = {
-         id: id,
          date: date,
          name: name,
          note: note,
@@ -61,7 +58,7 @@ function AddWorkout({ drillsData }) {
          added: new Date().toISOString(),
       };
 
-      let response = await fetch(`/api/workouts`, {
+      let response = await fetch(`/api/workouts/add`, {
          method: "POST",
          body: JSON.stringify(newWorkout),
       });

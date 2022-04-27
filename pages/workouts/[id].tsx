@@ -12,9 +12,7 @@ import ButtonDelete from "components/Button/ButtonDelete/ButtonDelete";
 
 function Workout({ drillsData, workout }) {
    const [name, setName] = useState(workout.name);
-   const [note, setNote] = useState(
-      workout.note.length > 0 ? workout.note : ""
-   );
+   const [note, setNote] = useState(workout.note);
    const [drills, setDrills] = useState(workout.drills);
    const [warmups, setWarmups] = useState(workout.warmups);
    const [mitts, setMitts] = useState(workout.mitts);
@@ -73,8 +71,8 @@ function Workout({ drillsData, workout }) {
 
          setTimeout(function () {
             setSaving(false);
-            router.reload();
-         }, 600);
+            // router.reload();
+         }, 1200);
       } else {
          return setError(data.message);
       }
@@ -106,7 +104,6 @@ function Workout({ drillsData, workout }) {
                onChange={(e) => setName(e.target.value)}
             />
          </div>
-
          <div className="form-container-inputs">
             <label htmlFor="note">Note</label>
             <textarea
@@ -116,18 +113,19 @@ function Workout({ drillsData, workout }) {
                onChange={(e) => setNote(e.target.value)}
             />
          </div>
-
          <div className="form-container-inputs">
-            <div className={styles.inputsInner}>
-               <label htmlFor="warmup">Drills</label>
-               <Modal
-                  component="add"
-                  onClick={addDrill}
-                  data={drillsData}
-                  text="Add drill"
-                  size="add"
-               />
-            </div>
+            {drillsData.length > 0 && (
+               <div className={styles.inputsInner}>
+                  <label htmlFor="warmup">Drills</label>
+                  <Modal
+                     component="add"
+                     onClick={addDrill}
+                     data={drillsData}
+                     text="Add drill"
+                     size="add"
+                  />
+               </div>
+            )}
 
             {drills.length > 0 ? (
                <ul className={styles.drillsList}>
@@ -147,7 +145,6 @@ function Workout({ drillsData, workout }) {
                </ul>
             )}
          </div>
-
          {/* <div className={form.inputs}>
                   <label htmlFor="warmup">Warmup</label>
                   <ul>
@@ -158,7 +155,6 @@ function Workout({ drillsData, workout }) {
                         ))}
                   </ul>
                </div> */}
-
          <div className="form-buttons">
             <ButtonSubmit
                onClick={updateWorkout}
@@ -171,7 +167,6 @@ function Workout({ drillsData, workout }) {
                text={"Delete workout"}
             />
          </div>
-
          <div className="form-meta">
             <span>
                <b>Added:</b> {workout.added.split("T")[0]}
@@ -183,13 +178,7 @@ function Workout({ drillsData, workout }) {
             )}
          </div>
 
-         {saving && (
-            <ApiOverlay
-               text={message}
-               requestState={saving}
-               component="saving"
-            />
-         )}
+         {saving && <ApiOverlay message={message} />}
       </form>
    );
 }
@@ -206,11 +195,12 @@ export async function getServerSideProps({ params }) {
 
    const data = await response.json();
    const drillsData = await drillsResponse.json();
+   console.log(drillsData["response"]);
 
    return {
       props: {
-         workout: data["message"],
-         drillsData: drillsData["message"],
+         workout: data["response"][0],
+         drillsData: drillsData["response"],
       },
    };
 }
