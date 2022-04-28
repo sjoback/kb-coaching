@@ -7,8 +7,14 @@
 
    a {
       padding: 20px;
+
       &:hover {
          text-decoration: underline;
+      }
+
+      image {
+         width: 50px;
+         height: 50px;
       }
    }
 }
