@@ -1,0 +1,16 @@
+.container {
+   display: grid;
+   gap: 30px;
+
+   &Inner {
+      gap: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      width: 300px;
+
+      .flex {
+      }
+   }
+}

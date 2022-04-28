@@ -3,28 +3,47 @@ import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import Button from "components/Button/Button";
 import classnames from "classnames";
+// import keyHandler from "hooks/keyHandler";
 
-function DatePicker({ onChange }) {
+function DatePicker({ onChange, datePreset = "" }) {
+   const [parsedDate, setParsedDate] = useState("");
+
    const [open, toggleOpen] = useState(false);
-   const [date, setDate] = useState(new Date());
+   const [date, setDate] = useState(
+      datePreset.length > 0 ? datePreset : new Date()
+   );
 
    function handleChange(date) {
-      setDate(date);
-      onChange(date);
+      const utcDate = new Date(
+         Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+      );
+      const parsed = JSON.parse(JSON.stringify(utcDate));
+      setDate(parsed);
+      setParsedDate(parsed);
+      onChange(parsed);
       toggleOpen(false);
    }
 
-   function dateString() {
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
-      const year = date.getUTCFullYear();
+   // function dateString() {
+   //    // const month = date.getMonth() + 1;
+   //    const day = date.getDate();
+   //    // const year = date.getUTCFullYear();
+   //    // return `${year}-${month}-${day}`;
+   //    const formatted = JSON.parse(JSON.stringify(date));
+   //    console.log(day);
 
-      return `${year}-${month}-${day}`;
-   }
+   //    // const test = new Date().getDate();
+   //    // console.log(date.getDate());
+
+   //    return formatted.split("T")[0];
+   // }
+
+   // const { esc } = keyHandler();
 
    // Enable ESC for closing modal
    useEffect(() => {
-      onChange(date);
+      if (datePreset.length > 0) setParsedDate(datePreset);
+      else handleChange(new Date());
 
       const close = (e) => {
          if (e.keyCode === 27) {
@@ -37,7 +56,8 @@ function DatePicker({ onChange }) {
 
    return (
       <div className={styles.container}>
-         <div className={styles.input}>{dateString()}</div>
+         <div className={styles.input}>{parsedDate.split("T")[0]}</div>
+
          <Button
             text="set date"
             onClick={() => toggleOpen(true)}

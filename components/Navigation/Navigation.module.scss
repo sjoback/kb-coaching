@@ -3,13 +3,23 @@
    width: 100vw;
    color: #fff;
    position: relative;
+   display: flex;
+   align-items: center;
+   gap: 10px;
    z-index: 99;
+   padding: 10px;
 
    a {
-      padding: 20px;
+      padding: 10px 20px;
+      transition: 0.15s ease-in-out;
 
-      &:hover {
-         text-decoration: underline;
+      &:not(:first-child) {
+         background-color: var(--color-blue);
+         border-radius: 30px;
+
+         &:hover {
+            background-color: var(--color-blue-hover);
+         }
       }
 
       image {
@@ -21,4 +31,11 @@
 
 .navLogo {
    padding: 20px 25px;
+   width: 50px;
+   height: 50px;
+   background-color: #fff;
+   border-radius: 10px;
+   padding: 10px;
+
+   position: relative;
 }

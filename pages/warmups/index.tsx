@@ -11,7 +11,7 @@ function Warmups({ data }) {
          <div className="link-list-button">
             <Button
                color="green"
-               text="Add new warmup"
+               text="Add warmup"
                component="link"
                link="/warmups/add"
                onClick={false}

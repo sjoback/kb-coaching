@@ -11,7 +11,7 @@ function Drills({ data }) {
          <div className="link-list-button">
             <Button
                color="green"
-               text="Add new drill"
+               text="Add drill"
                component="link"
                link="/drills/add"
                onClick={false}

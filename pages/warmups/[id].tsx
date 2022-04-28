@@ -1,37 +1,35 @@
 import React from "react";
-import { useEffect, useState } from "react";
-
-import Button from "components/Button/Button";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 import ButtonDelete from "components/Button/ButtonDelete/ButtonDelete";
 
-function Drill({ drill }) {
-   const [name, setName] = useState(drill.name);
-   const [note, setNote] = useState(drill.note);
-   const [images, setImages] = useState(drill.images);
+function Warmup({ warmup }) {
+   const [name, setName] = useState(warmup.name);
+   const [note, setNote] = useState(warmup.note);
+   const [images, setImages] = useState(warmup.images);
    const [saving, setSaving] = useState(false);
    const [deleting, setDeleting] = useState(false);
    const [message, setMessage] = useState("");
    const [error, setError] = useState("");
    const router = useRouter();
 
-   const updateDrill = async (e) => {
+   const updateWarmup = async (e) => {
       e.preventDefault();
 
       setSaving(true);
       setMessage("Saving..");
 
-      let updatedDrill = {
+      let updatedWarmup = {
          name: name,
          note: note,
          images: images,
       };
 
-      let response = await fetch(`/api/drills/${router.query.id}`, {
+      let response = await fetch(`/api/warmups/${router.query.id}`, {
          method: "PUT",
-         body: JSON.stringify(updatedDrill),
+         body: JSON.stringify(updatedWarmup),
       });
 
       let data = await response.json();
@@ -39,28 +37,25 @@ function Drill({ drill }) {
       if (data.success) {
          setMessage(data.message);
          setTimeout(function () {
-            // router.push("/drills");
-            // router.push("/drills");
-            setSaving(false);
+            router.push("/warmups");
+            // setSaving(false);
          }, 1200);
       } else {
          return setError(data.message);
       }
    };
 
-   const deleteDrill = async (drillId) => {
+   const deleteWarmup = async () => {
       setDeleting(true);
 
       try {
-         await fetch(`/api/drills/${router.query.id}`, {
-            // await fetch("/api/drills", {
+         await fetch(`/api/warmups/${router.query.id}`, {
             method: "DELETE",
-            // body: drillId,
          });
 
          setDeleting(false);
 
-         return router.push("/drills");
+         return router.push("/warmups");
       } catch (error) {
          return setDeleting(false);
       }
@@ -90,24 +85,24 @@ function Drill({ drill }) {
 
          <div className="form-buttons">
             <ButtonSubmit
-               onClick={updateDrill}
-               text={"Save drill"}
+               onClick={updateWarmup}
+               text={"Save warmup"}
                color={"green"}
             />
 
             <ButtonDelete
-               onClick={() => deleteDrill(drill.id)}
-               text={"Delete drill"}
+               onClick={() => deleteWarmup()}
+               text={"Delete warmup"}
                color={"red"}
             />
          </div>
 
          <div className="form-meta">
             <span>
-               <b>Added:</b> {drill.added}
+               <b>Added:</b> {warmup.added}
             </span>
             <span>
-               <b>Updated:</b> {drill.updated}
+               <b>Updated:</b> {warmup.updated}
             </span>
          </div>
 
@@ -121,16 +116,16 @@ export async function getServerSideProps({ params }) {
    let { DEV_URL, PROD_URL } = process.env;
 
    let response = await fetch(
-      `${dev ? DEV_URL : PROD_URL}/api/drills/${params.id}`
+      `${dev ? DEV_URL : PROD_URL}/api/warmups/${params.id}`
    );
 
    const data = await response.json();
 
    return {
       props: {
-         drill: data["response"][0],
+         warmup: data["response"][0],
       },
    };
 }
 
-export default Drill;
+export default Warmup;

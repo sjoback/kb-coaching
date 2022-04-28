@@ -2,7 +2,7 @@ import { useState } from "react";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 
-function AddDrill() {
+function AddWarmup() {
    const [name, setName] = useState("");
    const [note, setNote] = useState("");
    const [images, setImages] = useState([]);
@@ -12,7 +12,7 @@ function AddDrill() {
 
    const [requestState, setRequestState] = useState(false);
 
-   const handleDrill = async (e) => {
+   const handleWarmup = async (e) => {
       e.preventDefault();
 
       if (!name) return;
@@ -73,8 +73,8 @@ function AddDrill() {
          </div>
 
          <ButtonSubmit
-            onClick={handleDrill}
-            text={"Add drill"}
+            onClick={handleWarmup}
+            text={"Add warmup"}
             color={"green"}
          />
 
@@ -83,4 +83,4 @@ function AddDrill() {
    );
 }
 
-export default AddDrill;
+export default AddWarmup;

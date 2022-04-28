@@ -39,9 +39,8 @@ function Drill({ drill }) {
       if (data.success) {
          setMessage(data.message);
          setTimeout(function () {
-            // router.push("/drills");
-            // router.push("/drills");
-            setSaving(false);
+            router.push("/drills");
+            // setSaving(false);
          }, 1200);
       } else {
          return setError(data.message);
