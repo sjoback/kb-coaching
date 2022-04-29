@@ -91,7 +91,6 @@ export async function getServerSideProps() {
    let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/drills`);
 
    const data = await response.json();
-   console.log(response);
 
    return {
       props: {

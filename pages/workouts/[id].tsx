@@ -203,7 +203,6 @@ export async function getServerSideProps({ params }) {
 
    const data = await response.json();
    const drillsData = await drillsResponse.json();
-   console.log(drillsData["response"]);
 
    return {
       props: {
