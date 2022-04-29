@@ -1,26 +1,18 @@
 [
     {
-        "id": "4d67d211-1800-4b66-a034-9721e7128ce9",
-        "name": "drill 1",
-        "information": "this isa information",
-        "added": "2022-03-17T19:58:58.281Z",
-        "updated": "2022-03-17T19:58:58.281Z"
+        "id": "fbec21e4-0fd6-424a-acda-893d75ecf4fe",
+        "name": "1-2, slip 1-2",
+        "note": "back and forth, focusing on proper slip technique. ",
+        "images": [],
+        "added": "2022-04-28T09:21:36.588Z",
+        "updated": ""
     },
     {
-        "id": "0faec7c9-129e-489a-81aa-0c6496b12a90",
-        "name": "x",
-        "information": "x",
+        "id": "d5264cf9-5902-4f41-94cd-507b1639606f",
+        "name": "Square",
+        "note": "Moving in a square pattern. \nForward: 1 + 2\nBackward: 2 + f.hook\nLeft: f.hook + 2\nRight: 2 + f.hook",
         "images": [],
-        "added": "2022-04-14T11:45:40.954Z",
-        "updated": "2022-04-14T11:45:40.954Z"
-    },
-    {
-        "id": "0e2e4f2a-4bce-4565-b2b4-be0b6f05a4be",
-        "name": "Bensparring: 1 teknik",
-        "information": "Elever kastar varsin teknik, utan skydd",
-        "images": [],
-        "added": "2022-04-14T11:55:01.913Z",
-        "updated": "2022-04-14T11:55:01.913Z",
-        "warmup": []
+        "added": "2022-04-28T09:22:53.411Z",
+        "updated": ""
     }
 ]

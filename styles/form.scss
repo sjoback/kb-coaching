@@ -1,5 +1,4 @@
 .form-container {
-   //    margin: 30px;
    display: grid;
    gap: 30px;
    grid-template-columns: 1fr;
@@ -11,7 +10,6 @@
    &-inputs {
       display: flex;
       position: relative;
-      // gap: 10px;
       flex-wrap: wrap;
       align-items: center;
 
@@ -54,14 +52,14 @@
          background-color: #ebeef1;
          --input-border-radius: 30px;
          box-sizing: border-box;
-         border: 1px solid #ebeef1;
+         border: none;
          transition: 0.15s ease-in-out;
          outline: none;
          resize: none;
+         font-size: 16px;
 
          &:focus {
-            // border-color: var(--color-green-hover);
-            // border-color: #c3ccd5;
+            background-color: #d2d9e0;
          }
       }
    }
@@ -73,10 +71,10 @@
 
    button {
       &:first-child {
-         --button-border-radius: 30px 30px 5px 5px;
+         --button-border-radius: 30px;
       }
       &:last-child {
-         --button-border-radius: 5px 5px 30px 30px;
+         --button-border-radius: 30px;
       }
    }
 

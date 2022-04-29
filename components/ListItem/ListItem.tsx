@@ -1,46 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./ListItem.module.scss";
-import ListItemNotes from "./ListItemNotes/ListItemNotes";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
 
 function ListItem({ index, removeDrill, drill }) {
-   useEffect(() => {
-      setRounds(drill.rounds);
-      setRoundTime(drill.round_time);
-   }, []);
-
-   const [rounds, setRounds] = useState(Number);
-   const [roundTime, setRoundTime] = useState(Number);
-   // const [note, setNote] = useState(Number);
-   // const [inputs, openInputs] = useState(false);
-
-   // function saveRounds(newRounds) {
-   //    setRounds(newRounds);
-   //    onChange(newRounds, index, "rounds");
-   // }
-
-   // function saveRoundTime(newRoundTime) {
-   //    setRoundTime(newRoundTime);
-   //    onChange(newRoundTime, index, "round_time");
-   // }
-
-   // function saveNotes(newNote) {
-   //    console.log(newNote);
-
-   //    setNote(newNote);
-   //    onChange(newNote, index, "notes");
-   // }
-
-   // Enable ESC for closing modal
-   // useEffect(() => {
-   //    const close = (e) => {
-   //       if (e.keyCode === 27) {
-   //          openInputs(false);
-   //       }
-   //    };
-   //    window.addEventListener("keydown", close);
-   //    return () => window.removeEventListener("keydown", close);
-   // }, []);
+   const [rounds, setRounds] = useState(drill.rounds);
+   const [roundTime, setRoundTime] = useState(drill.round_time);
 
    return (
       <li className={styles.container}>
@@ -49,24 +15,26 @@ function ListItem({ index, removeDrill, drill }) {
             className={classNames(styles.buttonDelete, "btn-red")}
             type="button"
          >
-            X
+            <FontAwesomeIcon
+               icon={faTimes}
+               style={{ fontSize: 20, color: "#fff" }}
+            />
          </button>
 
-         <div className={styles.containerInner}>{drill.name}</div>
+         <div className={styles.containerInner}>
+            {/* <div>name</div> */}
+            <div>{drill.name}</div>
+         </div>
 
-         {/* <input
-            name="rounds"
-            type="text"
-            value={rounds}
-            onChange={(e) => saveRounds(e.target.value)}
-         />
+         <div className={styles.containerInner}>
+            <div>rounds</div>
+            <div>{roundTime}</div>
+         </div>
 
-         <input
-            name="round time"
-            type="text"
-            value={roundTime}
-            onChange={(e) => saveRoundTime(e.target.value)}
-         /> */}
+         <div className={styles.containerInner}>
+            <div>round time</div>
+            <div>{roundTime}</div>
+         </div>
       </li>
    );
 }

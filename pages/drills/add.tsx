@@ -1,20 +1,24 @@
 import { useState } from "react";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
+import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 
 function AddDrill() {
    const [name, setName] = useState("");
    const [note, setNote] = useState("");
-   const [images, setImages] = useState("");
+   const [images, setImages] = useState([]);
    const [message, setMessage] = useState("");
-   const [error, setError] = useState("");
+   const [error, setError] = useState(false);
+   const [saving, setSaving] = useState(false);
+
+   const [requestState, setRequestState] = useState(false);
 
    const handleDrill = async (e) => {
       e.preventDefault();
 
-      setError("");
-      setMessage("");
+      if (!name) return;
 
-      if (!name) return setError("Name field is required");
+      setSaving(true);
+      setMessage("Adding..");
 
       let drill = {
          name: name,
@@ -24,23 +28,28 @@ function AddDrill() {
          updated: "",
       };
 
-      let response = await fetch("/api/drills", {
+      let response = await fetch("/api/drills/add", {
          method: "POST",
          body: JSON.stringify(drill),
       });
-      console.log(response);
 
       let data = await response.json();
 
       if (data.success) {
-         return setMessage(data.message);
-      } else {
-         return setError(data.message);
+         setMessage(data.message);
+         setTimeout(function () {
+            // reset inputs
+            setSaving(false);
+            setName("");
+            setNote("");
+            setImages([]);
+         }, 1200);
       }
    };
 
    return (
-      <form onSubmit={handleDrill} className="form-container">
+      <form onSubmit={(e) => e.preventDefault()} className="form-container">
+         <h1>Add drill</h1>
          <div className="form-container-inputs">
             <label htmlFor="name">Name*</label>
             <input
@@ -55,7 +64,7 @@ function AddDrill() {
          </div>
 
          <div className="form-container-inputs">
-            <label htmlFor="name">Notexx</label>
+            <label htmlFor="name">Note</label>
             <textarea
                placeholder="Note"
                name="note"
@@ -64,7 +73,13 @@ function AddDrill() {
             />
          </div>
 
-         <ButtonSubmit text={"Add drill"} color={"green"} />
+         <ButtonSubmit
+            onClick={handleDrill}
+            text={"Add drill"}
+            color={"green"}
+         />
+
+         {saving && <ApiOverlay message={message} />}
       </form>
    );
 }

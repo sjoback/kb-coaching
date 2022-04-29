@@ -6,11 +6,18 @@
    height: 100%;
    background-color: rgba(255, 255, 255, 0.8);
    display: flex;
+   flex-wrap: wrap;
    justify-content: center;
    align-items: center;
 
+   &Inner {
+      display: grid;
+      gap: 20px;
+      place-items: center;
+      text-align: center;
+   }
+
    .checkmark {
-      margin-left: 20px;
       width: 56px;
       height: 56px;
       border-radius: 50%;

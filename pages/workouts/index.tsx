@@ -1,23 +1,7 @@
-import { connectToDatabase } from "../../lib/mongodb";
-import Button from "components/Button/Button";
 import List from "components/List/List";
 
 function Workouts({ data }) {
-   return (
-      <div>
-         <h1>Workouts</h1>
-         <List linkType="workouts" items={data} />
-
-         <div className="link-list-button">
-            <Button
-               color="green"
-               text="Add new workout"
-               component="link"
-               link="/workouts/add"
-            />
-         </div>
-      </div>
-   );
+   return <List type="workouts" items={data} />;
 }
 
 export async function getServerSideProps() {
@@ -28,7 +12,7 @@ export async function getServerSideProps() {
 
    return {
       props: {
-         data: data["message"],
+         data: data["response"],
       },
    };
 }

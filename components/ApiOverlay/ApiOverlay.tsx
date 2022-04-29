@@ -1,19 +1,10 @@
 import styles from "./ApiOverlay.module.scss";
-import ApiOverlaySaving from "./ApiOverlaySaving/ApiOverlaySaving";
 
-function ApiOverlay({ requestState, component, text }) {
-   const Components = {
-      saving: ApiOverlaySaving,
-   };
-
-   const Component = Components[component];
-
-   if (typeof Components[component] !== "undefined") {
-      return (
-         <div className={styles.apiOverlay}>
-            <Component text={"Saving"} />
-
-            {/* <svg
+function ApiOverlay({ message }) {
+   return (
+      <div className={styles.apiOverlay}>
+         <div className={styles.apiOverlayInner}>
+            <svg
                className={styles.checkmark}
                xmlns="http://www.w3.org/2000/svg"
                viewBox="0 0 52 52"
@@ -30,12 +21,14 @@ function ApiOverlay({ requestState, component, text }) {
                   fill="none"
                   d="M14.1 27.2l7.1 7.2 16.7-16.8"
                />
-            </svg> */}
+            </svg>
+
+            <div>
+               <h1>{message}</h1>
+            </div>
          </div>
-      );
-   } else {
-      return <p>{component} is not yet defined.</p>;
-   }
+      </div>
+   );
 }
 
 export default ApiOverlay;

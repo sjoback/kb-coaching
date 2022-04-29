@@ -9,10 +9,12 @@ import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 import ListItem from "components/ListItem/ListItem";
 import ButtonDelete from "components/Button/ButtonDelete/ButtonDelete";
+import DatePicker from "components/DatePicker/DatePicker";
 
 function Workout({ drillsData, workout }) {
+   const [date, setDate] = useState(workout.date);
    const [name, setName] = useState(workout.name);
-   const [note, setNote] = useState(workout.comment);
+   const [note, setNote] = useState(workout.note);
    const [drills, setDrills] = useState(workout.drills);
    const [warmups, setWarmups] = useState(workout.warmups);
    const [mitts, setMitts] = useState(workout.mitts);
@@ -41,22 +43,21 @@ function Workout({ drillsData, workout }) {
    }
 
    const updateWorkout = async (e) => {
-      console.log("updae");
-
       e.preventDefault();
 
       setSaving(true);
       setMessage("Saving workout..");
 
-      if (!name) return setError("All fields are required");
+      // if (!name) return setError("All fields are required");
 
       let updatedWorkout = {
+         date: date,
          name: name,
          note: note,
          drills: drills,
          warmups: warmups,
          mitts: mitts,
-         updated_at: new Date().toISOString(),
+         updated: new Date().toISOString(),
       };
 
       let response = await fetch(`/api/workouts/${router.query.id}`, {
@@ -71,7 +72,8 @@ function Workout({ drillsData, workout }) {
 
          setTimeout(function () {
             setSaving(false);
-         }, 600);
+            // router.reload();
+         }, 1200);
       } else {
          return setError(data.message);
       }
@@ -93,7 +95,12 @@ function Workout({ drillsData, workout }) {
    };
 
    return (
-      <form onSubmit={updateWorkout} className="form-container">
+      <form onSubmit={(e) => e.preventDefault()} className="form-container">
+         <div className="form-container-inputs">
+            <label htmlFor="date">Date</label>
+            <DatePicker datePreset={workout.date} onChange={setDate} />
+         </div>
+
          <div className="form-container-inputs">
             <label htmlFor="name">Name</label>
             <input
@@ -115,16 +122,18 @@ function Workout({ drillsData, workout }) {
          </div>
 
          <div className="form-container-inputs">
-            <div className={styles.inputsInner}>
-               <label htmlFor="warmup">Drills</label>
-               <Modal
-                  component="add"
-                  onClick={addDrill}
-                  data={drillsData}
-                  text="Add drill"
-                  size="add"
-               />
-            </div>
+            {drillsData.length > 0 && (
+               <div className={styles.inputsInner}>
+                  <label htmlFor="warmup">Drills</label>
+                  <Modal
+                     component="add"
+                     onClick={addDrill}
+                     data={drillsData}
+                     text="Add drill"
+                     size="add"
+                  />
+               </div>
+            )}
 
             {drills.length > 0 ? (
                <ul className={styles.drillsList}>
@@ -144,7 +153,6 @@ function Workout({ drillsData, workout }) {
                </ul>
             )}
          </div>
-
          {/* <div className={form.inputs}>
                   <label htmlFor="warmup">Warmup</label>
                   <ul>
@@ -155,32 +163,30 @@ function Workout({ drillsData, workout }) {
                         ))}
                   </ul>
                </div> */}
-
          <div className="form-buttons">
-            <ButtonSubmit text={"Save workout"} color={"green"} />
+            <ButtonSubmit
+               onClick={updateWorkout}
+               text={"Save workout"}
+               color={"green"}
+            />
 
             <ButtonDelete
                onClick={() => deleteWorkout(workout.id)}
                text={"Delete workout"}
             />
          </div>
-
          <div className="form-meta">
             <span>
-               <b>Added:</b> {workout.added}
+               <b>Added:</b> {workout.added.split("T")[0]}
             </span>
-            <span>
-               <b>Updated:</b> {workout.updated}
-            </span>
+            {workout.updated && (
+               <span>
+                  <b>Updated:</b> {workout.updated.split("T")[0]}
+               </span>
+            )}
          </div>
 
-         {saving && (
-            <ApiOverlay
-               text={message}
-               requestState={saving}
-               component="saving"
-            />
-         )}
+         {saving && <ApiOverlay message={message} />}
       </form>
    );
 }
@@ -200,8 +206,8 @@ export async function getServerSideProps({ params }) {
 
    return {
       props: {
-         workout: data["message"],
-         drillsData: drillsData["message"],
+         workout: data["response"][0],
+         drillsData: drillsData["response"],
       },
    };
 }

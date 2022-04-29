@@ -1,58 +1,35 @@
 [
-   {
-      "id": "4d67d211-1800-4b66-a034-9721e7128ce8",
-      "added": "2022-03-17T19:58:58.281Z",
-      "updated": "2022-03-17T19:58:58.281Z",
-      "name": "a new workoutxx",
-      "comment": "a coment",
-      "drills": [
-         {
-            "id": "4d67d211-1800-4b66-a034-9721e7128ce9",
-            "name": "drill 1",
-            "rounds": "1",
-            "round_time": "1",
-            "notes": "this is anote"
-         },
-         {
-            "id": "0faec7c9-129e-489a-81aa-0c6496b12a90",
-            "name": "x",
-            "rounds": 1,
-            "round_time": 1,
-            "notes": ""
-         },
-         {
-            "id": "4d67d211-1800-4b66-a034-9721e7128ce9",
-            "name": "drill 1",
-            "rounds": 1,
-            "round_time": 1,
-            "notes": ""
-         },
-         {
-            "id": "4d67d211-1800-4b66-a034-9721e7128ce9",
-            "name": "drill 1",
-            "rounds": 1,
-            "round_time": 1,
-            "notes": ""
-         },
-         {
-            "id": "0faec7c9-129e-489a-81aa-0c6496b12a90",
-            "name": "x",
-            "rounds": 1,
-            "round_time": 1,
-            "notes": ""
-         }
-      ],
-      "warmup": [],
-      "mitts": []
-   },
-   {
-      "id": "46d3653f-16bd-4da9-b5a7-cea5363b26c6",
-      "added": "2022-03-17T20:06:33.666Z",
-      "updated": "2022-03-17T20:06:33.666Z",
-      "name": "sdfasf",
-      "comment": "",
-      "drills": [],
-      "warmup": [],
-      "mitts": []
-   }
+    {
+        "id": "8197802c-4c01-4e6b-a499-79f341f64cfb",
+        "date": "2022-04-22T00:00:00.000Z",
+        "name": "Introducing knees",
+        "note": "",
+        "drills": [
+            {
+                "id": "fbec21e4-0fd6-424a-acda-893d75ecf4fe",
+                "name": "1-2, slip 1-2",
+                "note": "back and forth, focusing on proper slip technique. ",
+                "images": [],
+                "added": "2022-04-28T09:21:36.588Z",
+                "updated": "",
+                "rounds": "1",
+                "round_time": "1"
+            }
+        ],
+        "warmups": [],
+        "mitts": [],
+        "updated": "2022-04-29T10:08:42.227Z",
+        "added": "2022-04-27T16:07:15.879Z"
+    },
+    {
+        "id": "2e018edc-8f51-46c8-9068-c5b08b80e072",
+        "date": "2022-04-08T00:00:00.000Z",
+        "name": "asdf",
+        "note": "",
+        "drills": [],
+        "warmups": [],
+        "mitts": [],
+        "updated": "2022-04-28T10:15:25.505Z",
+        "added": "2022-04-28T10:14:02.712Z"
+    }
 ]

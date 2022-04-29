@@ -14,16 +14,20 @@
       "@fortawesome/react-fontawesome": "^0.1.18",
       "@netlify/plugin-nextjs": "^4.2.7",
       "classnames": "^2.3.1",
+      "framer-motion": "^6.3.2",
       "mongodb": "^4.5.0",
       "mongodb-client-encryption": "^2.1.0",
       "netlify-cli": "^10.0.0",
       "next": "12.1.0",
       "next-connect": "^0.12.2",
       "react": "17.0.2",
+      "react-calendar": "^3.7.0",
+      "react-datepicker": "^4.7.0",
       "react-dom": "17.0.2",
       "react-router": "^6.3.0",
       "react-router-dom": "^6.3.0",
-      "sass": "^1.49.9"
+      "sass": "^1.49.9",
+      "uuid": "^8.3.2"
    },
    "devDependencies": {
       "@types/node": "^17.0.21",

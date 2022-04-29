@@ -1,22 +1,40 @@
-function Home() {
-   return <div>home</div>;
+import Button from "components/Button/Button";
+import styles from "./Styles.module.scss";
+function Home(props) {
+   return (
+      <div className={styles.container}>
+         <h1>Welcome, Coach!</h1>
+
+         <div className={styles.containerInner}>
+            <Button
+               text="Add workout"
+               onClick={false}
+               size="md"
+               color="green"
+               component="link"
+               link="/workouts/add"
+            />
+
+            <Button
+               text="Add drill"
+               onClick={false}
+               size="md"
+               color="green"
+               component="link"
+               link="/drills/add"
+            />
+
+            <Button
+               text="Add warmup"
+               onClick={false}
+               size="md"
+               color="green"
+               component="link"
+               link="/warmups/add"
+            />
+         </div>
+      </div>
+   );
 }
-
-// export async function getServerSideProps(ctx) {
-//    // get the current environment
-//    let dev = process.env.NODE_ENV !== "production";
-//    let { DEV_URL, PROD_URL } = process.env;
-
-//    // request posts from api
-//    let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/workouts`);
-//    // extract the data
-//    let data = await response.json();
-
-//    return {
-//       props: {
-//          data: data["message"],
-//       },
-//    };
-// }
 
 export default Home;

@@ -1,0 +1,34 @@
+[
+    {
+        "id": "e24271d1-074d-4bc0-937e-27db48b521b4",
+        "name": "Skipping rope",
+        "note": "Standard. Good for conditioning as well as building calf strength",
+        "images": [],
+        "added": "2022-04-27T16:15:24.416Z",
+        "updated": ""
+    },
+    {
+        "id": "cff07907-e72d-4892-aa2e-c39bc196243e",
+        "name": "Stretching: Ligaments",
+        "note": "Inlcudes hip, shoulders, neck",
+        "images": [],
+        "added": "2022-04-28T09:17:10.872Z",
+        "updated": ""
+    },
+    {
+        "id": "bddfba43-7048-440c-b54f-e473c43fe812",
+        "name": "Leg sparring: 1 technique",
+        "note": "Touch sparring, legs only, 1 technique each. Focusing on technique and proper stance/balance.",
+        "images": [],
+        "added": "2022-04-28T09:19:49.614Z",
+        "updated": ""
+    },
+    {
+        "id": "5e501686-6be4-4098-bf22-ac368ee380dd",
+        "name": "Leg sparring: 2 technique",
+        "note": "",
+        "images": [],
+        "added": "2022-04-28T09:19:59.174Z",
+        "updated": ""
+    }
+]
