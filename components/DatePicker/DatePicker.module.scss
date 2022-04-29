@@ -1,24 +1,4 @@
 .container {
-   width: 100%;
-   display: grid;
-   gap: 10px;
-   grid-template-columns: 1fr 150px;
-   div {
-      width: 100%;
-   }
-
-   .input {
-      width: 100%;
-      padding: var(--input-padding);
-      background-color: #ebeef1;
-      border-radius: 30px;
-      box-sizing: border-box;
-      border: 1px solid #ebeef1;
-      transition: 0.15s ease-in-out;
-      outline: none;
-      resize: none;
-   }
-
    .modalContainer {
       position: fixed;
       display: flex;
@@ -34,5 +14,29 @@
    .modalContent {
       width: 600px;
       max-width: calc(100% - 40px);
+   }
+}
+
+.showInput {
+   width: 100%;
+   display: grid;
+   gap: 10px;
+   grid-template-columns: 1fr 150px;
+
+   div {
+      width: 100%;
+   }
+
+   .input {
+      width: 100%;
+      padding: var(--input-padding);
+      background-color: #ebeef1;
+      border-radius: 30px;
+      box-sizing: border-box;
+      border: 1px solid #ebeef1;
+      transition: 0.15s ease-in-out;
+      outline: none;
+      resize: none;
+      font-size: 16px;
    }
 }

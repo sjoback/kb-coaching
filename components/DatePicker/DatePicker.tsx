@@ -3,9 +3,13 @@ import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import Button from "components/Button/Button";
 import classnames from "classnames";
-// import keyHandler from "hooks/keyHandler";
 
-function DatePicker({ onChange, datePreset = "" }) {
+function DatePicker({
+   showInput = true,
+   buttonText = "set date",
+   onChange,
+   datePreset = "",
+}) {
    const [parsedDate, setParsedDate] = useState("");
 
    const [open, toggleOpen] = useState(false);
@@ -24,22 +28,6 @@ function DatePicker({ onChange, datePreset = "" }) {
       toggleOpen(false);
    }
 
-   // function dateString() {
-   //    // const month = date.getMonth() + 1;
-   //    const day = date.getDate();
-   //    // const year = date.getUTCFullYear();
-   //    // return `${year}-${month}-${day}`;
-   //    const formatted = JSON.parse(JSON.stringify(date));
-   //    console.log(day);
-
-   //    // const test = new Date().getDate();
-   //    // console.log(date.getDate());
-
-   //    return formatted.split("T")[0];
-   // }
-
-   // const { esc } = keyHandler();
-
    // Enable ESC for closing modal
    useEffect(() => {
       if (datePreset.length > 0) setParsedDate(datePreset);
@@ -55,11 +43,18 @@ function DatePicker({ onChange, datePreset = "" }) {
    }, []);
 
    return (
-      <div className={styles.container}>
-         <div className={styles.input}>{parsedDate.split("T")[0]}</div>
+      <div
+         className={classnames(
+            styles.container,
+            showInput ? styles.showInput : ""
+         )}
+      >
+         {showInput && (
+            <div className={styles.input}>{parsedDate.split("T")[0]}</div>
+         )}
 
          <Button
-            text="set date"
+            text={buttonText}
             onClick={() => toggleOpen(true)}
             size="xs"
             color="blue"

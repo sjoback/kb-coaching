@@ -1,26 +1,43 @@
 .container {
    display: grid;
-   grid-template-columns: 40px 1fr;
-   padding: 7.5px 20px 7.5px 7.5px;
-   gap: 20px;
+   grid-template-columns: 40px 1fr 100px 120px;
    font-size: 16px;
    position: relative;
-
-   background-color: var(--color-blue);
-   border-radius: 30px;
+   background-color: #999;
+   border-radius: 10px;
 
    .containerInner {
-      display: flex;
+      padding: 7.5px 15px;
+      display: grid;
+      gap: 5px;
       width: 100%;
-      align-items: center;
       color: #fff;
+      border-left: 1px solid #ebeef1;
+
+      div:first-child {
+         font-size: 14px;
+      }
+      div:last-child {
+         font-weight: bold;
+      }
+   }
+
+   .containerCounter {
+      padding: 7.5px 15px;
+      border-left: 1px solid #ebeef1;
    }
 
    .buttonDelete {
+      margin: 5px;
       --button-padding: 10px;
-      border-radius: 50px;
+      border-radius: 10px 2.5px 2.5px 10px;
       display: flex;
       justify-content: center;
+      align-items: center;
+
+      svg {
+         margin: 0;
+      }
    }
 }
 

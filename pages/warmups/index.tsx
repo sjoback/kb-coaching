@@ -1,25 +1,7 @@
-import Button from "components/Button/Button";
 import List from "components/List/List";
 
 function Warmups({ data }) {
-   return (
-      <div>
-         <h1>Warmups</h1>
-
-         <List linkType="warmups" items={data} />
-
-         <div className="link-list-button">
-            <Button
-               color="green"
-               text="Add warmup"
-               component="link"
-               link="/warmups/add"
-               onClick={false}
-               size={false}
-            />
-         </div>
-      </div>
-   );
+   return <List type="warmups" items={data} />;
 }
 
 export async function getServerSideProps() {

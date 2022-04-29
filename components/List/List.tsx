@@ -1,65 +1,49 @@
-import Button from "components/Button/Button";
+import Link from "next/link";
+
 import styles from "./List.module.scss";
-import { motion } from "framer-motion";
+import Button from "components/Button/Button";
+import ListFilter from "./ListFilter/ListFilter";
 
-const listVariants = {
-   hidden: {
-      transition: {
-         staggerChildren: 0.1,
-         staggerDirection: -1,
-      },
-   },
-   visible: {
-      transition: {
-         staggerChildren: 0.2,
-      },
-   },
-};
-
-const itemVariants = {
-   hidden: {
-      opacity: 0,
-      x: -16,
-   },
-   visible: {
-      opacity: 1,
-      x: 0,
-   },
-};
-
-function List({ items, linkType }) {
+function List({ items, type }) {
    return (
       <div className={styles.container}>
+         <h1>{type}</h1>
+
+         {type == "workouts" && <ListFilter />}
+
          {items.length > 0 ? (
-            <motion.ul
-               className="link-list"
-               variants={listVariants}
-               initial="hidden"
-               animate="visible"
-            >
+            <ul className={styles.linkList}>
                {items.map((item) => {
                   return (
-                     <motion.li
-                        key={`${item.name} + ${item.id}`}
-                        variants={itemVariants}
-                     >
-                        <Button
-                           onClick={() => {}}
-                           color="default"
-                           size="sm"
-                           text={item.name}
-                           component="link"
-                           link={`/${linkType}/${item.id}`}
-                        />
-                     </motion.li>
+                     <li key={`${item.name} + ${item.id}`}>
+                        <Link href={`/${type}/${item.id}`}>
+                           <a>
+                              <h4>{item.name}</h4>
+                              {type == "workouts" && (
+                                 <p>{item.date.split("T")[0]}</p>
+                              )}
+                           </a>
+                        </Link>
+                     </li>
                   );
                })}
-            </motion.ul>
+            </ul>
          ) : (
             <div className={styles.empty}>
-               <h2>No {linkType} added</h2>
+               <h2>No {type} added</h2>
             </div>
          )}
+
+         <div className={styles.button}>
+            <Button
+               color="green"
+               text={`Add ${type.slice(0, -1)}`}
+               component="link"
+               link={`/${type}/add`}
+               onClick={false}
+               size="md"
+            />
+         </div>
       </div>
    );
 }

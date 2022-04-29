@@ -2,24 +2,7 @@ import Button from "components/Button/Button";
 import List from "components/List/List";
 
 function Drills({ data }) {
-   return (
-      <div>
-         <h1>Drills</h1>
-
-         <List linkType="drills" items={data} />
-
-         <div className="link-list-button">
-            <Button
-               color="green"
-               text="Add drill"
-               component="link"
-               link="/drills/add"
-               onClick={false}
-               size={false}
-            />
-         </div>
-      </div>
-   );
+   return <List type="drills" items={data} />;
 }
 
 export async function getServerSideProps() {

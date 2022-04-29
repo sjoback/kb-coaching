@@ -71,10 +71,10 @@
 
    button {
       &:first-child {
-         --button-border-radius: 30px 30px 5px 5px;
+         --button-border-radius: 30px;
       }
       &:last-child {
-         --button-border-radius: 5px 5px 30px 30px;
+         --button-border-radius: 30px;
       }
    }
 

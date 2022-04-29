@@ -2,12 +2,23 @@
     {
         "id": "8197802c-4c01-4e6b-a499-79f341f64cfb",
         "date": "2022-04-16T00:00:00.000Z",
-        "name": "123",
+        "name": "Introducing knees",
         "note": "",
-        "drills": [],
+        "drills": [
+            {
+                "id": "fbec21e4-0fd6-424a-acda-893d75ecf4fe",
+                "name": "1-2, slip 1-2",
+                "note": "back and forth, focusing on proper slip technique. ",
+                "images": [],
+                "added": "2022-04-28T09:21:36.588Z",
+                "updated": "",
+                "rounds": "1",
+                "round_time": "1"
+            }
+        ],
         "warmups": [],
         "mitts": [],
-        "updated": "2022-04-28T10:08:54.143Z",
+        "updated": "2022-04-29T06:19:42.492Z",
         "added": "2022-04-27T16:07:15.879Z"
     },
     {

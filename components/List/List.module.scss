@@ -1,28 +1,33 @@
 .container {
+   h1 {
+      text-transform: capitalize;
+   }
 }
 
-.list {
+.linkList {
    display: grid;
    gap: 10px;
    width: 600px;
    max-width: calc(100% - 20px);
    margin: 40px 0;
 
-   li {
-      display: flex;
+   li a {
+      background-color: var(--color-main-gray);
+      border-radius: 30px;
+      padding: 15px 15px 15px 25px;
+      display: grid;
+      gap: 5px;
+
+      p {
+         font-size: 14px;
+      }
+
+      &:hover {
+         color: var(--color-blue);
+      }
    }
 }
 
-.empty {
-   margin: 30px 0;
-   font-style: italic;
-   h2 {
-      font-weight: 300;
-   }
-}
-
-.link-list-button {
+.button {
    display: flex;
-   width: 600px;
-   max-width: calc(100% - 20px);
 }

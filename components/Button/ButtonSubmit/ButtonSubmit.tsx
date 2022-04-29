@@ -17,11 +17,7 @@ function ButtonSubmit({
    const buttonClasses = [buttonSize, buttonColor, buttonAlign];
 
    return (
-      <button
-         onClick={onClick}
-         type="button"
-         className={classnames(buttonClasses)}
-      >
+      <button onClick={onClick} className={classnames(buttonClasses)}>
          <FontAwesomeIcon
             icon={faFloppyDisk}
             style={{ fontSize: 20, color: "#fff" }}
