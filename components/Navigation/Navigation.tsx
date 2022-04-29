@@ -13,6 +13,8 @@ function Navigation() {
          <Link href="/workouts">Workouts</Link>
          <Link href="/drills">Drills</Link>
          <Link href="/warmups">Warmups</Link>
+         <Link href="/mitts">Mitts</Link>
+         <Link href="/physicals">Physicals</Link>
       </nav>
    );
 }

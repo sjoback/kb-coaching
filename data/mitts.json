@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "id": "c27bc159-671f-4631-b22a-1be74af97c4d",
+        "name": "Free mitts",
+        "note": "Any and every techniques",
+        "images": [],
+        "added": "2022-04-29T11:05:44.489Z",
+        "updated": ""
+    },
+    {
+        "id": "ca45f44a-d23e-463e-89f8-9bb1ec2e2d07",
+        "name": "Jack up the heartrate",
+        "note": "This is suitable before starting drills.\nStudent will do: 25 double kicks on each side + 100 straight punches + 100 hooks",
+        "images": [],
+        "added": "2022-04-29T11:24:03.660Z",
+        "updated": ""
+    }
+]

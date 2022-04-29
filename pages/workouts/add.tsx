@@ -54,6 +54,7 @@ function AddWorkout({ drillsData }) {
 
    return (
       <form className="form-container">
+         <h1>Add workout</h1>
          <div className="form-container-inputs">
             <label htmlFor="date">Date</label>
             <DatePicker onChange={setDate} />

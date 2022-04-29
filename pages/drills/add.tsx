@@ -49,6 +49,7 @@ function AddDrill() {
 
    return (
       <form onSubmit={(e) => e.preventDefault()} className="form-container">
+         <h1>Add drill</h1>
          <div className="form-container-inputs">
             <label htmlFor="name">Name*</label>
             <input

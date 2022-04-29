@@ -1,19 +1,30 @@
 import Link from "next/link";
-
 import styles from "./List.module.scss";
 import Button from "components/Button/Button";
 import ListFilter from "./ListFilter/ListFilter";
+import { useState } from "react";
 
 function List({ items, type }) {
+   const [filteredList, setFilteredList] = useState(items);
+
+   function handleDateFilter(value) {
+      if (value.length > 0) {
+         const filtered = items.filter((item) => {
+            if (item.date == value) return item;
+         });
+         setFilteredList(filtered);
+      } else setFilteredList(items);
+   }
+
    return (
       <div className={styles.container}>
          <h1>{type}</h1>
 
-         {type == "workouts" && <ListFilter />}
+         {type == "workouts" && <ListFilter onChange={handleDateFilter} />}
 
-         {items.length > 0 ? (
+         {filteredList.length > 0 ? (
             <ul className={styles.linkList}>
-               {items.map((item) => {
+               {filteredList.map((item) => {
                   return (
                      <li key={`${item.name} + ${item.id}`}>
                         <Link href={`/${type}/${item.id}`}>
@@ -30,7 +41,7 @@ function List({ items, type }) {
             </ul>
          ) : (
             <div className={styles.empty}>
-               <h2>No {type} added</h2>
+               <h1>:(</h1>
             </div>
          )}
 

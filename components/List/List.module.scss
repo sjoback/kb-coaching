@@ -31,3 +31,12 @@
 .button {
    display: flex;
 }
+
+.empty {
+   margin: 40px 0;
+   h1 {
+      text-transform: lowercase;
+      font-weight: 500;
+      font-style: italic;
+   }
+}

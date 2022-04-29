@@ -1,21 +1,21 @@
-import warmups from "data/warmups.json";
+import physicals from "data/physicals.json";
 const fs = require("fs");
 
 function saveData(data) {
-   fs.writeFileSync(`data/warmups.json`, JSON.stringify(data, null, 4));
+   fs.writeFileSync(`data/physicals.json`, JSON.stringify(data, null, 4));
 }
 
 export default async function handler(req, res) {
    switch (req.method) {
       case "GET": {
          try {
-            const warmup = warmups.filter(
-               (warmup) => warmup.id == req.query.id
+            const physical = physicals.filter(
+               (physical) => physical.id == req.query.id
             );
 
             return res.json({
                message: "Success",
-               response: JSON.parse(JSON.stringify(warmup)),
+               response: JSON.parse(JSON.stringify(physical)),
                success: true,
             });
          } catch (error) {
@@ -28,15 +28,18 @@ export default async function handler(req, res) {
 
       case "PUT": {
          try {
-            const warmup = warmups.filter(
-               (warmup) => warmup.id == req.query.id
+            const physical = physicals.filter(
+               (physical) => physical.id == req.query.id
             );
-            const i = warmups.findIndex((n) => n.id === req.query.id);
-            const updatedWarmup = { ...warmup[0], ...JSON.parse(req.body) };
+            const i = physicals.findIndex((n) => n.id === req.query.id);
+            const updatedPhysical = {
+               ...physical[0],
+               ...JSON.parse(req.body),
+            };
 
-            warmups[i] = updatedWarmup;
+            physicals[i] = updatedPhysical;
 
-            saveData(warmups);
+            saveData(physicals);
 
             return res.json({
                message: "Success",
@@ -52,10 +55,10 @@ export default async function handler(req, res) {
 
       case "DELETE": {
          try {
-            const newWarmups = warmups.filter(
-               (warmup) => warmup.id != req.query.id
+            const newPhysicals = physicals.filter(
+               (physical) => physical.id != req.query.id
             );
-            saveData(newWarmups);
+            saveData(newPhysicals);
 
             return res.json({
                message: "Success",

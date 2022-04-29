@@ -1,13 +1,10 @@
 import classnames from "classnames";
-import styles from "./ListFilterDate.module.scss";
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 
 function ListFilterDate({ onChange }) {
-   const [showFromCalendar, toggleFromCalendar] = useState(false);
-   const [showToCalendar, toggleToCalendar] = useState(false);
-   const [dateFrom, setDateFrom] = useState("");
-   const [dateTo, setDateTo] = useState("");
+   const [showCalendar, toggleCalendar] = useState(false);
+   const [date, setDate] = useState("");
 
    function formatDateString(date) {
       const utcDate = new Date(
@@ -18,33 +15,23 @@ function ListFilterDate({ onChange }) {
    }
 
    function handleFromCalendarChange(value) {
-      setDateFrom(formatDateString(value));
-      toggleFromCalendar(false);
-   }
-
-   function handleToCalendarChange(value) {
-      setDateTo(formatDateString(value));
-      toggleToCalendar(false);
+      setDate(formatDateString(value));
+      toggleCalendar(false);
+      onChange(formatDateString(value));
    }
 
    function handleFromToggle() {
-      if (dateFrom) return setDateFrom("");
-      //   tell parent to remove filter
-      toggleFromCalendar(true);
-   }
-
-   function handleToToggle() {
-      if (dateTo) return setDateTo("");
-      //   tell parent to remove filter
-      toggleToCalendar(true);
+      if (date) {
+         setDate("");
+         onChange("");
+      } else toggleCalendar(true);
    }
 
    // Enable ESC for closing modal
    useEffect(() => {
       const close = (e) => {
          if (e.keyCode === 27) {
-            toggleFromCalendar(false);
-            toggleToCalendar(false);
+            toggleCalendar(false);
          }
       };
       window.addEventListener("keydown", close);
@@ -52,71 +39,32 @@ function ListFilterDate({ onChange }) {
    }, []);
 
    return (
-      <div className={styles.container}>
-         <div className={styles.containerInner}>
-            <button
-               type="button"
-               className={classnames("btn-xs", "btn-blue")}
-               onClick={handleFromToggle}
-            >
-               {dateFrom ? (
-                  <span>{dateFrom.split("T")[0]}</span>
-               ) : (
-                  <span>filter by date</span>
-               )}
-            </button>
-
-            {showFromCalendar && (
-               <div className="modal">
-                  <div className="modal-open">
-                     <div
-                        onClick={() => toggleFromCalendar(false)}
-                        className="modal-open-overlay"
-                     />
-
-                     <div className="modal-open-content">
-                        <Calendar
-                           onChange={(value) => handleFromCalendarChange(value)}
-                        />
-                     </div>
-                  </div>
-               </div>
+      <div>
+         <button
+            type="button"
+            className={classnames("btn-xs", "btn-blue")}
+            onClick={handleFromToggle}
+         >
+            {date ? (
+               <span>{date.split("T")[0]}</span>
+            ) : (
+               <span>filter by date</span>
             )}
-         </div>
+         </button>
 
-         {dateFrom && (
-            <div className={styles.containerInner}>
-               <div className={styles.containerInner}>
-                  <button
-                     type="button"
-                     className={classnames("btn-xs", "btn-blue")}
-                     onClick={handleToToggle}
-                  >
-                     {dateTo ? (
-                        <span>{dateTo.split("T")[0]}</span>
-                     ) : (
-                        <span>add date interval</span>
-                     )}
-                  </button>
+         {showCalendar && (
+            <div className="modal">
+               <div className="modal-open">
+                  <div
+                     onClick={() => toggleCalendar(false)}
+                     className="modal-open-overlay"
+                  />
 
-                  {showToCalendar && (
-                     <div className="modal">
-                        <div className="modal-open">
-                           <div
-                              onClick={() => toggleToCalendar(false)}
-                              className="modal-open-overlay"
-                           />
-
-                           <div className="modal-open-content">
-                              <Calendar
-                                 onChange={(value) =>
-                                    handleToCalendarChange(value)
-                                 }
-                              />
-                           </div>
-                        </div>
-                     </div>
-                  )}
+                  <div className="modal-open-content">
+                     <Calendar
+                        onChange={(value) => handleFromCalendarChange(value)}
+                     />
+                  </div>
                </div>
             </div>
          )}

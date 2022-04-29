@@ -2,7 +2,7 @@ import { useState } from "react";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 
-function AddWarmup() {
+function AddPhysical() {
    const [name, setName] = useState("");
    const [note, setNote] = useState("");
    const [images, setImages] = useState([]);
@@ -12,7 +12,7 @@ function AddWarmup() {
 
    const [requestState, setRequestState] = useState(false);
 
-   const handleWarmup = async (e) => {
+   const addPhysical = async (e) => {
       e.preventDefault();
 
       if (!name) return;
@@ -20,7 +20,7 @@ function AddWarmup() {
       setSaving(true);
       setMessage("Adding..");
 
-      let warmup = {
+      let physical = {
          name: name,
          note: note,
          images: images,
@@ -28,9 +28,9 @@ function AddWarmup() {
          updated: "",
       };
 
-      let response = await fetch("/api/warmups/add", {
+      let response = await fetch("/api/physicals/add", {
          method: "POST",
-         body: JSON.stringify(warmup),
+         body: JSON.stringify(physical),
       });
 
       let data = await response.json();
@@ -49,7 +49,7 @@ function AddWarmup() {
 
    return (
       <form onSubmit={(e) => e.preventDefault()} className="form-container">
-         <h1>Add warmup</h1>
+         <h1>Add physical</h1>
          <div className="form-container-inputs">
             <label htmlFor="name">Name*</label>
             <input
@@ -74,8 +74,8 @@ function AddWarmup() {
          </div>
 
          <ButtonSubmit
-            onClick={handleWarmup}
-            text={"Add warmup"}
+            onClick={addPhysical}
+            text={"Add physical"}
             color={"green"}
          />
 
@@ -84,4 +84,4 @@ function AddWarmup() {
    );
 }
 
-export default AddWarmup;
+export default AddPhysical;
