@@ -3,16 +3,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBurger } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classnames from "classnames";
+import { useRouter } from "next/router";
 
 function Navigation() {
+   const router = useRouter();
+
    const [mobileOpen, setMobileOpen] = useState(false);
 
    function toggleOpen() {
       if (mobileOpen) setMobileOpen(false);
       else setMobileOpen(true);
    }
+   useEffect(() => {
+      if (mobileOpen) setMobileOpen(false);
+   }, [router.asPath]);
 
    return (
       <nav
@@ -26,7 +32,9 @@ function Navigation() {
                <Image layout="fill" src="/logo.webp" />
             </a>
          </Link>
-         <Link href="/workouts">Workouts</Link>
+         <Link onClick={toggleOpen} href="/workouts">
+            Workouts
+         </Link>
          <Link href="/drills">Drills</Link>
          <Link href="/warmups">Warmups</Link>
          <Link href="/mitts">Mitts</Link>
