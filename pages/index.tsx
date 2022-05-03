@@ -32,6 +32,24 @@ function Home(props) {
                component="link"
                link="/warmups/add"
             />
+
+            <Button
+               text="Add mitt"
+               onClick={false}
+               size="md"
+               color="green"
+               component="link"
+               link="/mitts/add"
+            />
+
+            <Button
+               text="Add physical"
+               onClick={false}
+               size="md"
+               color="green"
+               component="link"
+               link="/physicals/add"
+            />
          </div>
       </div>
    );
