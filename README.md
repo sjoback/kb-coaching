@@ -17,7 +17,7 @@ First, clone the repo.
 Second, install and run the development server and enjoy:
 
 ```bash
-npm i & npm run dev
+npm install && npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser of choiche, preferably [Chrome](https://www.google.com/chrome/) :sunglasses:, to see the result.
