@@ -12,7 +12,10 @@ When I'm not coding or googling I'm a coach in kickboxing. I was using the notes
 
 ## Getting Started
 
-First, clone the repo.
+First, clone the repo. Rename the file .env.example to .env and change the DEV_URL value:
+```bash
+DEV_URL=http://localhost:3000
+```
 
 Second, install and run the development server and enjoy:
 
