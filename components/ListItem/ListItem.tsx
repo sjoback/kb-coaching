@@ -3,10 +3,20 @@ import styles from "./ListItem.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
+import ListItemCounter from "./ListItemCounter/ListItemCounter";
+import classnames from "classnames";
 
-function ListItem({ index, removeDrill, drill }) {
+function ListItem({ onChange, index, removeDrill, drill }) {
    const [rounds, setRounds] = useState(drill.rounds);
    const [roundTime, setRoundTime] = useState(drill.round_time);
+
+   function handleRoundsChange(value) {
+      onChange(value, index, "rounds");
+   }
+
+   function handleRoundTimeChange(value) {
+      onChange(value, index, "round_time");
+   }
 
    return (
       <li className={styles.container}>
@@ -21,19 +31,25 @@ function ListItem({ index, removeDrill, drill }) {
             />
          </button>
 
-         <div className={styles.containerInner}>
+         <div className={classnames(styles.containerInner, styles.name)}>
             {/* <div>name</div> */}
             <div>{drill.name}</div>
          </div>
 
-         <div className={styles.containerInner}>
-            <div>rounds</div>
-            <div>{roundTime}</div>
+         <div className={classnames(styles.containerInner, styles.rounds)}>
+            <ListItemCounter
+               onChange={handleRoundsChange}
+               label="rounds"
+               preset={drill.rounds}
+            />
          </div>
 
-         <div className={styles.containerInner}>
-            <div>round time</div>
-            <div>{roundTime}</div>
+         <div className={classnames(styles.containerInner, styles.roundTime)}>
+            <ListItemCounter
+               onChange={handleRoundTimeChange}
+               label="round time"
+               preset={drill.round_time}
+            />
          </div>
       </li>
    );

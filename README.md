@@ -2,7 +2,9 @@
 
 # KB-COACHING
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with a [MongoDB](https://www.mongodb.com/) connection.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+Currently the project is working with local databases for plug n' play.
 
 ## IDEA
 
@@ -10,28 +12,12 @@ When I'm not coding or googling I'm a coach in kickboxing. I was using the notes
 
 ## Getting Started
 
-First, change the file `.env.example` to `.env` and change variables to:
+First, clone the repo.
 
-```
-MONGODB_URI="mongodb+srv://sjoback:Cxkiwn12345@cluster0.ldupk.mongodb.net/test?retryWrites=true&w=majority"
-```
-
-```
-DB_NAME="kb-coaching"
-```
-
-```
-DEV_URL="http://localhost:3000"
-```
-
-```
-PROD_URL="http://localhost:3000"
-```
-
-Second, run the development server and enjoy:
+Second, install and run the development server and enjoy:
 
 ```bash
-npm run dev
+npm i & npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser of choiche, preferably [Chrome](https://www.google.com/chrome/) :sunglasses:, to see the result.

@@ -1,10 +1,43 @@
+@import "/styles/mixins";
+
 .container {
    display: grid;
-   grid-template-columns: 40px 1fr 100px 120px;
    font-size: 16px;
    position: relative;
    background-color: #999;
    border-radius: 10px;
+
+   @include breakpoint("mobile") {
+      grid-template-areas:
+         "a b b b"
+         "c c d d";
+   }
+
+   @include breakpoint("tablet") {
+      grid-template-columns: 40px 1fr 130px 170px;
+   }
+
+   .name {
+      @include breakpoint("mobile") {
+         grid-area: b;
+         border-left: 1px solid #ebeef1;
+      }
+   }
+
+   .rounds {
+      @include breakpoint("mobile") {
+         grid-area: c;
+         border-top: 1px solid #ebeef1;
+      }
+   }
+
+   .roundTime {
+      @include breakpoint("mobile") {
+         grid-area: d;
+         border-left: 1px solid #ebeef1;
+         border-top: 1px solid #ebeef1;
+      }
+   }
 
    .containerInner {
       padding: 7.5px 15px;
@@ -12,7 +45,10 @@
       gap: 5px;
       width: 100%;
       color: #fff;
-      border-left: 1px solid #ebeef1;
+
+      @include breakpoint("tablet") {
+         border-left: 1px solid #ebeef1;
+      }
 
       div:first-child {
          font-size: 14px;
@@ -34,6 +70,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      @include breakpoint("mobile") {
+         border-radius: 10px 2.5px 2.5px 2.5px;
+         grid-area: a;
+      }
 
       svg {
          margin: 0;
