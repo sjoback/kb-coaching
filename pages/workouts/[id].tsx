@@ -26,7 +26,14 @@ function Workout({ drillsData, workout }) {
    const router = useRouter();
 
    function addDrill(drill) {
-      const newDrills = [...drills, drill];
+      const newDrill = {
+         ...drill,
+         rounds: 0,
+         round_time: 0,
+      };
+
+      console.log(newDrill);
+      const newDrills = [...drills, newDrill];
       setDrills(newDrills);
    }
 
@@ -144,6 +151,7 @@ function Workout({ drillsData, workout }) {
                            index={index}
                            drill={drill}
                            removeDrill={removeDrill}
+                           onChange={updateDrill}
                         />
                      ))}
                </ul>
