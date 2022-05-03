@@ -12,13 +12,23 @@
                 "images": [],
                 "added": "2022-04-28T09:21:36.588Z",
                 "updated": "",
-                "rounds": "1",
-                "round_time": "1"
+                "rounds": 4,
+                "round_time": 4
+            },
+            {
+                "id": "d5264cf9-5902-4f41-94cd-507b1639606f",
+                "name": "Square",
+                "note": "Moving in a square pattern. \nForward: 1 + 2\nBackward: 2 + f.hook\nLeft: f.hook + 2\nRight: 2 + f.hook",
+                "images": [],
+                "added": "2022-04-28T09:22:53.411Z",
+                "updated": "",
+                "rounds": 1,
+                "round_time": 2
             }
         ],
         "warmups": [],
         "mitts": [],
-        "updated": "2022-04-29T10:08:42.227Z",
+        "updated": "2022-05-03T08:31:30.617Z",
         "added": "2022-04-27T16:07:15.879Z"
     },
     {
