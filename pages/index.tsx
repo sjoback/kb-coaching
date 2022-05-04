@@ -1,6 +1,6 @@
 import Button from "components/Button/Button";
 import styles from "./Styles.module.scss";
-function Home(props) {
+function Home() {
    return (
       <div className={styles.container}>
          <h1>Welcome, Coach!</h1>
