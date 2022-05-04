@@ -32,9 +32,7 @@ function Navigation() {
                <Image layout="fill" src="/logo.webp" />
             </a>
          </Link>
-         <Link onClick={toggleOpen} href="/workouts">
-            Workouts
-         </Link>
+         <Link href="/workouts">Workouts</Link>
          <Link href="/drills">Drills</Link>
          <Link href="/warmups">Warmups</Link>
          <Link href="/mitts">Mitts</Link>
