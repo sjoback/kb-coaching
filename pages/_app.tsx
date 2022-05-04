@@ -2,6 +2,7 @@ import "../styles/fonts.scss";
 import "../styles/globals.scss";
 import Nav from "components/Navigation/Navigation";
 import { motion } from "framer-motion";
+import Head from "next/head";
 
 const variants = {
    hidden: { opacity: 0, x: -25 },
@@ -12,6 +13,14 @@ const variants = {
 function App({ Component, pageProps, router }) {
    return (
       <div>
+         <Head>
+            <title>KB-COACHING. Amazing stuff!</title>
+            <meta
+               name="viewport"
+               content="initial-scale=1.0, width=device-width"
+            />
+         </Head>
+
          <Nav />
 
          <motion.main
