@@ -24,3 +24,5 @@ npm install && npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser of choiche, preferably [Chrome](https://www.google.com/chrome/) :sunglasses:, to see the result.
+
+OR try it [LIVE](https://kb-coach.netlify.app/)!!
