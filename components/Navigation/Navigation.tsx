@@ -32,11 +32,56 @@ function Navigation() {
                <Image layout="fill" src="/logo.webp" />
             </a>
          </Link>
-         <Link href="/workouts">Workouts</Link>
-         <Link href="/drills">Drills</Link>
-         <Link href="/warmups">Warmups</Link>
-         <Link href="/mitts">Mitts</Link>
-         <Link href="/physicals">Physicals</Link>
+
+         <Link href="/workouts">
+            <a
+               className={
+                  router.pathname.includes("/workouts") ? styles.active : ""
+               }
+            >
+               Workouts
+            </a>
+         </Link>
+
+         <Link href="/drills">
+            <a
+               className={
+                  router.pathname.includes("/drills") ? styles.active : ""
+               }
+            >
+               Drills
+            </a>
+         </Link>
+
+         <Link href="/warmups">
+            <a
+               className={
+                  router.pathname.includes("/warmups") ? styles.active : ""
+               }
+            >
+               Warmups
+            </a>
+         </Link>
+
+         <Link href="/mitts">
+            <a
+               className={
+                  router.pathname.includes("/mitts") ? styles.active : ""
+               }
+            >
+               Mitts
+            </a>
+         </Link>
+
+         <Link href="/physicals">
+            <a
+               className={
+                  router.pathname.includes("/physicals") ? styles.active : ""
+               }
+            >
+               Physicals
+            </a>
+         </Link>
 
          <div onClick={toggleOpen} className={styles.navToggle}>
             <FontAwesomeIcon

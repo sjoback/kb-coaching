@@ -25,6 +25,7 @@ function Drill({ drill }) {
          name: name,
          note: note,
          images: images,
+         updated: new Date().toISOString(),
       };
 
       let response = await fetch(`/api/drills/${router.query.id}`, {
@@ -37,8 +38,8 @@ function Drill({ drill }) {
       if (data.success) {
          setMessage(data.message);
          setTimeout(function () {
-            router.push("/drills");
             // setSaving(false);
+            router.reload();
          }, 1200);
       } else {
          return setError(data.message);
@@ -50,9 +51,7 @@ function Drill({ drill }) {
 
       try {
          await fetch(`/api/drills/${router.query.id}`, {
-            // await fetch("/api/drills", {
             method: "DELETE",
-            // body: drillId,
          });
 
          setDeleting(false);
@@ -113,7 +112,7 @@ function Drill({ drill }) {
    );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
    let dev = process.env.NODE_ENV == "development";
    let { DEV_URL, PROD_URL } = process.env;
 
@@ -127,6 +126,23 @@ export async function getServerSideProps({ params }) {
       props: {
          drill: data["response"][0],
       },
+   };
+}
+
+export async function getStaticPaths() {
+   let dev = process.env.NODE_ENV == "development";
+   let { DEV_URL, PROD_URL } = process.env;
+
+   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/drills`);
+   const drills = await response.json();
+
+   const paths = drills["response"].map((drill) => ({
+      params: { id: drill.id },
+   }));
+
+   return {
+      paths,
+      fallback: false,
    };
 }
 

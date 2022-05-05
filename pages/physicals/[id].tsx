@@ -25,6 +25,7 @@ function Physical({ physical }) {
          name: name,
          note: note,
          images: images,
+         updated: new Date().toISOString(),
       };
 
       let response = await fetch(`/api/physicals/${router.query.id}`, {
@@ -37,7 +38,7 @@ function Physical({ physical }) {
       if (data.success) {
          setMessage(data.message);
          setTimeout(function () {
-            router.push("/physicals");
+            router.reload();
             // setSaving(false);
          }, 1200);
       } else {
@@ -99,10 +100,10 @@ function Physical({ physical }) {
 
          <div className="form-meta">
             <span>
-               <b>Added:</b> {physical.added}
+               <b>Added:</b> {physical.added.split("T")[0]}
             </span>
             <span>
-               <b>Updated:</b> {physical.updated}
+               <b>Updated:</b> {physical.updated.split("T")[0]}
             </span>
          </div>
 
@@ -111,7 +112,7 @@ function Physical({ physical }) {
    );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
    let dev = process.env.NODE_ENV == "development";
    let { DEV_URL, PROD_URL } = process.env;
 
@@ -125,6 +126,23 @@ export async function getServerSideProps({ params }) {
       props: {
          physical: data["response"][0],
       },
+   };
+}
+
+export async function getStaticPaths() {
+   let dev = process.env.NODE_ENV == "development";
+   let { DEV_URL, PROD_URL } = process.env;
+
+   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/physicals`);
+   const physicals = await response.json();
+
+   const paths = physicals["response"].map((physical) => ({
+      params: { id: physical.id },
+   }));
+
+   return {
+      paths,
+      fallback: false,
    };
 }
 

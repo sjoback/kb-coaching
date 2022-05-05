@@ -32,7 +32,6 @@ function Workout({ drillsData, workout }) {
          round_time: 0,
       };
 
-      console.log(newDrill);
       const newDrills = [...drills, newDrill];
       setDrills(newDrills);
    }
@@ -55,8 +54,6 @@ function Workout({ drillsData, workout }) {
       setSaving(true);
       setMessage("Saving workout..");
 
-      // if (!name) return setError("All fields are required");
-
       let updatedWorkout = {
          date: date,
          name: name,
@@ -78,8 +75,8 @@ function Workout({ drillsData, workout }) {
          setMessage(data.message);
 
          setTimeout(function () {
-            setSaving(false);
-            // router.reload();
+            router.reload();
+            // setSaving(false);
          }, 1200);
       } else {
          return setError(data.message);
@@ -199,7 +196,7 @@ function Workout({ drillsData, workout }) {
    );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
    let dev = process.env.NODE_ENV == "development";
    let { DEV_URL, PROD_URL } = process.env;
 
@@ -217,6 +214,23 @@ export async function getServerSideProps({ params }) {
          workout: data["response"][0],
          drillsData: drillsData["response"],
       },
+   };
+}
+
+export async function getStaticPaths() {
+   let dev = process.env.NODE_ENV == "development";
+   let { DEV_URL, PROD_URL } = process.env;
+
+   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/workouts`);
+   const workouts = await response.json();
+
+   const paths = workouts["response"].map((workout) => ({
+      params: { id: workout.id },
+   }));
+
+   return {
+      paths,
+      fallback: false,
    };
 }
 
