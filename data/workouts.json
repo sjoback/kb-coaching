@@ -3,7 +3,7 @@
         "id": "8197802c-4c01-4e6b-a499-79f341f64cfb",
         "date": "2022-04-22T00:00:00.000Z",
         "name": "Introducing knees",
-        "note": "",
+        "note": "again edited",
         "drills": [
             {
                 "id": "fbec21e4-0fd6-424a-acda-893d75ecf4fe",
@@ -28,7 +28,7 @@
         ],
         "warmups": [],
         "mitts": [],
-        "updated": "2022-05-03T08:31:30.617Z",
+        "updated": "2022-05-05T06:52:50.461Z",
         "added": "2022-04-27T16:07:15.879Z"
     },
     {
@@ -41,5 +41,16 @@
         "mitts": [],
         "updated": "2022-04-28T10:15:25.505Z",
         "added": "2022-04-28T10:14:02.712Z"
+    },
+    {
+        "id": "8dd4b811-fc9c-421e-890a-5853a7204eae",
+        "date": "2022-05-05T00:00:00.000Z",
+        "name": "testing",
+        "note": "",
+        "drills": [],
+        "warmups": [],
+        "mitts": [],
+        "updated": "",
+        "added": "2022-05-05T06:46:48.219Z"
     }
 ]

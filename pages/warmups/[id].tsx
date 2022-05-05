@@ -25,6 +25,7 @@ function Warmup({ warmup }) {
          name: name,
          note: note,
          images: images,
+         updated: new Date().toISOString(),
       };
 
       let response = await fetch(`/api/warmups/${router.query.id}`, {
@@ -37,7 +38,7 @@ function Warmup({ warmup }) {
       if (data.success) {
          setMessage(data.message);
          setTimeout(function () {
-            router.push("/warmups");
+            router.reload();
             // setSaving(false);
          }, 1200);
       } else {
@@ -99,10 +100,10 @@ function Warmup({ warmup }) {
 
          <div className="form-meta">
             <span>
-               <b>Added:</b> {warmup.added}
+               <b>Added:</b> {warmup.added.split("T")[0]}
             </span>
             <span>
-               <b>Updated:</b> {warmup.updated}
+               <b>Updated:</b> {warmup.updated.split("T")[0]}
             </span>
          </div>
 
@@ -111,7 +112,7 @@ function Warmup({ warmup }) {
    );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
    let dev = process.env.NODE_ENV == "development";
    let { DEV_URL, PROD_URL } = process.env;
 
@@ -125,6 +126,23 @@ export async function getServerSideProps({ params }) {
       props: {
          warmup: data["response"][0],
       },
+   };
+}
+
+export async function getStaticPaths() {
+   let dev = process.env.NODE_ENV == "development";
+   let { DEV_URL, PROD_URL } = process.env;
+
+   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/warmups`);
+   const warmups = await response.json();
+
+   const paths = warmups["response"].map((warmup) => ({
+      params: { id: warmup.id },
+   }));
+
+   return {
+      paths,
+      fallback: false,
    };
 }
 

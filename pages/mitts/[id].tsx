@@ -25,6 +25,7 @@ function Mitt({ mitt }) {
          name: name,
          note: note,
          images: images,
+         updated: new Date().toISOString(),
       };
 
       let response = await fetch(`/api/mitts/${router.query.id}`, {
@@ -37,7 +38,7 @@ function Mitt({ mitt }) {
       if (data.success) {
          setMessage(data.message);
          setTimeout(function () {
-            router.push("/mitts");
+            router.reload();
             // setSaving(false);
          }, 1200);
       } else {
@@ -99,10 +100,10 @@ function Mitt({ mitt }) {
 
          <div className="form-meta">
             <span>
-               <b>Added:</b> {mitt.added}
+               <b>Added:</b> {mitt.added.split("T")[0]}
             </span>
             <span>
-               <b>Updated:</b> {mitt.updated}
+               <b>Updated:</b> {mitt.updated.split("T")[0]}
             </span>
          </div>
 
@@ -111,7 +112,7 @@ function Mitt({ mitt }) {
    );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
    let dev = process.env.NODE_ENV == "development";
    let { DEV_URL, PROD_URL } = process.env;
 
@@ -125,6 +126,23 @@ export async function getServerSideProps({ params }) {
       props: {
          mitt: data["response"][0],
       },
+   };
+}
+
+export async function getStaticPaths() {
+   let dev = process.env.NODE_ENV == "development";
+   let { DEV_URL, PROD_URL } = process.env;
+
+   let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/mitts`);
+   const mitts = await response.json();
+
+   const paths = mitts["response"].map((mitt) => ({
+      params: { id: mitt.id },
+   }));
+
+   return {
+      paths,
+      fallback: false,
    };
 }
 
