@@ -1,15 +1,13 @@
 @import "/styles/mixins";
 
-.wrapper {
-   background: #222;
+.container {
+   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
    width: 100vw;
-   color: #fff;
+   color: var(--color-font);
    position: relative;
    display: flex;
    flex-direction: column;
-   gap: 10px;
    z-index: 99;
-   padding: 10px;
 
    @include breakpoint("tablet") {
       flex-direction: row;
@@ -17,52 +15,95 @@
    }
 
    a {
-      padding: 10px 20px;
+      padding: 10px 30px;
       font-size: 14px;
       transition: 0.15s ease-in-out;
       text-align: center;
 
-      &:not(:first-child) {
-         border-radius: 30px;
+      &:hover {
+         text-decoration: underline;
+      }
 
-         @include breakpoint("mobile") {
-            display: none;
+      // &:not(:first-child) {
+      //    border-radius: 30px;
+
+      //    @include breakpoint("mobile") {
+      //       display: none;
+      //    }
+      // }
+
+      image {
+         width: 30px;
+         height: 30px;
+      }
+   }
+
+   &Left {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+
+      @include breakpoint("mobile") {
+         order: 2;
+         width: 100%;
+         display: none;
+      }
+      @include breakpoint("tablet") {
+         width: auto;
+         flex: 1;
+      }
+   }
+
+   &Right {
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row-reverse;
+      width: 100%;
+
+      @include breakpoint("tablet") {
+         justify-content: flex-end;
+         width: 150px;
+         flex-direction: row;
+      }
+
+      .navLogo {
+         padding: 20px 25px;
+         width: 30px;
+         height: 30px;
+         border-radius: 100px;
+         overflow: hidden;
+         padding: 10px;
+         position: relative;
+
+         @include breakpoint("tablet") {
+            margin: 0 20px 0 0;
          }
       }
 
-      image {
-         width: 50px;
-         height: 50px;
+      .navToggle {
+         transition: 0.2s ease-in-out;
+         color: var(--color-blue);
+
+         @include breakpoint("tablet") {
+            display: none;
+         }
       }
    }
 }
 
-.navLogo {
-   padding: 20px 25px;
-   width: 50px;
-   height: 50px;
-   border-radius: 100px;
-   overflow: hidden;
-   padding: 10px;
-   position: relative;
+// Nav toggle class
+.mobileOpen {
+   .containerLeft {
+      @include breakpoint("mobile") {
+         border-top: 1px solid #e6e6e6;
+         display: flex;
+         padding: 10px;
+         flex-direction: column;
+      }
 
-   @include breakpoint("mobile") {
-      // margin-bottom: 20px;
-   }
-
-   @include breakpoint("tablet") {
-      margin: 0 20px 0 0;
-   }
-}
-
-.navToggle {
-   position: absolute;
-   transition: 0.2s ease-in-out;
-   right: 20px;
-   top: 20px;
-
-   @include breakpoint("tablet") {
-      display: none;
+      @include breakpoint("tablet") {
+      }
    }
 }
 
@@ -71,15 +112,22 @@
       transform: rotate(90deg);
    }
 
-   a {
-      display: block !important;
+   .containerLeft {
+      @include breakpoint("mobile") {
+         display: flex;
+      }
+
+      @include breakpoint("tablet") {
+      }
+      flex-direction: column;
    }
 }
 
 .active {
-   background-color: var(--color-blue);
+   color: var(--color-blue);
+   font-weight: bold;
 
    &:hover {
-      background-color: var(--color-blue-hover);
+      color: var(--color-blue-hover);
    }
 }

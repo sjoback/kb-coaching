@@ -1,0 +1,30 @@
+@import "/styles/mixins";
+
+.container {
+   display: grid;
+   grid-template-columns: 1fr 100px 100px;
+   font-size: 16px;
+   position: relative;
+   background-color: #999;
+   border-radius: 25px;
+   padding: 10px 25px;
+
+   .inner {
+      display: grid;
+      gap: 10px;
+
+      a:hover {
+         color: var(--color-blue);
+      }
+
+      div {
+         color: #fff;
+         &:first-child {
+            font-size: 14px;
+         }
+         &:last-child {
+            font-weight: bold;
+         }
+      }
+   }
+}

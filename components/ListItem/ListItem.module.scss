@@ -5,7 +5,7 @@
    font-size: 16px;
    position: relative;
    background-color: #999;
-   border-radius: 10px;
+   border-radius: 25px;
 
    @include breakpoint("mobile") {
       grid-template-areas:

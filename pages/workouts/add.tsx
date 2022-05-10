@@ -6,8 +6,11 @@ import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 import classnames from "classnames";
 import DatePicker from "components/DatePicker/DatePicker";
+import { useSession, signIn } from "next-auth/react";
+import Button from "components/Button/Button";
 
 function AddWorkout({ drillsData }) {
+   const { data: session } = useSession();
    const [date, setDate] = useState("");
    const [name, setName] = useState("");
 
@@ -51,6 +54,25 @@ function AddWorkout({ drillsData }) {
          return setError(data.message);
       }
    };
+
+   if (!session) {
+      return (
+         <div>
+            <h3>You have to sign in in order to add workouts.</h3>
+
+            <br />
+
+            <Button
+               text="Sign in"
+               onClick={() => signIn("google")}
+               size="md"
+               color="green"
+               component="default"
+               link={false}
+            />
+         </div>
+      );
+   }
 
    return (
       <form className="form-container">
