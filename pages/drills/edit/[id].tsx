@@ -105,7 +105,7 @@ function Drill({ drill }) {
                />
 
                <ButtonDelete
-                  onClick={() => deleteDrill(drill.id)}
+                  onClick={() => deleteDrill()}
                   text={"Delete drill"}
                   color={"red"}
                />
