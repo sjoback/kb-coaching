@@ -9,10 +9,7 @@ function Home() {
       return (
          <div className={styles.container}>
             <h1>Welcome, Stranger!</h1>
-            <p>
-               <button onClick={() => signIn("google")}>Sign in</button> to gain
-               full access to this wonderful app.
-            </p>
+            <p>Dont forget to sign in.</p>
          </div>
       );
 

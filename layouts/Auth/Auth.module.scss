@@ -1,0 +1,21 @@
+.container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   .signIn {
+      box-shadow: var(--box-shadow);
+      border-radius: 25px;
+      gap: 20px;
+      padding: 40px;
+      display: grid;
+      width: 500px;
+      max-width: 100%;
+      margin-top: 100px;
+
+      &Inner {
+         display: grid;
+         gap: 20px;
+      }
+   }
+}

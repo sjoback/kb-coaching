@@ -43,33 +43,6 @@
          color: #666;
       }
 
-      textarea,
-      .textarea {
-         min-height: 100px;
-      }
-
-      input,
-      .input,
-      textarea,
-      .textarea,
-      ul {
-         width: 100%;
-         padding: var(--input-padding);
-         background-color: #ebeef1;
-         --input-border-radius: 30px;
-         border-radius: 30px;
-         box-sizing: border-box;
-         border: none;
-         transition: 0.15s ease-in-out;
-         outline: none;
-         resize: none;
-         font-size: 16px;
-
-         &:focus {
-            background-color: #d2d9e0;
-         }
-      }
-
       ul {
          display: grid;
          gap: 20px;
@@ -125,6 +98,52 @@
       &:focus {
          user-select: none;
          pointer-events: none;
+      }
+   }
+}
+
+textarea,
+.textarea {
+   min-height: 100px;
+}
+
+input,
+.input,
+textarea,
+.textarea {
+   width: 100%;
+   padding: var(--input-padding);
+   background-color: #ebeef1;
+   --input-border-radius: 30px;
+   border-radius: 30px;
+   box-sizing: border-box;
+   border: none;
+   transition: 0.15s ease-in-out;
+   outline: none;
+   resize: none;
+   font-size: 16px;
+
+   &:focus {
+      background-color: #d2d9e0;
+   }
+}
+
+form {
+   ul {
+      width: 100%;
+      padding: var(--input-padding);
+      background-color: #ebeef1;
+      --input-border-radius: 30px;
+      border-radius: 30px;
+      box-sizing: border-box;
+      border: none;
+      transition: 0.15s ease-in-out;
+      outline: none;
+      resize: none;
+      font-size: 16px;
+
+      &:focus {
+         background-color: #d2d9e0;
       }
    }
 }
