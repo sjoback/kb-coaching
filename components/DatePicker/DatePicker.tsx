@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import Button from "components/Button/Button";
 import classnames from "classnames";
+import { useSession } from "next-auth/react";
 
 function DatePicker({
    showInput = true,
@@ -11,6 +12,7 @@ function DatePicker({
    datePreset = "",
 }) {
    const [parsedDate, setParsedDate] = useState("");
+   const { data: session } = useSession();
 
    const [open, toggleOpen] = useState(false);
    const [date, setDate] = useState(
@@ -53,14 +55,16 @@ function DatePicker({
             <div className={styles.input}>{parsedDate.split("T")[0]}</div>
          )}
 
-         <Button
-            text={buttonText}
-            onClick={() => toggleOpen(true)}
-            size="xs"
-            color="blue"
-            component="default"
-            link={false}
-         />
+         {session && (
+            <Button
+               text={buttonText}
+               onClick={() => toggleOpen(true)}
+               size="xs"
+               color="blue"
+               component="default"
+               link={false}
+            />
+         )}
 
          {open && (
             <div className={classnames(styles.modalContainer)}>

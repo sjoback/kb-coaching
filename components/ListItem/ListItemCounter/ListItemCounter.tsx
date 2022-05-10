@@ -2,9 +2,11 @@ import { useState } from "react";
 import styles from "./ListItemCounter.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { useSession } from "next-auth/react";
 
 function ListItemCounter({ preset, onChange, label }) {
-   const [counter, setCounter] = useState(preset ? preset : 0);
+   const { data: session } = useSession();
+   const [counter, setCounter] = useState(preset ? preset : 1);
 
    function countUp() {
       setCounter(counter + 1);
@@ -12,7 +14,7 @@ function ListItemCounter({ preset, onChange, label }) {
    }
 
    function countDown() {
-      if (counter > 0) {
+      if (counter > 1) {
          setCounter(counter - 1);
          onChange(counter - 1);
       }
@@ -25,21 +27,23 @@ function ListItemCounter({ preset, onChange, label }) {
             <div>{counter}</div>
          </div>
 
-         <div className={styles.containerButtons}>
-            <button type="button" onClick={countUp}>
-               <FontAwesomeIcon
-                  icon={faAngleUp}
-                  style={{ fontSize: 20, color: "#333" }}
-               />
-            </button>
+         {session && (
+            <div className={styles.containerButtons}>
+               <button type="button" onClick={countUp}>
+                  <FontAwesomeIcon
+                     icon={faAngleUp}
+                     style={{ fontSize: 20, color: "#333" }}
+                  />
+               </button>
 
-            <button type="button" onClick={countDown}>
-               <FontAwesomeIcon
-                  icon={faAngleDown}
-                  style={{ fontSize: 20, color: "#333" }}
-               />
-            </button>
-         </div>
+               <button type="button" onClick={countDown}>
+                  <FontAwesomeIcon
+                     icon={faAngleDown}
+                     style={{ fontSize: 20, color: "#333" }}
+                  />
+               </button>
+            </div>
+         )}
       </div>
    );
 }

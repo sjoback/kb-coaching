@@ -1,3 +1,13 @@
+button {
+   cursor: pointer;
+   background-color: transparent;
+   padding: 0;
+   font-weight: bold;
+   &:hover {
+      text-decoration: underline;
+   }
+}
+
 [class*="btn-"] {
    background-color: var(--button-background);
    color: var(--button-color);
@@ -8,8 +18,10 @@
    letter-spacing: 0.5px;
    font-weight: 500;
    text-transform: uppercase;
+   text-align: center;
    cursor: pointer;
    &:hover {
+      text-decoration: none;
       background-color: var(--button-background-hover);
    }
 
