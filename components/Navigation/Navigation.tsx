@@ -31,12 +31,6 @@ function Navigation() {
          )}
       >
          <div className={styles.containerLeft}>
-            {/* <Link href="/">
-               <a className={styles.navLogo}>
-                  <Image layout="fill" src="/logo.webp" />
-               </a>
-            </Link> */}
-
             <Link href="/workouts">
                <a
                   className={
@@ -96,7 +90,7 @@ function Navigation() {
             {!session ? (
                <Button
                   text="Sign in"
-                  onClick={() => signIn("google")}
+                  onClick={() => signIn()}
                   size="xs"
                   color="green"
                   component="default"

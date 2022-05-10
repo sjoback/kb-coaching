@@ -28,6 +28,11 @@ body {
    @include breakpoint("tablet") {
       font-size: 18px;
    }
+
+   .page {
+      background-color: red !important;
+      position: relative !important;
+   }
 }
 
 a {

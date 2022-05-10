@@ -1,34 +1,66 @@
-import { faJarWheat } from "@fortawesome/free-solid-svg-icons";
 import NextAuth from "next-auth";
-import { getToken } from "next-auth/jwt";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import users from "data/users.json";
 
 export default NextAuth({
    providers: [
-      GoogleProvider({
-         clientId: process.env.GOOGLE_CLIENT_ID,
-         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-         authorization: {
-            params: {
-               prompt: "consent",
-               access_type: "offline",
-               response_type: "code",
+      CredentialsProvider({
+         name: "Credentials",
+         credentials: {
+            username: {
+               label: "Email",
+               type: "text",
+               placeholder: "Email",
             },
+            password: { label: "Password", type: "password" },
+         },
+
+         async authorize(credentials, req) {
+            const userFromDatabase = users.filter(
+               (user) => user.email == credentials.username
+            );
+
+            const user = {
+               id: userFromDatabase[0].id,
+               name: userFromDatabase[0].name,
+               email: userFromDatabase[0].email,
+               password: userFromDatabase[0].password,
+            };
+
+            function userVerified() {
+               return (
+                  credentials.password == user.password &&
+                  credentials.username == user.email
+               );
+            }
+
+            if (userVerified()) {
+               return user;
+            } else {
+               return null;
+            }
          },
       }),
    ],
    debug: true,
    secret: "iwS/fwKiCOG3WnIC10PZnqefqfBLNrb606YNSEtfZjU=",
    callbacks: {
+      // async signIn({ user, account, profile, email, credentials }) {
+      //    return true;
+      // },
+      // async redirect({ url, baseUrl }) {
+      //    console.log(baseUrl);
+
+      //    return "/signin";
+      // },
       async jwt({ token, account }) {
-         // Persist the OAuth access_token to the token right after signin
          if (account) {
             token.accessToken = account.access_token;
          }
          return token;
       },
       async session({ session, token, user }) {
-         // Send properties to the client, like an access_token from a provider.
          session.accessToken = token.accessToken;
          return session;
       },
