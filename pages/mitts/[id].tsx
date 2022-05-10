@@ -1,114 +1,19 @@
+import FormRead from "components/Form/FormRead/FormRead";
 import React from "react";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
-import ApiOverlay from "components/ApiOverlay/ApiOverlay";
-import ButtonDelete from "components/Button/ButtonDelete/ButtonDelete";
 
 function Mitt({ mitt }) {
-   const [name, setName] = useState(mitt.name);
-   const [note, setNote] = useState(mitt.note);
-   const [images, setImages] = useState(mitt.images);
-   const [saving, setSaving] = useState(false);
-   const [deleting, setDeleting] = useState(false);
-   const [message, setMessage] = useState("");
-   const [error, setError] = useState("");
-   const router = useRouter();
-
-   const updateWarmup = async (e) => {
-      e.preventDefault();
-
-      setSaving(true);
-      setMessage("Saving..");
-
-      let updatedMitt = {
-         name: name,
-         note: note,
-         images: images,
-         updated: new Date().toISOString(),
-      };
-
-      let response = await fetch(`/api/mitts/${router.query.id}`, {
-         method: "PUT",
-         body: JSON.stringify(updatedMitt),
-      });
-
-      let data = await response.json();
-
-      if (data.success) {
-         setMessage(data.message);
-         setTimeout(function () {
-            router.reload();
-            // setSaving(false);
-         }, 1200);
-      } else {
-         return setError(data.message);
-      }
-   };
-
-   const deleteMitt = async () => {
-      setDeleting(true);
-
-      try {
-         await fetch(`/api/mitts/${router.query.id}`, {
-            method: "DELETE",
-         });
-
-         setDeleting(false);
-
-         return router.push("/mitts");
-      } catch (error) {
-         return setDeleting(false);
-      }
-   };
-
    return (
-      <form onSubmit={(e) => e.preventDefault()} className="form-container">
+      <FormRead editLink={`/mitts/edit/${mitt.id}`}>
          <div className="form-container-inputs">
-            <label htmlFor="name">Name</label>
-            <input
-               autoFocus
-               type="text"
-               value={name}
-               onChange={(e) => setName(e.target.value)}
-            />
+            <div className="label">Name</div>
+            <div className="input">{mitt.name}</div>
          </div>
 
          <div className="form-container-inputs">
-            <label htmlFor="note">Note</label>
-            <textarea
-               name="note"
-               placeholder="Note"
-               value={note}
-               onChange={(e) => setNote(e.target.value)}
-            />
+            <div className="label">Note</div>
+            <div className="textarea">{mitt.note}</div>
          </div>
-
-         <div className="form-buttons">
-            <ButtonSubmit
-               onClick={updateWarmup}
-               text={"Save mitt"}
-               color={"green"}
-            />
-
-            <ButtonDelete
-               onClick={() => deleteMitt()}
-               text={"Delete mitt"}
-               color={"red"}
-            />
-         </div>
-
-         <div className="form-meta">
-            <span>
-               <b>Added:</b> {mitt.added.split("T")[0]}
-            </span>
-            <span>
-               <b>Updated:</b> {mitt.updated.split("T")[0]}
-            </span>
-         </div>
-
-         {saving && <ApiOverlay message={message} />}
-      </form>
+      </FormRead>
    );
 }
 

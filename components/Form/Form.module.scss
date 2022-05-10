@@ -1,4 +1,6 @@
-.form-container {
+@import "/styles/mixins";
+
+.container {
    display: grid;
    gap: 30px;
    grid-template-columns: 1fr;
@@ -7,25 +9,24 @@
    width: 600px;
    max-width: 100%;
 
-   &-inputs {
+   &Inner {
       display: flex;
       position: relative;
       flex-wrap: wrap;
       align-items: center;
+      //   &Inner {
+      //      margin-bottom: 10px;
+      //      display: grid;
+      //      grid-template-columns: 1fr 140px;
+      //      width: 100%;
 
-      &Inner {
-         margin-bottom: 10px;
-         display: grid;
-         grid-template-columns: 1fr 140px;
-         width: 100%;
-
-         label,
-         .label {
-            display: flex;
-            align-items: flex-end;
-            margin-bottom: -8px !important;
-         }
-      }
+      //      label,
+      //      .label {
+      //         display: flex;
+      //         align-items: flex-end;
+      //         margin-bottom: -8px !important;
+      //      }
+      //   }
 
       label,
       .label {
@@ -78,7 +79,7 @@
    }
 }
 
-.form-buttons {
+.buttons {
    display: grid;
    gap: 10px;
 

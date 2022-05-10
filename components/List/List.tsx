@@ -3,9 +3,11 @@ import styles from "./List.module.scss";
 import Button from "components/Button/Button";
 import ListFilter from "./ListFilter/ListFilter";
 import { useState } from "react";
+import { useSession, signIn } from "next-auth/react";
 
 function List({ items, type }) {
    const [filteredList, setFilteredList] = useState(items);
+   const { data: session } = useSession();
 
    function handleDateFilter(value) {
       if (value.length > 0) {
@@ -45,16 +47,18 @@ function List({ items, type }) {
             </div>
          )}
 
-         <div className={styles.button}>
-            <Button
-               color="green"
-               text={`Add ${type.slice(0, -1)}`}
-               component="link"
-               link={`/${type}/add`}
-               onClick={false}
-               size="md"
-            />
-         </div>
+         {session && (
+            <div className={styles.button}>
+               <Button
+                  color="green"
+                  text={`Add ${type.slice(0, -1)}`}
+                  component="link"
+                  link={`/${type}/add`}
+                  onClick={false}
+                  size="md"
+               />
+            </div>
+         )}
       </div>
    );
 }
