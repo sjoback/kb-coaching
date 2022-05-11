@@ -87,7 +87,7 @@ function Navigation() {
                <FontAwesomeIcon icon={faBurger} style={{ fontSize: 32 }} />
             </div>
 
-            {!session ? (
+            {/* {!session ? (
                <SignIn />
             ) : (
                <Button
@@ -98,7 +98,7 @@ function Navigation() {
                   component="default"
                   link={false}
                />
-            )}
+            )} */}
          </div>
       </nav>
    );
