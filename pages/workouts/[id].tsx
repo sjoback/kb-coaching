@@ -22,16 +22,20 @@ function Workout({ workout }) {
 
          <div className="form-container-inputs">
             <div className="label">Drills</div>
-            <ul>
-               {workout.drills.length > 0 &&
-                  workout.drills.map((drill, index) => (
-                     <ListItemRead
-                        key={`${drill.name}-${index}`}
-                        item={drill}
-                        type="drills"
-                     />
-                  ))}
-            </ul>
+            {workout.drills.length > 0 ? (
+               <ul>
+                  {workout.drills.length > 0 &&
+                     workout.drills.map((drill, index) => (
+                        <ListItemRead
+                           key={`${drill.name}-${index}`}
+                           item={drill}
+                           type="drills"
+                        />
+                     ))}
+               </ul>
+            ) : (
+               <p>no drills added</p>
+            )}
          </div>
       </FormRead>
    );

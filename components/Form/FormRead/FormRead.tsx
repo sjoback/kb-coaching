@@ -8,7 +8,7 @@ function FormRead(props) {
       <div className={styles.container}>
          {props.children}
 
-         {session && (
+         {!session && (
             <div className={styles.buttons}>
                <Button
                   text={"Edit"}
