@@ -1,0 +1,22 @@
+.container {
+   position: relative;
+
+   .signin {
+      display: grid;
+      gap: 10px;
+      font-size: 14px;
+      position: fixed;
+      right: 0;
+      top: 0;
+      padding: 20px;
+      box-shadow: var(--box-shadow);
+      background-color: #fff;
+      border-radius: 0 0 0 25px;
+      width: 300px;
+      max-width: 100%;
+
+      input {
+         font-size: 14px;
+      }
+   }
+}

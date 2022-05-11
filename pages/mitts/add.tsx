@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
+import ProtectedRoute from "components/Layout/ProtectedRoute";
 
 function AddMitt() {
    const [name, setName] = useState("");
@@ -48,35 +49,37 @@ function AddMitt() {
    };
 
    return (
-      <form onSubmit={(e) => e.preventDefault()} className="form-container">
-         <h1>Add mitt</h1>
-         <div className="form-container-inputs">
-            <label htmlFor="name">Name*</label>
-            <input
-               autoFocus
-               placeholder="E.g: Dutch slip 'n rip"
-               name="name"
-               type="text"
-               required
-               value={name}
-               onChange={(e) => setName(e.target.value)}
-            />
-         </div>
+      <ProtectedRoute>
+         <form onSubmit={(e) => e.preventDefault()} className="form-container">
+            <h1>Add mitt</h1>
+            <div className="form-container-inputs">
+               <label htmlFor="name">Name*</label>
+               <input
+                  autoFocus
+                  placeholder="E.g: Dutch slip 'n rip"
+                  name="name"
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+               />
+            </div>
 
-         <div className="form-container-inputs">
-            <label htmlFor="name">Note</label>
-            <textarea
-               placeholder="Note"
-               name="note"
-               value={note}
-               onChange={(e) => setNote(e.target.value)}
-            />
-         </div>
+            <div className="form-container-inputs">
+               <label htmlFor="name">Note</label>
+               <textarea
+                  placeholder="Note"
+                  name="note"
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+               />
+            </div>
 
-         <ButtonSubmit onClick={addMitt} text={"Add mitt"} color={"green"} />
+            <ButtonSubmit onClick={addMitt} text={"Add mitt"} color={"green"} />
 
-         {saving && <ApiOverlay message={message} />}
-      </form>
+            {saving && <ApiOverlay message={message} />}
+         </form>
+      </ProtectedRoute>
    );
 }
 
