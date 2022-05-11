@@ -45,7 +45,10 @@
 
       ul {
          display: grid;
-         gap: 20px;
+         width: 100%;
+         gap: 10px;
+         background-color: #ebeef1;
+         border-radius: 30px;
          padding: 20px;
       }
    }

@@ -5,7 +5,7 @@ import { useSession, signIn } from "next-auth/react";
 function Home() {
    const { data: session } = useSession();
 
-   if (!session)
+   if (session)
       return (
          <div className={styles.container}>
             <h1>Welcome, Stranger!</h1>
@@ -15,7 +15,8 @@ function Home() {
 
    return (
       <div className={styles.container}>
-         <h1>Welcome, {session.user.name}!</h1>
+         <h1>Welcome, Coach!</h1>
+         {/* <h1>Welcome, {session.user.name}!</h1> */}
 
          <div className={styles.containerInner}>
             <Button
