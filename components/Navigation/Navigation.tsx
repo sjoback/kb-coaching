@@ -8,11 +8,11 @@ import classnames from "classnames";
 import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Button from "components/Button/Button";
+import SignIn from "components/SignIn/SignIn";
 
 function Navigation() {
    const router = useRouter();
    const { data: session } = useSession();
-
    const [mobileOpen, setMobileOpen] = useState(false);
 
    function toggleOpen() {
@@ -88,14 +88,7 @@ function Navigation() {
             </div>
 
             {!session ? (
-               <Button
-                  text="Sign in"
-                  onClick={() => signIn()}
-                  size="xs"
-                  color="green"
-                  component="default"
-                  link={false}
-               />
+               <SignIn />
             ) : (
                <Button
                   text="Sign out"

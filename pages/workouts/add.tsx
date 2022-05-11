@@ -8,6 +8,7 @@ import classnames from "classnames";
 import DatePicker from "components/DatePicker/DatePicker";
 import { useSession, signIn } from "next-auth/react";
 import Button from "components/Button/Button";
+import ProtectedRoute from "components/Layout/ProtectedRoute";
 
 function AddWorkout({ drillsData }) {
    const { data: session } = useSession();
@@ -55,54 +56,56 @@ function AddWorkout({ drillsData }) {
       }
    };
 
-   if (!session) {
-      return (
-         <div>
-            <h3>You have to sign in in order to add workouts.</h3>
+   // if (!session) {
+   //    return (
+   //       <div>
+   //          <h3>You have to sign in in order to add workouts.</h3>
 
-            <br />
+   //          <br />
 
-            <Button
-               text="Sign in"
-               onClick={() => signIn("google")}
-               size="md"
-               color="green"
-               component="default"
-               link={false}
-            />
-         </div>
-      );
-   }
+   //          <Button
+   //             text="Sign in"
+   //             onClick={() => signIn("google")}
+   //             size="md"
+   //             color="green"
+   //             component="default"
+   //             link={false}
+   //          />
+   //       </div>
+   //    );
+   // }
 
    return (
-      <form className="form-container">
-         <h1>Add workout</h1>
-         <div className="form-container-inputs">
-            <label htmlFor="date">Date</label>
-            <DatePicker onChange={setDate} />
-         </div>
+      <ProtectedRoute>
+         <form className="form-container">
+            <h1>Add workout</h1>
+            <div className="form-container-inputs">
+               <label htmlFor="date">Date</label>
+               <DatePicker onChange={setDate} />
+            </div>
 
-         <div className="form-container-inputs">
-            <label htmlFor="name">Name</label>
-            <input
-               autoFocus
-               type="text"
-               placeholder="name"
-               value={name}
-               onChange={(e) => setName(e.target.value)}
-            />
-         </div>
+            <div className="form-container-inputs">
+               <label htmlFor="name">Name</label>
+               <input
+                  autoFocus
+                  type="text"
+                  placeholder="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+               />
+            </div>
 
-         <div className={classnames(styles.addButton, "form-buttons")}>
-            <ButtonSubmit
-               onClick={saveWorkout}
-               text={"Save workout"}
-               color={"green"}
-            />
-         </div>
+            <div className={classnames(styles.addButton, "form-buttons")}>
+               <ButtonSubmit
+                  onClick={saveWorkout}
+                  text={"Save workout"}
+                  color={"green"}
+               />
+            </div>
 
-         {saving && <ApiOverlay message={message} />}
-      </form>
+            {saving && <ApiOverlay message={message} />}
+         </form>
+      </ProtectedRoute>
    );
 }
 
