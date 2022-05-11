@@ -1,0 +1,19 @@
+.container {
+   display: grid;
+   gap: 20px;
+
+   .containerInner {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 20px;
+      font-weight: bold;
+
+      div {
+         display: flex;
+         align-items: center;
+      }
+
+      span {
+      }
+   }
+}
