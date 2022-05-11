@@ -15,7 +15,6 @@ export default NextAuth({
             },
             password: { label: "Password", type: "password" },
          },
-
          async authorize(credentials, req) {
             const userFromDatabase = users.filter(
                (user) => user.email == credentials.username
@@ -25,6 +24,7 @@ export default NextAuth({
                id: userFromDatabase[0].id,
                name: userFromDatabase[0].name,
                email: userFromDatabase[0].email,
+               role: userFromDatabase[0].role,
                password: userFromDatabase[0].password,
             };
 
@@ -46,14 +46,6 @@ export default NextAuth({
    debug: true,
    secret: "iwS/fwKiCOG3WnIC10PZnqefqfBLNrb606YNSEtfZjU=",
    callbacks: {
-      // async signIn({ user, account, profile, email, credentials }) {
-      //    return true;
-      // },
-      // async redirect({ url, baseUrl }) {
-      //    console.log(baseUrl);
-
-      //    return "/signin";
-      // },
       async jwt({ token, account }) {
          if (account) {
             token.accessToken = account.access_token;
