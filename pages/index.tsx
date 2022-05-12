@@ -1,22 +1,13 @@
 import Button from "components/Button/Button";
 import styles from "./Styles.module.scss";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 function Home() {
    const { data: session } = useSession();
 
-   if (session)
-      return (
-         <div className={styles.container}>
-            <h1>Welcome, Stranger!</h1>
-            <p>Dont forget to sign in.</p>
-         </div>
-      );
-
    return (
       <div className={styles.container}>
-         <h1>Welcome, Coach!</h1>
-         {/* <h1>Welcome, {session.user.name}!</h1> */}
+         <h1>Welcome, {session ? session.user.name : "Stranger"}!</h1>
 
          <div className={styles.containerInner}>
             <Button

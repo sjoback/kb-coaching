@@ -87,6 +87,15 @@ function Navigation() {
                <FontAwesomeIcon icon={faBurger} style={{ fontSize: 32 }} />
             </div>
 
+            <Button
+               text="Sign out"
+               onClick={() => signOut()}
+               size="xs"
+               color="red"
+               component="default"
+               link={false}
+            />
+
             {/* {!session ? (
                <SignIn />
             ) : (

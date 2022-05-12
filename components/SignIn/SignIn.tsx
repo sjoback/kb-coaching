@@ -21,7 +21,7 @@ function SignIn() {
          <Button
             text={"Sign in"}
             onClick={() => toggleShow(!show)}
-            size={"sm"}
+            size={"xs"}
             color={"green"}
             component={"default"}
             link={false}

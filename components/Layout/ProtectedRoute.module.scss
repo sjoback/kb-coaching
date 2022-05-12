@@ -1,0 +1,74 @@
+.container {
+   height: 100vh;
+   width: 100vw;
+   // padding: 20px;
+   display: flex;
+   justify-content: center;
+   align-items: stretch;
+   --input-padding: 22.5px 35px;
+   --input-border-radius: 100px;
+
+   .signin,
+   .register {
+      padding: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .inner {
+         display: grid;
+         gap: 20px;
+         width: 100%;
+      }
+   }
+
+   .signin {
+      flex: 1;
+      background-color: #57b497;
+      // background: linear-gradient(180deg, rgba(87, 180, 151, 1) 100%, 0%);
+      min-width: 40vw;
+      max-width: 100%;
+      position: relative;
+      overflow: hidden;
+
+      .image {
+         position: absolute;
+         width: 600px;
+         height: auto;
+         opacity: 0.15;
+      }
+
+      .inner {
+         position: relative;
+         max-width: 300px;
+         color: #fff;
+         text-align: center;
+      }
+   }
+
+   .register {
+      flex: 2;
+      max-width: 100%;
+
+      .inner {
+         max-width: 500px;
+      }
+
+      form {
+         display: flex;
+         flex-direction: column;
+         text-align: center;
+         gap: 20px;
+
+         h1 {
+            color: var(--color-green);
+            margin-bottom: 30px;
+         }
+
+         button {
+            margin-top: 30px;
+            min-width: 300px;
+         }
+      }
+   }
+}

@@ -27,7 +27,7 @@ function ListItemCounter({ preset, onChange, label }) {
             <div>{counter}</div>
          </div>
 
-         {!session && (
+         {session && (
             <div className={styles.containerButtons}>
                <button type="button" onClick={countUp}>
                   <FontAwesomeIcon

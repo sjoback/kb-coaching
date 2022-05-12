@@ -1,20 +1,38 @@
 [
-   {
-      "id": "0174bc5d-0b2a-40aa-acf8-3878d4241f20",
-      "name": "Tester",
-      "avatar": "",
-      "email": "test",
-      "role": "test",
-      "password": "test",
-      "created": "2022-05-10T06:35:05.155Z"
-   },
-   {
-      "id": "0174bc5d-0b2a-40aa-acf8-3878d4241f19",
-      "name": "Joakim Sjöbäck",
-      "avatar": "",
-      "email": "joakim.sjoback@gmail.com",
-      "role": "admin",
-      "password": "admin",
-      "created": "2022-05-09T06:35:05.155Z"
-   }
+    {
+        "id": "71c7e168-ef70-473b-b03f-208ebc5ea26a",
+        "name": "Joakim Sjöbäck",
+        "email": "joakim.sjoback@gmail.com",
+        "password": "Cxkiwn12345",
+        "avatar": "",
+        "role": "user",
+        "created": "2022-05-12T08:28:20.793Z"
+    },
+    {
+        "id": "9412d3d1-7826-47d9-99c7-f255bcab7681",
+        "name": "Test Tester",
+        "email": "test",
+        "password": "test",
+        "avatar": "",
+        "role": "tester",
+        "created": "2022-05-12T08:29:33.288Z"
+    },
+    {
+        "id": "fd690e14-db7d-498d-8ba4-cc5bf039a9c1",
+        "name": "",
+        "email": "",
+        "password": "",
+        "avatar": "",
+        "role": "user",
+        "created": "2022-05-12T12:56:58.939Z"
+    },
+    {
+        "id": "d6aab815-0b4f-43fb-a1e6-b88998add627",
+        "name": "",
+        "email": "",
+        "password": "",
+        "avatar": "",
+        "role": "user",
+        "created": "2022-05-12T12:57:13.850Z"
+    }
 ]

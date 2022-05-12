@@ -19,18 +19,11 @@
       font-size: 14px;
       transition: 0.15s ease-in-out;
       text-align: center;
+      font-weight: bold;
 
       &:hover {
          text-decoration: underline;
       }
-
-      // &:not(:first-child) {
-      //    border-radius: 30px;
-
-      //    @include breakpoint("mobile") {
-      //       display: none;
-      //    }
-      // }
 
       image {
          width: 30px;
@@ -129,5 +122,6 @@
 
    &:hover {
       color: var(--color-blue-hover);
+      text-decoration: none !important;
    }
 }

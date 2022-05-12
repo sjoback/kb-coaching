@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import ButtonSubmit from "components/Button/ButtonSubmit/ButtonSubmit";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 import ButtonDelete from "components/Button/ButtonDelete/ButtonDelete";
-import Form from "components/List/Form/Form";
-import FormInput from "components/List/Form/FormInput/FormInput";
-import FormTextarea from "components/List/Form/FormTextarea/FormTextarea";
-import { useSession } from "next-auth/react";
 import ProtectedRoute from "components/Layout/ProtectedRoute";
 
 function Drill({ drill }) {
@@ -19,13 +15,6 @@ function Drill({ drill }) {
    const [message, setMessage] = useState("");
    const [error, setError] = useState("");
    const router = useRouter();
-   const { data: session } = useSession();
-
-   // useEffect(() => {
-   if (!session) {
-      console.log("no session");
-   }
-   // }, []);
 
    const updateDrill = async (e) => {
       e.preventDefault();

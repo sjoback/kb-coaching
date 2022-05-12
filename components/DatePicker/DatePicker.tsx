@@ -55,7 +55,7 @@ function DatePicker({
             <div className={styles.input}>{parsedDate.split("T")[0]}</div>
          )}
 
-         {!session && (
+         {session && (
             <Button
                text={buttonText}
                onClick={() => toggleOpen(true)}

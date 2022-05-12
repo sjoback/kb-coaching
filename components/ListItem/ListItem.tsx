@@ -22,7 +22,7 @@ function ListItem({ onChange, index, removeDrill, drill }) {
 
    return (
       <li className={styles.container}>
-         {!session ? (
+         {session ? (
             <button
                onClick={() => removeDrill(index)}
                className={classNames(styles.buttonDelete, "btn-red")}

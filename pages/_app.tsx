@@ -4,6 +4,7 @@ import Nav from "components/Navigation/Navigation";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
+import ProtectedRoute from "components/Layout/ProtectedRoute";
 
 const variants = {
    hidden: { opacity: 0, x: -25 },
@@ -23,18 +24,20 @@ function App({ Component, pageProps: { session, ...pageProps }, router }) {
          </Head>
 
          <SessionProvider session={session}>
-            <Nav />
+            <ProtectedRoute>
+               <Nav />
 
-            <motion.main
-               key={router.route}
-               variants={variants}
-               initial="hidden"
-               animate="enter"
-               exit="exit"
-               transition={{ duration: 0.4, type: "linear" }}
-            >
-               <Component {...pageProps} />
-            </motion.main>
+               <motion.main
+                  key={router.route}
+                  variants={variants}
+                  initial="hidden"
+                  animate="enter"
+                  exit="exit"
+                  transition={{ duration: 0.4, type: "linear" }}
+               >
+                  <Component {...pageProps} />
+               </motion.main>
+            </ProtectedRoute>
          </SessionProvider>
       </div>
    );

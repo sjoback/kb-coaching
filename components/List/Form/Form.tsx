@@ -14,7 +14,7 @@ function Form({
 }) {
    const { data: session } = useSession();
 
-   if (!session) return <div>Sign in to use the app.</div>;
+   if (session) return <div>Sign in to use the app.</div>;
 
    return (
       <form onSubmit={(e) => e.preventDefault()} className="form-container">

@@ -47,7 +47,7 @@ function List({ items, type }) {
             </div>
          )}
 
-         {!session && (
+         {session && (
             <div className={styles.button}>
                <Button
                   color="green"
