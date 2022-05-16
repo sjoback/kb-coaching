@@ -8,7 +8,7 @@ import classnames from "classnames";
 import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Button from "components/Button/Button";
-import SignIn from "components/SignIn/SignIn";
+import SignIn from "components/DEPSignIn/SignIn";
 
 function Navigation() {
    const router = useRouter();
@@ -31,6 +31,12 @@ function Navigation() {
          )}
       >
          <div className={styles.containerLeft}>
+            <Link href="/">
+               <a className={router.pathname == "/" ? styles.active : ""}>
+                  Grid
+               </a>
+            </Link>
+
             <Link href="/workouts">
                <a
                   className={

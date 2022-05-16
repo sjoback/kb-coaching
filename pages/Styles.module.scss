@@ -1,18 +1,39 @@
 @import "/styles/mixins";
 
 .container {
-   display: grid;
+   display: flex;
+   align-items: center;
+   justify-content: center;
    gap: 30px;
+   height: 100vh;
+   background-color: var(--color-green);
+
+   a {
+      font-weight: bold;
+   }
 
    &Inner {
-      gap: 20px;
+      display: grid;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
+      padding: 2.5rem;
+      width: 500px;
+      gap: 30px;
+      color: #fff;
+
+      .buttons {
+         display: grid;
+         gap: 5px;
+
+         p {
+            font-size: 14px;
+
+            a:hover {
+               text-decoration: underline;
+            }
+         }
+      }
 
       @include breakpoint("tablet") {
-         width: 300px;
       }
    }
 }

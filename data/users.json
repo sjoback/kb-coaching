@@ -3,7 +3,7 @@
         "id": "71c7e168-ef70-473b-b03f-208ebc5ea26a",
         "name": "Joakim Sjöbäck",
         "email": "joakim.sjoback@gmail.com",
-        "password": "Cxkiwn12345",
+        "password": "admin",
         "avatar": "",
         "role": "user",
         "created": "2022-05-12T08:28:20.793Z"
@@ -18,21 +18,19 @@
         "created": "2022-05-12T08:29:33.288Z"
     },
     {
-        "id": "fd690e14-db7d-498d-8ba4-cc5bf039a9c1",
-        "name": "",
-        "email": "",
-        "password": "",
-        "avatar": "",
+        "id": "26c378da-479e-46e8-a927-6cab34bf5fc6",
+        "name": "test@gmail.com",
+        "email": "test@gmail.com",
+        "password": "testpw",
         "role": "user",
-        "created": "2022-05-12T12:56:58.939Z"
+        "created": "2022-05-16T19:13:45.561Z"
     },
     {
-        "id": "d6aab815-0b4f-43fb-a1e6-b88998add627",
-        "name": "",
-        "email": "",
-        "password": "",
-        "avatar": "",
+        "id": "94da3b51-793f-4aed-8394-d87840f70027",
+        "name": "xx@gmail.com",
+        "email": "xx@gmail.com",
+        "password": "xxxx",
         "role": "user",
-        "created": "2022-05-12T12:57:13.850Z"
+        "created": "2022-05-16T19:14:43.125Z"
     }
 ]

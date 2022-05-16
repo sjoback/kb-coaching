@@ -12,23 +12,34 @@
       border-right: 2px solid #bfbfbf;
       color: #bfbfbf;
       font-size: 24px;
-      transition: 0.2s ease-in-out;
+      transition: 0.1s ease-in-out;
    }
    input {
       width: 100%;
-      --input-padding: 25px 25px 25px 80px;
+      --input-padding: 25px 50px 25px 80px;
       --input-border-radius: 50px;
       border: 2px solid transparent;
+      transition: 0.1s ease-in-out;
    }
 }
 
 .container.active {
-   .icon {
-      color: var(--color-green);
-      border-color: var(--color-green);
-   }
    input {
       border: 2px solid var(--color-green);
       background-color: #fff;
+   }
+}
+
+.error {
+   position: absolute;
+   left: 82px;
+   bottom: 2px;
+   color: rgba(255, 0, 0, 0.7);
+   font-size: 14px;
+}
+
+.errorActive {
+   input {
+      border-color: rgba(255, 0, 0, 0.5);
    }
 }

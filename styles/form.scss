@@ -51,6 +51,11 @@
          border-radius: 30px;
          padding: 20px;
       }
+
+      input {
+         --input-border-radius: 50px;
+         --input-padding: 25px 50px 25px 80px;
+      }
    }
 }
 
@@ -67,18 +72,18 @@
       }
    }
 
-   @include breakpoint("tablet") {
-      grid-template-columns: 1fr 1fr;
+   // @include breakpoint("tablet") {
+   //    grid-template-columns: 1fr 1fr;
 
-      button {
-         &:first-child {
-            --button-border-radius: 50px 10px 10px 50px;
-         }
-         &:last-child {
-            --button-border-radius: 10px 50px 50px 10px;
-         }
-      }
-   }
+   //    button {
+   //       &:first-child {
+   //          --button-border-radius: 50px 10px 10px 50px;
+   //       }
+   //       &:last-child {
+   //          --button-border-radius: 10px 50px 50px 10px;
+   //       }
+   //    }
+   // }
 }
 
 .form-meta {
@@ -90,6 +95,27 @@
       color: #999;
       font-style: italic;
    }
+}
+
+.form-icon {
+   position: absolute;
+   height: calc(100% - 30px);
+   bottom: 15px;
+   padding: 0 15px 0 25px;
+   display: flex;
+   align-items: center;
+   border-right: 2px solid #bfbfbf;
+   color: #bfbfbf;
+   font-size: 24px;
+   transition: 0.1s ease-in-out;
+}
+
+.form-error {
+   position: absolute;
+   left: 80px;
+   bottom: 7px;
+   color: rgba(255, 0, 0, 0.7);
+   font-size: 13px;
 }
 
 .form-disabled {

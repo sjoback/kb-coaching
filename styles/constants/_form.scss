@@ -1,6 +1,6 @@
 :root {
    --form-background: #fff;
-   --form-color: #000;
+   --form-color: var(--color-font);
    --input-background: #ebeef1;
    --input-color: #000;
    --input-border-radius: 30px;

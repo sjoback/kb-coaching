@@ -1,36 +1,9 @@
-import styles from "./Styles.module.scss";
-import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
+import styles from "./Grid.module.scss";
+import { useSession } from "next-auth/react";
 import Button from "components/Button/Button";
-import classNames from "classnames";
 
-function Home() {
+function Grid() {
    const { data: session } = useSession();
-
-   if (!session)
-      return (
-         <div className={styles.container}>
-            <div className={styles.containerInner}>
-               <h1>Welcome, Stranger!</h1>
-
-               <div className={styles.buttons}>
-                  <button
-                     onClick={() => signIn("Google")}
-                     className={classNames("btn", "btn-md")}
-                  >
-                     Sign in
-                  </button>
-
-                  <p>
-                     Already a coach?
-                     <Link href="/signup">
-                        <a> Sign up</a>
-                     </Link>
-                  </p>
-               </div>
-            </div>
-         </div>
-      );
 
    return (
       <div className={styles.container}>
@@ -86,4 +59,4 @@ function Home() {
    );
 }
 
-export default Home;
+export default Grid;

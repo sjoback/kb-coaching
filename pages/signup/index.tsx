@@ -1,47 +1,38 @@
 import Button from "components/Button/Button";
-import Image from "next/image";
-import { useSession, signIn } from "next-auth/react";
-import { useState } from "react";
-import styles from "./ProtectedRoute.module.scss";
-import image from "/public/kickboxing.png";
-import InputContainer from "components/Form/FormInputs/InputContainer/InputContainer";
+import styles from "./Styles.module.scss";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import image from "/public/kickboxing.png";
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock, faUser, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 
-function ProtectedRoute(props) {
+type FormData = {
+   Email: string;
+   Password: string;
+};
+
+function SignUp() {
+   // const { data: session } = useSession();
    const {
       register,
+      getValues,
       handleSubmit,
-      watch,
       formState: { errors },
-   } = useForm();
-
-   const { data: session } = useSession();
-   const [name, setName] = useState("");
-   const [email, setEmail] = useState("");
-   const [password, setPassword] = useState("");
+   } = useForm<FormData>();
    const [creating, setCreating] = useState(false);
    const [message, setMessage] = useState("");
-   // const [nameError, setNameError] = useState("");
-   // const [emailError, setEmailError] = useState("");
-   // const [passwordError, setPasswordError] = useState("");
-
-   const handleSignIn = async () => {
-      signIn("credentials", {
-         username: email,
-         password: password,
-      });
-   };
+   const [error, setError] = useState(false);
 
    const handleSignUp = async () => {
       setCreating(true);
 
       let newUser = {
-         name: name,
-         email: email,
-         password: password,
+         name: getValues().Email,
+         email: getValues().Email,
+         password: getValues().Password,
          role: "user",
          created: new Date().toISOString(),
       };
@@ -56,11 +47,18 @@ function ProtectedRoute(props) {
       if (data.success) {
          setMessage("success");
          setTimeout(function () {
-            handleSignIn();
-            // setCreating(false);
+            signIn("Google", {
+               username: getValues().Email,
+               password: getValues().Password,
+            });
          }, 1200);
       } else {
-         // return setError(data.message);
+         console.log(data);
+         setError(true);
+
+         setTimeout(function () {
+            return setCreating(false);
+         }, 1200);
       }
    };
 
@@ -69,9 +67,8 @@ function ProtectedRoute(props) {
       if (emailAdress.match(regexEmail)) return true;
       else return false;
    }
-
-   if (!session)
-      return (
+   return (
+      <div className={styles.container}>
          <div className={styles.container}>
             <div className={styles.signin}>
                <div className={styles.image}>
@@ -87,7 +84,7 @@ function ProtectedRoute(props) {
 
                   <Button
                      text={"Sign in"}
-                     onClick={handleSignIn}
+                     onClick={() => signIn("Google")}
                      size={"md"}
                      color={"border-white"}
                      component={"default"}
@@ -101,53 +98,52 @@ function ProtectedRoute(props) {
                   <form name="signup" method="POST" data-netlify="true">
                      {creating && <ApiOverlay message={"Creating account"} />}
                      <h1>Create account</h1>
-
+                     <p>
+                        Currently in <b>Beta</b>, thus only allowing gmail
+                        accounts. If you do not have this, try{" "}
+                        <b>Email/Password </b>: test/test for limited access.
+                     </p>
                      <div className="form-container-inputs">
                         <div className="form-icon">
-                           <FontAwesomeIcon icon={faUser} />
+                           <FontAwesomeIcon icon={faEnvelope} />
                         </div>
 
                         <input
-                           // onChange={(e) => setName(e.target.value)}
-                           type={"text"}
-                           name={"Name"}
-                           placeholder={"Name"}
+                           type={"email"}
+                           name={"Email"}
+                           placeholder={"Email"}
                            required
-                           {...register("Name", { required: true })}
+                           {...register("Email", { required: true })}
                         />
 
                         <div className="form-error">
-                           {errors.Name?.type === "required" &&
-                              "First name is required"}
+                           {errors.Email?.type === "required" &&
+                              "Email is required"}
+
+                           {error && "Email is already registered"}
                         </div>
                      </div>
 
                      <div className="form-container-inputs">
-                        {/* <InputContainer
-                           placeholder={"Email"}
-                           name={"Email"}
-                           preset={email}
-                           onChange={setEmail}
-                           resetError={resetError}
-                           icon={"email"}
-                           error={emailError}
-                        /> */}
-                     </div>
+                        <div className="form-icon">
+                           <FontAwesomeIcon icon={faLock} />
+                        </div>
 
-                     <div className="form-container-inputs">
-                        {/* <InputContainer
-                           placeholder={"Password"}
+                        <input
+                           type={"password"}
                            name={"Password"}
-                           preset={password}
-                           onChange={setPassword}
-                           resetError={resetError}
-                           icon={"password"}
-                           error={passwordError}
-                           type="password"
-                        /> */}
+                           placeholder={"Password"}
+                           required
+                           {...register("Password", { required: true })}
+                        />
+
+                        <div className="form-error">
+                           {errors.Password?.type === "required" &&
+                              "Password is required"}
+                        </div>
                      </div>
 
-                     <div>
+                     <div className="form-buttons">
                         <Button
                            text={"Sign up"}
                            onClick={handleSubmit(handleSignUp)}
@@ -161,9 +157,8 @@ function ProtectedRoute(props) {
                </div>
             </div>
          </div>
-      );
-
-   return props.children;
+      </div>
+   );
 }
 
-export default ProtectedRoute;
+export default SignUp;
