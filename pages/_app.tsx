@@ -1,17 +1,9 @@
 import "../styles/fonts.scss";
 import "../styles/globals.scss";
-import Nav from "components/Navigation/Navigation";
-import { motion } from "framer-motion";
 import Head from "next/head";
-import { SessionProvider } from "next-auth/react";
+import Layout from "layout/Layout";
 
-const variants = {
-   hidden: { opacity: 0, x: -25 },
-   enter: { opacity: 1, x: 0 },
-   exit: { opacity: 0, x: 0 },
-};
-
-function App({ Component, pageProps: { session, ...pageProps }, router }) {
+function App({ Component, pageProps: { ...pageProps } }) {
    return (
       <div>
          <Head>
@@ -22,20 +14,9 @@ function App({ Component, pageProps: { session, ...pageProps }, router }) {
             />
          </Head>
 
-         <SessionProvider session={session}>
-            {session && <Nav />}
-
-            <motion.main
-               key={router.route}
-               variants={variants}
-               initial="hidden"
-               animate="enter"
-               exit="exit"
-               transition={{ duration: 0.4, type: "linear" }}
-            >
-               <Component {...pageProps} />
-            </motion.main>
-         </SessionProvider>
+         <Layout>
+            <Component {...pageProps} />
+         </Layout>
       </div>
    );
 }

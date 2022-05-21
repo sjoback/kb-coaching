@@ -30,6 +30,15 @@ button {
    }
 }
 
+.btnText {
+   margin: 0;
+   padding: 0;
+   cursor: pointer;
+   &:hover {
+      text-decoration: underline;
+   }
+}
+
 // Sizes
 .btn-xs {
    --button-padding: 10px 10px;
@@ -45,6 +54,7 @@ button {
 }
 
 .btn-lg {
+   font-size: 24px;
    --button-padding: 30px 45px;
 }
 

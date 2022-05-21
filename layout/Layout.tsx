@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
-import { useSession } from "next-auth/react";
-import Nav from "components/Navigation/Navigation";
+import Header from "components/Settings/Header/Header";
+import React, { useEffect, useState } from "react";
+import Auth from "components/Auth/Auth";
+import { checkCookies } from "cookies-next";
 
-function Layout(props) {
-   const { data: session } = useSession();
+function Layout({ children }) {
+   const [show, setShow] = useState(false);
 
    const variants = {
       hidden: { opacity: 0, x: -25 },
@@ -11,18 +13,33 @@ function Layout(props) {
       exit: { opacity: 0, x: 0 },
    };
 
+   const isLoggedIn = checkCookies("kb-coach");
+
+   useEffect(() => {
+      setShow(isLoggedIn);
+   }, []);
+
+   if (!show)
+      return (
+         <div>
+            <Auth onAuth={() => setShow(true)} />
+         </div>
+      );
+
    return (
-      <motion.main
-         //  key={router.route}
-         variants={variants}
-         initial="hidden"
-         animate="enter"
-         exit="exit"
-         transition={{ duration: 0.4, type: "linear" }}
-      >
-         <Nav />
-         {props.children}
-      </motion.main>
+      <div>
+         <Header />
+
+         <motion.main
+            variants={variants}
+            initial="hidden"
+            animate="enter"
+            exit="exit"
+            transition={{ duration: 0.3, type: "linear" }}
+         >
+            {children}
+         </motion.main>
+      </div>
    );
 }
 

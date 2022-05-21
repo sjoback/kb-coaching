@@ -1,39 +1,78 @@
 @import "/styles/mixins";
 
-.container {
+.containerAuth {
    display: flex;
    align-items: center;
    justify-content: center;
    gap: 30px;
-   height: 100vh;
-   background-color: var(--color-green);
+   height: calc(100vh - 0px);
+   width: 100vw;
+   position: fixed;
+
+   top: 0;
+   // background-color: var(--color-green);
 
    a {
       font-weight: bold;
    }
 
-   &Inner {
-      display: grid;
+   .inner {
+      display: flex;
+      // place-items: center;
+      // flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
       text-align: center;
       padding: 2.5rem;
-      width: 500px;
+      width: 700px;
       gap: 30px;
-      color: #fff;
+      // color: #fff;
+
+      h1 {
+         color: var(--color-green);
+      }
 
       .buttons {
          display: grid;
          gap: 5px;
+         max-width: 400px;
+
+         a {
+            width: 300px;
+            max-width: 100%;
+         }
 
          p {
             font-size: 14px;
 
-            a:hover {
-               text-decoration: underline;
+            span {
+               font-weight: bold;
+               margin-left: 5px;
+               cursor: pointer;
+               color: var(--color-green);
+
+               &:hover {
+                  text-decoration: underline;
+               }
             }
          }
       }
 
       @include breakpoint("tablet") {
       }
+   }
+}
+
+.container {
+   padding: 2.5rem;
+
+   h1 {
+      margin-bottom: 30px;
+   }
+
+   .inner {
+      display: grid;
+      gap: 15px;
+      max-width: 300px;
    }
 }

@@ -1,42 +1,31 @@
 import styles from "./Styles.module.scss";
-import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
 import Button from "components/Button/Button";
-import classNames from "classnames";
+import { getCookie } from "cookies-next";
+import { useEffect, useState } from "react";
+
+interface User {
+   avatar: String;
+   created: String;
+   email: String;
+   id: String;
+   name: String;
+   password: String;
+   role: String;
+}
 
 function Home() {
-   const { data: session } = useSession();
+   const [user, setUser] = useState<User>();
+   const userCookie = getCookie("kb-coach");
+   const cookieParsed = JSON.parse(JSON.stringify(userCookie));
 
-   if (!session)
-      return (
-         <div className={styles.container}>
-            <div className={styles.containerInner}>
-               <h1>Welcome, Stranger!</h1>
-
-               <div className={styles.buttons}>
-                  <button
-                     onClick={() => signIn("Google")}
-                     className={classNames("btn", "btn-md")}
-                  >
-                     Sign in
-                  </button>
-
-                  <p>
-                     Already a coach?
-                     <Link href="/signup">
-                        <a> Sign up</a>
-                     </Link>
-                  </p>
-               </div>
-            </div>
-         </div>
-      );
+   useEffect(() => {
+      setUser(JSON.parse(cookieParsed));
+   }, []);
 
    return (
       <div className={styles.container}>
-         <h1>Welcome, {session ? session.user.name : "Stranger"}!</h1>
-
-         <div className={styles.containerInner}>
+         <h1>Welcome, {user ? user.name : "Stranger"}</h1>
+         <div className={styles.inner}>
             <Button
                text="Add workout"
                onClick={false}

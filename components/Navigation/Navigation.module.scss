@@ -1,9 +1,7 @@
 @import "/styles/mixins";
 
 .container {
-   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-   width: 100vw;
-   color: var(--color-font);
+   flex: 1;
    position: relative;
    display: flex;
    flex-direction: column;
@@ -15,7 +13,7 @@
    }
 
    a {
-      padding: 10px 30px;
+      padding: 20px 30px;
       font-size: 14px;
       transition: 0.15s ease-in-out;
       text-align: center;
@@ -31,56 +29,12 @@
       }
    }
 
-   &Left {
-      display: flex;
-      align-items: center;
-      padding: 10px;
+   .navToggle {
+      transition: 0.2s ease-in-out;
+      color: var(--color-blue);
 
-      @include breakpoint("mobile") {
-         order: 2;
-         width: 100%;
+      @include breakpoint("tablet") {
          display: none;
-      }
-      @include breakpoint("tablet") {
-         width: auto;
-         flex: 1;
-      }
-   }
-
-   &Right {
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      flex-direction: row-reverse;
-      width: 100%;
-
-      @include breakpoint("tablet") {
-         justify-content: flex-end;
-         width: 150px;
-         flex-direction: row;
-      }
-
-      .navLogo {
-         padding: 20px 25px;
-         width: 30px;
-         height: 30px;
-         border-radius: 100px;
-         overflow: hidden;
-         padding: 10px;
-         position: relative;
-
-         @include breakpoint("tablet") {
-            margin: 0 20px 0 0;
-         }
-      }
-
-      .navToggle {
-         transition: 0.2s ease-in-out;
-         color: var(--color-blue);
-
-         @include breakpoint("tablet") {
-            display: none;
-         }
       }
    }
 }

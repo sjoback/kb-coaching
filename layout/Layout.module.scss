@@ -1,0 +1,22 @@
+.container {
+   padding: 40px;
+   display: grid;
+   gap: 30px;
+
+   > div {
+      display: flex;
+
+      a {
+         width: 300px;
+      }
+   }
+
+   h1 {
+      font-size: 42px;
+      //   color: var(--color-green);
+   }
+
+   p {
+      margin-bottom: 30px;
+   }
+}
