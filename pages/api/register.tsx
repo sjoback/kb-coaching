@@ -1,7 +1,6 @@
 import users from "data/users.json";
 const fs = require("fs");
 import { v4 as uuidv4 } from "uuid";
-import { signIn } from "next-auth/react";
 
 function saveData() {
    fs.writeFileSync(`data/users.json`, JSON.stringify(users, null, 4));
@@ -28,9 +27,10 @@ export default async function handler(req, res) {
 
          saveData();
 
-         return signIn("Google", {
-            username: request.email,
-            password: request.password,
+         return res.json({
+            message: "Created account.",
+            response: JSON.parse(JSON.stringify(newUser)),
+            success: true,
          });
       } catch (error) {
          return res.json({

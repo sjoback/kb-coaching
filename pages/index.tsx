@@ -3,7 +3,7 @@ import Button from "components/Button/Button";
 import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 
-interface User {
+type User = {
    avatar: String;
    created: String;
    email: String;
@@ -11,15 +11,15 @@ interface User {
    name: String;
    password: String;
    role: String;
-}
+};
 
 function Home() {
    const [user, setUser] = useState<User>();
    const userCookie = getCookie("kb-coach");
-   const cookieParsed = JSON.parse(JSON.stringify(userCookie));
+   const userCookieParsed = JSON.parse(JSON.stringify(userCookie));
 
    useEffect(() => {
-      setUser(JSON.parse(cookieParsed));
+      setUser(JSON.parse(userCookieParsed));
    }, []);
 
    return (

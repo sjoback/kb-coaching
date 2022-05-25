@@ -9,7 +9,9 @@ function Auth({ onAuth }) {
       return (
          <Login onLogin={() => onAuth()} onClick={() => setShow("register")} />
       );
-   return <Register onClick={() => setShow("login")} />;
+   return (
+      <Register onRegister={() => onAuth()} onClick={() => setShow("login")} />
+   );
 }
 
 export default Auth;

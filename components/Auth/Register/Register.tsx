@@ -2,8 +2,6 @@ import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ApiOverlay from "components/ApiOverlay/ApiOverlay";
 import Button from "components/Button/Button";
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "../Auth.module.scss";
@@ -13,19 +11,19 @@ type FormData = {
    Password: string;
 };
 
-function Register({ onClick }) {
+function Register({ onClick, onRegister }) {
    const {
       register,
       getValues,
       handleSubmit,
       formState: { errors },
    } = useForm<FormData>();
-   const [creating, setCreating] = useState(false);
+   const [registering, setRegistering] = useState(false);
    const [message, setMessage] = useState("");
    const [error, setError] = useState(false);
 
    const handleSignUp = async () => {
-      setCreating(true);
+      setRegistering(true);
 
       let newUser = {
          name: getValues().Email,
@@ -35,7 +33,7 @@ function Register({ onClick }) {
          joined: new Date().toISOString(),
       };
 
-      let response = await fetch(`/api/user`, {
+      let response = await fetch(`/api/register`, {
          method: "POST",
          body: JSON.stringify(newUser),
       });
@@ -45,17 +43,15 @@ function Register({ onClick }) {
       if (data.success) {
          setMessage("success");
          setTimeout(function () {
-            signIn("credentials", {
-               username: getValues().Email,
-               password: getValues().Password,
-            });
+            setRegistering(false);
+            onRegister();
          }, 1200);
       } else {
          console.log(data);
          setError(true);
 
          setTimeout(function () {
-            return setCreating(false);
+            return setRegistering(false);
          }, 1200);
       }
    };
@@ -63,22 +59,17 @@ function Register({ onClick }) {
       <div className={styles.container}>
          <div className={styles.inner}>
             <form name="signup" method="POST" data-netlify="true">
-               {creating && <ApiOverlay message={"Creating account"} />}
+               {registering && <ApiOverlay message={"Creating account"} />}
                <h1>Create account</h1>
                <p>
                   In order to gain full access to this app you have to register
                   or log in. If not, you can
-                  <a
-                     onClick={() =>
-                        signIn("Credentials", {
-                           username: "test",
-                           password: "test",
-                        })
-                     }
+                  {/* <a
+                     onClick={}
                      className="btnText"
                   >
                      <b> continue as a limited user</b>
-                  </a>
+                  </a> */}
                   .
                </p>
                <div className="form-container-inputs">
